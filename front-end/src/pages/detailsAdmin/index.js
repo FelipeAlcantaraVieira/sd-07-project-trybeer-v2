@@ -53,7 +53,7 @@ export default function AdminDetails() {
         Preparar pedido
       </button>
     );
-    return orderStatus !== ENTREGUE  ? button : '';
+    return orderStatus !== ENTREGUE ? button : '';
   };
 
   const renderEntregueButton = () => {
