@@ -68,6 +68,7 @@ export default function Orders() {
               >
                 {priceOrder}
               </h2>
+              <h2>{order.status}</h2>
             </button>
           );
         })}
