@@ -36,13 +36,13 @@ export default function AdminDetails() {
   const handleClick = (status) => {
     updateSaleStatus(status, orderId);
     setOrderStatus(status);
-  }
+  };
 
   const renderRenderButton = (status, testid, text) => {
     const button = (
       <button
         type="button"
-        data-testid={testid}
+        data-testid={ testid }
         onClick={ () => handleClick(status) }
       >
         { text }
@@ -82,8 +82,8 @@ export default function AdminDetails() {
           `Total: R$ ${parseFloat(totalPrice).toFixed(2).split('.').join(',')}`
         }
       </span>
-      { renderRenderButton(PREPARANDO, "mark-as-prepared-btn", 'Preparar pedido') }
-      { renderRenderButton(ENTREGUE, "mark-as-delivered-btn", 'Marcar como entregue') }
+      { renderRenderButton(PREPARANDO, 'mark-as-prepared-btn', 'Preparar pedido') }
+      { renderRenderButton(ENTREGUE, 'mark-as-delivered-btn', 'Marcar como entregue') }
     </div>
   );
 }
