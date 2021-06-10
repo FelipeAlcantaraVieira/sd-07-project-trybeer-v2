@@ -33,40 +33,22 @@ export default function AdminDetails() {
     fetchSale();
   }, [orderId]);
 
-  const handlePrepare = () => {
-    updateSaleStatus(PREPARANDO, orderId);
-    setOrderStatus(PREPARANDO);
-  };
+  const handleClick = (status) => {
+    updateSaleStatus(status, orderId);
+    setOrderStatus(status);
+  }
 
-  const handleEntregue = () => {
-    updateSaleStatus(ENTREGUE, orderId);
-    setOrderStatus(ENTREGUE);
-  };
-
-  const renderPrepareButton = () => {
+  const renderRenderButton = (status, testid, text) => {
     const button = (
       <button
         type="button"
-        data-testid="mark-as-prepared-btn"
-        onClick={ handlePrepare }
+        data-testid={testid}
+        onClick={ () => handleClick(status) }
       >
-        Preparar pedido
+        { text }
       </button>
     );
     return orderStatus !== ENTREGUE  ? button : '';
-  };
-
-  const renderEntregueButton = () => {
-    const button = (
-      <button
-        type="button"
-        data-testid="mark-as-delivered-btn"
-        onClick={ handleEntregue }
-      >
-        Marcar como entregue
-      </button>
-    );
-    return orderStatus !== ENTREGUE ? button : '';
   };
 
   return (
@@ -100,8 +82,8 @@ export default function AdminDetails() {
           `Total: R$ ${parseFloat(totalPrice).toFixed(2).split('.').join(',')}`
         }
       </span>
-      { renderPrepareButton() }
-      { renderEntregueButton() }
+      { renderRenderButton(PREPARANDO, "mark-as-prepared-btn", 'Preparar pedido') }
+      { renderRenderButton(ENTREGUE, "mark-as-delivered-btn", 'Marcar como entregue') }
     </div>
   );
 }
