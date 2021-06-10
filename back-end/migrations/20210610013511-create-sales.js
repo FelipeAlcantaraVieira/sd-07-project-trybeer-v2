@@ -6,12 +6,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      totalPrice: { type: Sequelize.DECIMAL },
-      deliveryAddress: { type: Sequelize.STRING },
-      deliveryNumber: { type: Sequelize.STRING },
-      saleDate: { type: Sequelize.DATE },
+      total_price: { type: Sequelize.DECIMAL(4, 2) },
+      delivery_address: { type: Sequelize.STRING },
+      delivery_number: { type: Sequelize.STRING },
+      sale_date: { type: Sequelize.DATE },
       status: { type: Sequelize.STRING },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: { model: 'users', foreignKey: 'id' },
         onDelete: 'cascade',

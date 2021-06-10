@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.DECIMAL,
       urlImage: DataTypes.STRING,
     },
-    { timestamps: false });
+    { timestamps: false, tableName: 'products', underscored: true });
 
   return Product;
 };
