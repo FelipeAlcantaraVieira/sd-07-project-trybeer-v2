@@ -7,6 +7,7 @@ export default function ClientDetails() {
   const [orderDate, setOrderDate] = useState('');
   const [errors, setErrors] = useState('');
   const [orderDetail, setOrderDetail] = useState([]);
+  const [orderStatus, setOrderStatus] = useState();
   const orderNumber = useParams().np;
 
   const orderTotValue = orderDetail
@@ -24,6 +25,7 @@ export default function ClientDetails() {
         .format(Date.parse(order[0].sale_date));
       if (!dateOrder) return setErrors(<h3>Pedido não encontrado</h3>);
 
+      setOrderStatus(order[0].status);
       setOrderDate(dateOrder);
       setOrderDetail(result);
     };
@@ -38,6 +40,7 @@ export default function ClientDetails() {
         {' '}
         <span data-testid="order-date">{ `${orderDate}` }</span>
       </h2>
+      <h2>{orderStatus}</h2>
       <div>
         {orderDetail && orderDetail.map((product, index) => (
           <div

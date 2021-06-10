@@ -4,6 +4,7 @@ import AdminSideBar from '../../components/AdminSideBar';
 import { updateSaleStatus, orderById } from '../../service/trybeerApi';
 
 const ENTREGUE = 'Entregue';
+const PREPARANDO = 'Preparando';
 
 export default function AdminDetails() {
   const { id } = useParams();
@@ -32,19 +33,19 @@ export default function AdminDetails() {
     fetchSale();
   }, [orderId]);
 
-  const handleClick = () => {
-    updateSaleStatus(ENTREGUE, orderId);
-    setOrderStatus(ENTREGUE);
+  const handleClick = (status) => {
+    updateSaleStatus(status, orderId);
+    setOrderStatus(status);
   };
 
-  const shouldButtonRender = () => {
+  const renderRenderButton = (status, testid, text) => {
     const button = (
       <button
         type="button"
-        data-testid="mark-as-delivered-btn"
-        onClick={ handleClick }
+        data-testid={ testid }
+        onClick={ () => handleClick(status) }
       >
-        Marcar como entregue
+        { text }
       </button>
     );
     return orderStatus !== ENTREGUE ? button : '';
@@ -81,7 +82,8 @@ export default function AdminDetails() {
           `Total: R$ ${parseFloat(totalPrice).toFixed(2).split('.').join(',')}`
         }
       </span>
-      { shouldButtonRender() }
+      { renderRenderButton(PREPARANDO, 'mark-as-prepared-btn', 'Preparar pedido') }
+      { renderRenderButton(ENTREGUE, 'mark-as-delivered-btn', 'Marcar como entregue') }
     </div>
   );
 }
