@@ -6,5 +6,5 @@ const jwtConfig = {
 const SECRET = 'vanessa';
 module.exports = {
   jwtConfig,
-  SECRET
+  SECRET,
 };
