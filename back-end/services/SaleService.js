@@ -8,25 +8,14 @@ const {
 } = require('./errors/SaleMessages');
 const { validateData, validateStatus } = require('./validations/SaleValidations');
 
-const testex = async () => {
-  const teste2 = await product.findOne({ where: { name: 'Skol Lata 250ml' } });
-  console.log(teste2);
-};
-console.log(testex());
 const getTotalValue = async (data) => {
-  const teste1 = await Promise.all(data.map(async ({ productName }) => {
-    await product.findOne({ where: { name: productName }});
-  }));
-  console.log(teste1);
   const teste = await Promise.all(
     data.map(async ({ productName, quantity }) => {
       const newProduct = await product.findOne({ where: { name: productName } });
-      console.log(newProduct);
       const price = newProduct.price * quantity;
       return Number(price);
     }),
   );
-  console.log(teste);
   return teste;
 };
 const createSale = async (data, token) => {
@@ -34,6 +23,7 @@ const createSale = async (data, token) => {
   const dataIsntValid = validateArray.some((item) => item.error);
   if (dataIsntValid === true) throw validateArray.find((error) => error.error).error.details[0];
   const totalProductPrice = await getTotalValue(data);
+  console.log(token);
   const { id } = await user.findOne({ where: { email: token.email } });
   const totalSalePrice = totalProductPrice.reduce((acc, curr) => acc + curr);
   const { deliveryAddress, deliveryNumber } = data[0];

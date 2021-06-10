@@ -11,7 +11,7 @@ const validateTokenMiddleware = async (req, res, next) => {
     const { email, password } = jwt.verify(token, SECRET);
     const userFound = await user.findOne({ where: { email, password } });
     if (await userFound === null) throw ERROR;
-    req.user = user;
+    req.user = userFound;
 
     next();
   } catch (err) {
