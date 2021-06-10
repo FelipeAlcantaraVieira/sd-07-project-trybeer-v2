@@ -19,7 +19,7 @@ export default function AdminDetails() {
   useEffect(() => {
     const fetchSale = async () => {
       const { status, totalPrice, products } = await orderById(orderId);
-      setOrder({ status, totalPrice , products });
+      setOrder({ status, totalPrice, products });
       if (status) {
         setOrderStatus(status || 'Pendente');
       }
@@ -57,7 +57,9 @@ export default function AdminDetails() {
           <div
             key={ index }
           >
-            <span data-testid={ `${index}-product-qtd` }>{product.SaleProduct.quantity}</span>
+            <span data-testid={ `${index}-product-qtd` }>
+              {product.SaleProduct.quantity}
+            </span>
             <span data-testid={ `${index}-product-name` }>{ ` ${product.name} ` }</span>
             <span data-testid={ `${index}-product-total-value` }>
               { `R$ ${(product.SaleProduct.quantity * parseFloat(product.price))

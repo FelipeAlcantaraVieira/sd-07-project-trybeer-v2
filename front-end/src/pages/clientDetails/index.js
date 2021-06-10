@@ -16,7 +16,7 @@ export default function ClientDetails() {
   };
 
   const date = (saleDate) => new Intl.DateTimeFormat('pt-BR', options)
-  .format(Date.parse(saleDate));
+    .format(Date.parse(saleDate));
 
   useEffect(() => {
     const salesProducts = async () => {
