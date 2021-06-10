@@ -78,7 +78,7 @@ const updateSaleStatus = async (id, status, token) => {
 
 const adminGetSaleById = async (saleId, token) => {
   if (token.role !== 'administrator') throw NOTADMINISTRATOR;
-  const result = await sale.findAll({ where: { userId: saleId } });
+  const result = await sale.findAll({ where: { id: saleId } });
   return result;
 };
 
