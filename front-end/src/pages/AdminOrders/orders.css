@@ -1,0 +1,5 @@
+.orders {
+  background: url(../../img/pedidos.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 180vh;
+}

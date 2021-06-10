@@ -1,0 +1,5 @@
+.products {
+  background: url(../../img/productsBackground2.png) no-repeat center fixed;
+  background-size: cover;
+  height: 180vh;
+}
