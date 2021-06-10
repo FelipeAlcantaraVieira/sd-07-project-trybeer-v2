@@ -88,5 +88,5 @@ it('Ao realizar login com sucesso deve ser retornado um objeto com token, name, 
     }));
 
     afterAll(async () => {
-        await db.sequelize.close()
+        await db.sequelize.close();
       });

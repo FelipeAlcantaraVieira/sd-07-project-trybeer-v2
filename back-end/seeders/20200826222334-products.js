@@ -24,7 +24,7 @@ module.exports = {
       }, {
         id: '11', name: 'Stella Artois 275ml', price: 3.49, urlImage: 'http://localhost:3001/images/Stella Artois 275ml.jpg',
       },
-      ], {});
+      ]);
   },
 
   down: async (queryInterface, _Sequelize) => {

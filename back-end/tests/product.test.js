@@ -25,5 +25,5 @@ it('É possivel acessar a rota com um token válido', (done) =>
     .expect(200, done));
 
     afterAll(async () => {
-      await db.sequelize.close()
+      await db.sequelize.close();
     });

@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { INVALIDUSER } = require('../errors/LoginMessages');
-const { User } = require('../../models');
+const { user } = require('../../models');
 
 const validateLogin = (data) =>
   Joi.object({
@@ -9,7 +9,7 @@ const validateLogin = (data) =>
   }).validate(data);
 
 const validUser = async (email, password) => {
-  const userData = await User.findOne({ where: { email, password }});
+  const userData = await user.findOne({ where: { email, password } });
   if (!userData) throw INVALIDUSER;
 };
 

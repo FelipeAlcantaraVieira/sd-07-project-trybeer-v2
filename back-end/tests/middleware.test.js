@@ -19,5 +19,5 @@ it('Não é possivel logar utilizando um token invalido', (done) => request(app)
   .expect(401, message.errorToken, done));
 
   afterAll(async () => {
-    await db.sequelize.close()
+    await db.sequelize.close();
   });

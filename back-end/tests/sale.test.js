@@ -1,7 +1,7 @@
 const request = require('supertest');
 const express = require('express');
-const db = require('../models');
 const shell = require('shelljs');
+const db = require('../models');
 const { sale } = require('../routes');
 const message = require('./config/errorMessages');
 const { contentType, applicationJson, tokens } = require('./config/parameters');

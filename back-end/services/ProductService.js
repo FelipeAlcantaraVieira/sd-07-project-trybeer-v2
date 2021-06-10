@@ -1,7 +1,7 @@
-const { Product } = require('../models');
+const { product } = require('../models');
 
 const getAllProducts = async () => {
-  const products = await Product.findAll();
+  const products = await product.findAll();
   return products;
 };
 
