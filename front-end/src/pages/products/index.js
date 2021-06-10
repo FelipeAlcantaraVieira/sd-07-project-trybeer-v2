@@ -49,7 +49,7 @@ export default function Product() {
             <br />
             ---------------------------------------------------------------------------
             <Prices index={ index } value={ prod.price } />
-            <Images index={ index } value={ prod.url_image } />
+            <Images index={ index } value={ prod.urlImage } />
             <Texts index={ index } value={ prod.name } />
             <Counts index={ index } product={ prod } />
           </div>

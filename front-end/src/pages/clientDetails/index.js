@@ -1,36 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TopMenu from '../../components/TopMenu';
-import { saleById, getSaleByOrderId } from '../../service/trybeerApi';
+import { saleById } from '../../service/trybeerApi';
 
 export default function ClientDetails() {
   const [orderDate, setOrderDate] = useState('');
   const [errors, setErrors] = useState('');
   const [orderDetail, setOrderDetail] = useState([]);
   const [orderStatus, setOrderStatus] = useState();
+  const [totalPrice, setTotalPrice] = useState('');
   const orderNumber = useParams().np;
-
-  const orderTotValue = orderDetail
-    .reduce((acc, { qtd, unitPrice }) => acc + (qtd * unitPrice), 0);
 
   const options = {
     day: '2-digit', month: '2-digit',
   };
 
+  const date = (saleDate) => new Intl.DateTimeFormat('pt-BR', options)
+  .format(Date.parse(saleDate));
+
   useEffect(() => {
     const salesProducts = async () => {
       const result = await saleById(orderNumber);
-      const order = await getSaleByOrderId(orderNumber);
-      const dateOrder = new Intl.DateTimeFormat('pt-BR', options)
-        .format(Date.parse(order[0].sale_date));
+      const dateOrder = date(result.saleDate);
       if (!dateOrder) return setErrors(<h3>Pedido não encontrado</h3>);
 
-      setOrderStatus(order[0].status);
+      setOrderStatus(result.status);
       setOrderDate(dateOrder);
-      setOrderDetail(result);
+      setTotalPrice(result.totalPrice);
+
+      setOrderDetail(result.products);
     };
     salesProducts();
-  }, [options, orderNumber]);
+  }, []);
 
   return (
     <div>
@@ -48,7 +49,7 @@ export default function ClientDetails() {
           >
             <div>
               <span data-testid={ `${index}-product-qtd` }>
-                {product.qtd}
+                {product.SaleProduct.quantity}
               </span>
               {' '}
               -
@@ -61,7 +62,7 @@ export default function ClientDetails() {
               {' '}
               <span data-testid={ `${index}-product-total-value` }>
                 <strong>
-                  {`R$ ${product.unitPrice.replace('.', ',')}`}
+                  {`R$ ${product.price.replace('.', ',')}`}
                 </strong>
               </span>
             </div>
@@ -70,7 +71,7 @@ export default function ClientDetails() {
         <p
           data-testid="order-total-value"
         >
-          {`R$ ${(orderTotValue).toFixed(2).replace('.', ',')}`}
+          {`R$ ${(totalPrice).replace('.', ',')}`}
         </p>
       </div>
       { errors }

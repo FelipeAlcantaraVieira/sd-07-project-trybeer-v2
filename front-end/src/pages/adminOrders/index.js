@@ -11,6 +11,7 @@ export default function AdminOrders() {
 
   const listSales = async () => {
     const saleData = await getAllSales();
+    console.log(saleData);
     if (saleData.error) {
       return setSales([]);
     }
@@ -38,13 +39,13 @@ export default function AdminOrders() {
 
         <h4 data-testid={ `${index}-order-address` }>
           {
-            `${sale.delivery_address}, ${sale.delivery_number}`
+            `${sale.deliveryAddress}, ${sale.deliveryNumber}`
           }
         </h4>
 
         <h3 data-testid={ `${index}-order-total-value` }>
           {
-            `R$ ${parseFloat(sale.total_price)
+            `R$ ${parseFloat(sale.totalPrice)
               .toFixed(2).split('.').join(',')}`
           }
         </h3>
