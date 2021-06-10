@@ -10,24 +10,18 @@ export default function AdminDetails() {
   const { id } = useParams();
   const [orderId] = useState(id);
   const [orderStatus, setOrderStatus] = useState('Pendente');
-  const [totalPrice, setTotalPrice] = useState([]);
-  const [order, setOrder] = useState([{
-    name: '',
-    qtd: '',
+  const [order, setOrder] = useState({
     status: '',
-    unitPrice: '',
-  }]);
-
-  const getOrderValue = (array) => array.map((product) => product.qtd * product.unitPrice)
-    .reduce((acc, curr) => acc + curr);
+    totalPrice: '',
+    products: [],
+  });
 
   useEffect(() => {
     const fetchSale = async () => {
-      const orderData = await orderById(orderId);
-      setOrder(orderData);
-      if (orderData.length > 0) {
-        setTotalPrice(getOrderValue(orderData));
-        setOrderStatus(orderData[0].status || 'Pendente');
+      const { status, totalPrice, products } = await orderById(orderId);
+      setOrder({ status, totalPrice, products });
+      if (status) {
+        setOrderStatus(status || 'Pendente');
       }
     };
     fetchSale();
@@ -59,18 +53,20 @@ export default function AdminDetails() {
         <h4 data-testid="order-status">{` ${orderStatus}`}</h4>
       </div>
       <div>
-        {order && order.map((product, index) => (
+        {order && order.products.map((product, index) => (
           <div
             key={ index }
           >
-            <span data-testid={ `${index}-product-qtd` }>{product.qtd}</span>
+            <span data-testid={ `${index}-product-qtd` }>
+              {product.SaleProduct.quantity}
+            </span>
             <span data-testid={ `${index}-product-name` }>{ ` ${product.name} ` }</span>
             <span data-testid={ `${index}-product-total-value` }>
-              { `R$ ${(product.qtd * parseFloat(product.unitPrice))
+              { `R$ ${(product.SaleProduct.quantity * parseFloat(product.price))
                 .toFixed(2).split('.').join(',')}` }
             </span>
             <span data-testid={ `${index}-order-unit-price` }>
-              { `(R$ ${parseFloat(product.unitPrice)
+              { `(R$ ${parseFloat(product.price)
                 .toFixed(2).split('.').join(',')})` }
             </span>
 
@@ -79,7 +75,7 @@ export default function AdminDetails() {
       </div>
       <span data-testid="order-total-value">
         {
-          `Total: R$ ${parseFloat(totalPrice).toFixed(2).split('.').join(',')}`
+          `Total: R$ ${parseFloat(order.totalPrice).toFixed(2).split('.').join(',')}`
         }
       </span>
       { renderRenderButton(PREPARANDO, 'mark-as-prepared-btn', 'Preparar pedido') }

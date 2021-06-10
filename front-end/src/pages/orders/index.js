@@ -19,7 +19,6 @@ export default function Orders() {
     const listOrdes = async () => {
       const orders = await getSaleByUserId(userLogged.id);
       setOrdersFromUser(orders);
-      console.log(orders);
     };
     listOrdes();
   }, [userLogged.id]);
@@ -42,9 +41,9 @@ export default function Orders() {
         {ordersFromUser.map((order, index) => {
           const priceOrder = new Intl
             .NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
-            .format(order.total_price);
+            .format(order.totalPrice);
           const dateOrder = new Intl.DateTimeFormat('pt-BR', options)
-            .format(Date.parse(order.sale_date));
+            .format(Date.parse(order.saleDate));
           return (
             <button
               type="button"
