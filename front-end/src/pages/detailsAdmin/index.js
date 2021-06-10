@@ -48,7 +48,7 @@ export default function AdminDetails() {
         { text }
       </button>
     );
-    return orderStatus !== ENTREGUE  ? button : '';
+    return orderStatus !== ENTREGUE ? button : '';
   };
 
   return (
