@@ -13,7 +13,6 @@ export default function AdminOrders() {
       if (!currentUser) return null;
       const response = await getAdminSales(currentUser.token)
         .then((apiResponse) => apiResponse);
-      // console.log(response);
       if (response && Object.values(response).length > 0) {
         setAdminSales(response);
       }
@@ -32,7 +31,6 @@ export default function AdminOrders() {
     >
       { adminSales.err ? <p>{adminSales.err.message}</p>
         : adminSales.map((item, index) => (
-          // <p>{console.log(item)}</p>
           <Card
             type="button"
             data-testid={ `${index}-order-card-container}` }
@@ -60,7 +58,7 @@ export default function AdminOrders() {
                 <p
                   data-testid={ `${index}-order-address` }
                 >
-                  {`${item.delivery_address.concat(', ', item.delivery_number)}`}
+                  {`${item.deliveryAddress.concat(', ', item.deliveryNumber)}`}
                 </p>
               </Col>
               <Col>
@@ -74,7 +72,7 @@ export default function AdminOrders() {
                 <p
                   data-testid={ `${index}-order-total-value` }
                 >
-                  {`R$ ${item.total_price.replace('.', ',')}`}
+                  {`R$ ${item.totalPrice.replace('.', ',')}`}
                 </p>
               </Col>
             </Row>

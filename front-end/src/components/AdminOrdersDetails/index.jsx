@@ -23,7 +23,6 @@ export default function ClientOrderDetails() {
       const allSalesRes = await getAdminSales(currentUser.token)
         .then((apiRes) => apiRes);
       const saleStatus = allSalesRes.find((e) => e.id === Number(id));
-
       setSale(response);
       setStatus(saleStatus.status);
       if (saleStatus.status === 'Entregue') {
@@ -58,6 +57,7 @@ export default function ClientOrderDetails() {
       <div>
         <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
         <p data-testid="order-status">{status}</p>
+        { console.log(sale) }
         { sale.map((item, index) => {
           const productTotalValue = (item.price * item.quantity).toFixed(2);
 
@@ -92,7 +92,7 @@ export default function ClientOrderDetails() {
       >
         Total:
         {' '}
-        {sale ? `R$ ${sale[0].total_price.replace('.', ',')}` : 'R$ 0,00'}
+        {sale ? `R$ ${sale[0].total_rice.replace('.', ',')}` : 'R$ 0,00'}
       </p>
       <Button
         type="submit"

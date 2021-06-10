@@ -12,6 +12,7 @@ const getTotalValue = async (data) => {
   const teste = await Promise.all(
     data.map(async ({ productName, quantity }) => {
       const newProduct = await product.findOne({ where: { name: productName } });
+      console.log(newProduct);
       const price = newProduct.price * quantity;
       return Number(price);
     }),
@@ -43,7 +44,6 @@ const getSaleProducts = async (id, saleid) => {
 
 const getSaleByUserId = async (id) => {
   const result = await sale.findAll({ where: { userId: id } });
-  console.log(result);
   if (result === null) throw NOEXISTENTPURCHASE;
   const retorno = await Promise.all(
     result.map((newSale) => {
@@ -56,6 +56,7 @@ const getSaleByUserId = async (id) => {
       };
     }),
   );
+  console.log(retorno);
   return retorno;
 };
 
@@ -77,7 +78,7 @@ const updateSaleStatus = async (id, status, token) => {
 
 const adminGetSaleById = async (saleId, token) => {
   if (token.role !== 'administrator') throw NOTADMINISTRATOR;
-  const result = await sale.findByPk(saleId);
+  const result = await sale.findAll({ where: { userId: saleId } });
   return result;
 };
 
