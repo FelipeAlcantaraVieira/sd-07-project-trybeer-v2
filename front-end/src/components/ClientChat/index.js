@@ -7,53 +7,58 @@ export default function ClientChat() {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    socket.on('serverMessage', (message) => setServerMessage(message));
-    console.log('Chamou 2')
+    socket.on('serverMessage', (incomingMessage) => setServerMessage(incomingMessage));
+    console.log('Chamou 2');
   });
-  
+
   const sendMessage = (e) => {
     e.preventDefault();
-    socket.emit('userMessage', {userName, message});
+    socket.emit('userMessage', { userName, message });
     setMessage('');
+  };
+
+  const sendUserEmail = () => {
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    socket.emit('loadMessages', email);
+    setUserName(email);
   };
 
   useEffect(() => {
     sendUserEmail();
-    console.log('Chamou')
-  },[]);
-
-  const sendUserEmail = () => {
-    const { email } = JSON.parse(localStorage.getItem('user'));
-    socket.emit('loadMessages', email)
-    setUserName(email);
-  };
+    console.log('Chamou');
+  }, []);
 
   return (
     <div>
       <h1>Chat do Usuário</h1>
       <ul id="messageList">
-        {serverMessage.map(({message, userName, time }, index) => (
-          <li key={index}>
-            <span data-testid="nickname">{userName}</span> -
-            <span data-testid="message-time">{time}</span>
+        {serverMessage.map((messageContent, index) => (
+          <li key={ index }>
+            <span data-testid="nickname">{messageContent.userName}</span>
+            {' '}
+            -
+            <span data-testid="message-time">{messageContent.time}</span>
             <br />
-            <span data-testid="text-message">{message}</span>
+            <span data-testid="text-message">{messageContent.message}</span>
           </li>
         ))}
       </ul>
       <form>
         <input
           placeholder="Mensagem"
-          id="messageInput" 
-          value={message}
-          onChange={ (e) => { setMessage(e.target.value)} }
+          id="messageInput"
+          value={ message }
+          onChange={ (e) => { e.preventDefault(); setMessage(e.target.value); } }
           data-testid="message-input"
         />
         <button
+          type="submit"
           id="sendMessage"
-          onClick={(e) => sendMessage(e)}
+          onClick={ (e) => sendMessage(e) }
           data-testid="send-message"
-         >Enviar</button>
+        >
+          Enviar
+        </button>
       </form>
     </div>
   );
