@@ -13,6 +13,8 @@ import {
   detailsAdmin,
   Checkout,
   ClientDetails,
+  Chat,
+  ChatAdmin,
 } from '../pages';
 
 const Routes = () => (
@@ -30,6 +32,8 @@ const Routes = () => (
     <PrivateRoute exact path="/admin/profile" component={ ProfileAdmin } />
     <PrivateRoute exact path="/checkout" component={ Checkout } />
     <PrivateRoute exact path="/orders/:np" component={ ClientDetails } />
+    <PrivateRoute exact path="/chat" component={ Chat } />
+    <PrivateRoute exact path="/chatadmin" component={ ChatAdmin } />
   </Switch>
 );
 

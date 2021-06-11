@@ -28,6 +28,13 @@ function SideBar() {
       </button>
       <button
         type="button"
+        data-testid="side-menu-item-my-profile"
+        onClick={ () => history.push('/chat') }
+      >
+        Chat
+      </button>
+      <button
+        type="button"
         data-testid="side-menu-item-logout"
         onClick={ () => history.push('/login') }
       >
