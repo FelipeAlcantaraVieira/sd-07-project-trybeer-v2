@@ -11,7 +11,7 @@ const validateData = (data) =>
   }).validate(data);
 
 const validateStatus = (status) => 
-  Joi.string().valid('Pendente', 'Entregue').required().validate(status);
+  Joi.string().valid('Pendente', 'Entregue', 'Preparando').required().validate(status);
 
 module.exports = {
   validateData,

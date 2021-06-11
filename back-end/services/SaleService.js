@@ -56,6 +56,7 @@ const getSaleByUserId = async (id) => {
         saleId: newSale.id,
         saleDate: saleDate.slice(0, 5),
         totalPrice: newSale.totalPrice,
+        status: newSale.status,
       };
     }),
   );

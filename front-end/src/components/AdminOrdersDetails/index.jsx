@@ -45,6 +45,16 @@ export default function ClientOrderDetails() {
     }
   };
 
+  const preparingButton = async () => {
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const updateSatus = await updateSalesStatus(currentUser.token, 'Preparando', id)
+      .then((apiRes) => apiRes);
+
+    if (updateSatus.message) {
+      setStatus('Preparando');
+    }
+  };
+
   if (!(sale && status)) {
     return <p>Loading...</p>;
   }
@@ -93,6 +103,15 @@ export default function ClientOrderDetails() {
         {' '}
         {sale ? `R$ ${sale[0].totalPrice.replace('.', ',')}` : 'R$ 0,00'}
       </p>
+      <Button
+        type="submit"
+        data-testid="mark-as-prepared-btn"
+        onClick={ () => preparingButton() }
+        hidden={ hiddenButton }
+        style={ { width: '30vh' } }
+      >
+        Preparar pedido
+      </Button>
       <Button
         type="submit"
         data-testid="mark-as-delivered-btn"

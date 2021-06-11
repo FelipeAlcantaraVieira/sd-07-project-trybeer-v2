@@ -55,6 +55,10 @@ export default function ClientOrders() {
                     <Col>
                       <p data-testid={ `${index}-order-date` }>{item.saleDate}</p>
                     </Col>
+                    {console.log(item)}
+                    <Col>
+                      <p>{item.status}</p>
+                    </Col>
                   </Row>
                   <p data-testid={ `${index}-order-total-value` }>
                     {`R$ ${item.totalPrice.replace('.', ',')}`}
