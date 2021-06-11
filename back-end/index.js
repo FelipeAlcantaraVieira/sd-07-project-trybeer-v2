@@ -17,7 +17,7 @@ const chat = require('./modelsMongo/chat');
 io.on('connection', (socket) => {
   let temporaryMessages = [];
   socket.on('userMessage', ({ message, userName }) => {
-    const time = moment().format('HH:MM');
+    const time = moment().format('HH:mm');
     temporaryMessages.push({ message, userName, time });
     chat.add(message, userName, time);
     io.emit('serverMessage', temporaryMessages);
