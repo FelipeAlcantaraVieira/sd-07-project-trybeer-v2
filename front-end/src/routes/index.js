@@ -33,7 +33,7 @@ const Routes = () => (
     <PrivateRoute exact path="/checkout" component={ Checkout } />
     <PrivateRoute exact path="/orders/:np" component={ ClientDetails } />
     <PrivateRoute exact path="/chat" component={ Chat } />
-    <PrivateRoute exact path="/chatadmin" component={ ChatAdmin } />
+    <PrivateRoute exact path="/admin/chats" component={ ChatAdmin } />
   </Switch>
 );
 

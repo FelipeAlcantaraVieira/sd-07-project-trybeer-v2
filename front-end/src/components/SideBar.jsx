@@ -28,10 +28,10 @@ function SideBar() {
       </button>
       <button
         type="button"
-        data-testid="side-menu-item-my-profile"
+        data-testid="side-menu-chat"
         onClick={ () => history.push('/chat') }
       >
-        Chat
+        Conversar com a loja
       </button>
       <button
         type="button"

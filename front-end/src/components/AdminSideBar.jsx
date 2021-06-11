@@ -21,10 +21,10 @@ function SideBar() {
       </button>
       <button
         type="button"
-        data-testid="side-menu-item-chatadmin"
-        onClick={ () => history.push('/chatadmin') }
+        data-testid="side-menu-item-chat"
+        onClick={ () => history.push('/admin/chats') }
       >
-        Chat
+        Conversas
       </button>
       <button
         type="button"
