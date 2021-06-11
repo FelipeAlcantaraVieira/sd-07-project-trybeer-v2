@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { io } from 'socket.io-client';
 import {
   TopMenu,
 } from '../../components';
 
-import { io } from 'socket.io-client';
-
-const client = io('http://localhost:3002')
+const client = io('http://localhost:3002');
 
 export default function Login() {
   const [messageInput, setMessageInput] = useState('');
@@ -16,34 +15,37 @@ export default function Login() {
     return true;
   };
 
-  const handleChange = ({ target: { name, value } }) => {
+  const handleChange = ({ target: { value } }) => {
     setMessageInput(value);
   };
 
+  const handleMap = (e) => (
+    `${e.data.split('T')[1].split(':')[0]}:${e.data.split('T')[1].split(':')[1]}`);
 
   const localStorag = JSON.parse(localStorage.getItem('user'));
 
   const handleClick = () => {
     console.log(messageInput);
     setMessageInput('');
-    
+
     console.log(localStorag.email);
-    client.emit('sendMessage', {messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br'});
-    
+    client.emit('sendMessage', {
+      messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br' });
+
     client.on('allMessage', async (messages) => {
       setAllMessages(messages);
-    })
+    });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     client.on('allMessage', async (messages) => {
-      console.log('messages', messages)
+      console.log('messages', messages);
       setAllMessages(messages);
-    })
-  }, [])
+    });
+  }, []);
 
-  console.log('allMessages', allMessages)
-  console.log('localStorag.email', localStorag.email)
+  console.log('allMessages', allMessages);
+  console.log('localStorag.email', localStorag.email);
 
   return (
     <div>
@@ -53,7 +55,7 @@ export default function Login() {
           id="message"
           name="message"
           type="text"
-          value={messageInput}
+          value={ messageInput }
           data-testid="message-input"
           onChange={ handleChange }
         />
@@ -68,11 +70,17 @@ export default function Login() {
         Enviar
       </button>
 
-      { allMessages[localStorag.messageFrom] && allMessages[localStorag.messageFrom].map((e,i) => <p>{e.messageFrom} - {e.data.split('T')[1].split(':')[0]}:{e.data.split('T')[1].split(':')[1]} - {e.messageInput}</p>)}
+      { allMessages[localStorag.messageFrom]
+      && allMessages[localStorag.messageFrom].map((e, i) => (
+        <p key={ i }>
+          {`${e.messageFrom} - ${handlemap(e)} - ${e.messageInput}`}
+        </p>))}
 
-      { allMessages['user@test.com'] && allMessages[localStorag.email].map((e,i) => <p>{e.messageFrom} - {e.data.split('T')[1].split(':')[0]}:{e.data.split('T')[1].split(':')[1]} - {e.messageInput}</p>) }
+      { allMessages['user@test.com'] && allMessages[localStorag.email].map((e, i) => (
+        <p key={ i }>
+          {`${e.messageFrom} - ${handleMap(e)} - ${e.messageInput}`}
+        </p>)) }
 
-     
     </div>
   );
 }
