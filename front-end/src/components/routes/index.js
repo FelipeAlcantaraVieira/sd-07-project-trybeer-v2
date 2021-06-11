@@ -10,6 +10,7 @@ import ClientOrdersPage from '../../pages/ClientOrders';
 import ClientOrderDetailsPage from '../../pages/ClientOrderDetails';
 import AdminOrderDetailsPage from '../../pages/AdminOrdersDetails';
 import Checkout from '../../pages/Checkout';
+import ClientChat from '../../pages/ClientChat';
 
 function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ function AppRoutes() {
       <Route path="/login" component={ Login } />
       <Route path="/register" component={ Register } />
       <Route path="/profile" component={ ClientProfilePage } />
+      <Route path="/chat" component={ ClientChat } />
       <Route path="/orders/:id" component={ ClientOrderDetailsPage } />
       <Route exact path="/orders" component={ ClientOrdersPage } />
       <Route path="/admin/profile" component={ AdminProfilePage } />
