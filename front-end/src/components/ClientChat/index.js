@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import socket from '../../helper/chat';
 
 export default function ClientChat() {
-
   const [message, setMessage] = useState('');
   const [serverMessage, setServerMessage] = useState([]);
   const [userName, setUserName] = useState('');
