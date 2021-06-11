@@ -23,6 +23,13 @@ function MenuAdmin({ open }) {
         Perfil
       </Button>
       <Button
+        name="btn-admin-chat"
+        onClick={ () => history.push('/admin/chats') }
+        data-testid="side-menu-item-chat"
+      >
+        Conversas
+      </Button>
+      <Button
         name="btn-exit"
         data-testid="side-menu-item-logout"
         onClick={ () => {
