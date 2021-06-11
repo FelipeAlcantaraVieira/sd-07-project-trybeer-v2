@@ -32,6 +32,13 @@ function MenuClient({ open }) {
           Meu Perfil
         </Button>
         <Button
+          name="btn-chat"
+          onClick={ () => history.push('/chat') }
+          data-testid="side-menu-chat"
+        >
+          Conversar com a loja
+        </Button>
+        <Button
           name="btn-exit"
           data-testid="side-menu-item-logout"
           onClick={ () => {

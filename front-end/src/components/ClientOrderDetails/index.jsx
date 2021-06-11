@@ -43,9 +43,11 @@ export default function ClientOrderDetails() {
     >
       <div>
         <p data-testid="order-number">{`Pedido ${id}`}</p>
+        <p>{sale ? sale[0].status : null}</p>
         <p data-testid="order-date">
           {sale ? dateFormate(sale[0].saleDate) : null }
         </p>
+        {console.log(sale)}
         { sale ? sale[0].products.map((item, index) => {
         // totalValue = item.total_price;
           const productTotalValue = (item.price * item.salesProduct.quantity).toFixed(2);
