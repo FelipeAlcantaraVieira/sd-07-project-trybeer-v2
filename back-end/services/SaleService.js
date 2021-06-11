@@ -12,7 +12,6 @@ const getTotalValue = async (data) => {
   const teste = await Promise.all(
     data.map(async ({ productName, quantity }) => {
       const newProduct = await product.findOne({ where: { name: productName } });
-      console.log(newProduct);
       const price = newProduct.price * quantity;
       return Number(price);
     }),
@@ -24,7 +23,6 @@ const createSale = async (data, token) => {
   const dataIsntValid = validateArray.some((item) => item.error);
   if (dataIsntValid === true) throw validateArray.find((error) => error.error).error.details[0];
   const totalProductPrice = await getTotalValue(data);
-  console.log(token);
   const { id } = await user.findOne({ where: { email: token.email } });
   const totalSalePrice = totalProductPrice.reduce((acc, curr) => acc + curr);
   const { deliveryAddress, deliveryNumber } = data[0];
@@ -37,11 +35,16 @@ const createSale = async (data, token) => {
 };
 
 const getSaleProducts = async (id, saleid) => {
-  const sales = await sale.findOne({ where: { userId: id, saleid } });
+  const sales = await sale.findAll({ where: { userId: id, id: saleid }, 
+    include: [{ model: product, as: 'products' }] });
   if (sales.length === 0) throw NOTFOUNDID;
   return sales;
 };
-
+// sale = [{
+//   name,
+//   quantity,
+//   price,
+// }]
 const getSaleByUserId = async (id) => {
   const result = await sale.findAll({ where: { userId: id } });
   if (result === null) throw NOEXISTENTPURCHASE;
@@ -56,7 +59,6 @@ const getSaleByUserId = async (id) => {
       };
     }),
   );
-  console.log(retorno);
   return retorno;
 };
 
@@ -71,14 +73,15 @@ const updateSaleStatus = async (id, status, token) => {
   const { error } = validateStatus(status);
   if (token.role !== 'administrator') throw NOTADMINISTRATOR;
   if (error) throw error;
-  const response = await sale.update({ status }, { where: id });
+  const response = await sale.update({ status }, { where: { id } });
   if (response[0] === 0) throw SAMESTATUS;
   return { message: `Pedido registrado como ${status}` };
 };
 
 const adminGetSaleById = async (saleId, token) => {
   if (token.role !== 'administrator') throw NOTADMINISTRATOR;
-  const result = await sale.findAll({ where: { id: saleId } });
+  const result = await sale.findAll({ where: { id: saleId },
+    include: [{ model: product, as: 'products' }] });
   return result;
 };
 

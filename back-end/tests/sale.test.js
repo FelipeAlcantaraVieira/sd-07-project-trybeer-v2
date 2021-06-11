@@ -33,6 +33,7 @@ const withoutAddress = [{ productName, quantity }];
 
 beforeAll(async () => {
   await db.sequelize.sync({ force: true });
+  shell.exec('npx sequelize db:seed:undo:all');
   shell.exec('npx sequelize db:seed:all');
 });
 

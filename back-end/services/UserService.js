@@ -18,9 +18,7 @@ const registerUser = async (data) => {
 const updateUser = async (name, email) => {
   const { error } = validadeUserName({ name });
   if (error) throw error;
-  console.log(`Console do email: ${email}`);
   const response = await user.update({ name }, { where: { email } });
-  console.log(response);
   if (response[0] === 0) throw SAMEUSERNAME;
   return { message: 'Atualização concluída com sucesso' };
 };

@@ -4,7 +4,7 @@ const { jwtConfig, SECRET } = require('../config/jwt');
 const EMAIL = 'user@test.com';
 const generateToken = (type) => {
   if (type === 'admin') {
-  const token = jwt.sign({ email: 'tryber@trybe.com.br', password: '123456' }, SECRET, jwtConfig);
+  const token = jwt.sign({ email: 'tryber@trybe.com.br', password: '12345678' }, SECRET, jwtConfig);
   const data = { 
     token, 
     name: 'Tryber Admin', 

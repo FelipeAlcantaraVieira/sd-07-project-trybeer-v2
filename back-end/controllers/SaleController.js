@@ -65,7 +65,6 @@ const adminGetSaleById = async (req, res) => {
     const { saleid } = req.params;
     const { user } = req;
     const response = await saleService.adminGetSaleById(saleid, user);
-    console.log(response);
     res.status(200).json(response);
   } catch (error) {
     res.status(FORBIDDEN).json({ err: { message: error.message } });

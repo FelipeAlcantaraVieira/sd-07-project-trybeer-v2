@@ -57,9 +57,9 @@ export default function ClientOrderDetails() {
       <div>
         <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
         <p data-testid="order-status">{status}</p>
-        { sale.map((item, index) => {
-          const productTotalValue = (item.price * item.quantity).toFixed(2);
-
+        { sale && sale[0].products.map((item, index) => {
+          const productTotalValue = (item.price * item.salesProduct.quantity).toFixed(2);
+          console.log(productTotalValue);
           return (
             <div
               key={ item.name }
@@ -75,7 +75,6 @@ export default function ClientOrderDetails() {
               <p data-testid={ `${index}-product-qtd` }>{item.quantity}</p>
               <p data-testid={ `${index}-product-name` }>{item.name}</p>
               <p data-testid="0-order-unit-price">
-                {console.log(item)}
                 {`(R$ ${item.price.replace('.', ',')})`}
               </p>
               <p data-testid={ `${index}-product-total-value` }>
@@ -92,8 +91,7 @@ export default function ClientOrderDetails() {
       >
         Total:
         {' '}
-        { console.log(sale)}
-        {sale ? `R$ ${sale[0].total_price.replace('.', ',')}` : 'R$ 0,00'}
+        {sale ? `R$ ${sale[0].totalPrice.replace('.', ',')}` : 'R$ 0,00'}
       </p>
       <Button
         type="submit"

@@ -44,12 +44,11 @@ export default function ClientOrderDetails() {
       <div>
         <p data-testid="order-number">{`Pedido ${id}`}</p>
         <p data-testid="order-date">
-          {sale ? dateFormate(sale[0].sale_date) : null }
+          {sale ? dateFormate(sale[0].saleDate) : null }
         </p>
-        { sale ? sale.map((item, index) => {
+        { sale ? sale[0].products.map((item, index) => {
         // totalValue = item.total_price;
-          const productTotalValue = (item.price * item.quantity).toFixed(2);
-
+          const productTotalValue = (item.price * item.salesProduct.quantity).toFixed(2);
           return (
             <div
               key={ item.name }
@@ -68,7 +67,7 @@ export default function ClientOrderDetails() {
       <p data-testid="order-total-value" className="align-self-end">
         <span>Total:</span>
         {' '}
-        {sale ? `R$ ${sale[0].total_price.replace('.', ',')}` : 'R$ 0,00'}
+        {sale ? `R$ ${sale[0].totalPrice.replace('.', ',')}` : 'R$ 0,00'}
       </p>
     </div>
   );
