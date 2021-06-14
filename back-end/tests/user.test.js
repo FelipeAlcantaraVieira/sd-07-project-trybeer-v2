@@ -119,8 +119,8 @@ it(' É possível cadastrar um novo usuario', (done) =>
     .expect(contentType, /json/)
     .expect(201)
     .then(({ body }) => {
-      const { token, name, email, role, id } = body;
-      expect(body).toMatchObject({ token, name, email, role, id });
+      const { token, name, email, role } = body;
+      expect(body).toMatchObject({ token, name, email, role });
       done();
     }));
 
