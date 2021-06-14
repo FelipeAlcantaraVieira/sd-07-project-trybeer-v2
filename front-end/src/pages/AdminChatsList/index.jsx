@@ -1,9 +1,8 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import Header from '../../components/Header';
-import AdminChats from '../../components/AdminChats';
+import AdminChatsList from '../../components/AdminChatsList';
 import AuthVerification from '../../components/AuthVerification';
-import socket from '../../helper/chat';
 
 const AdminChatsPage = () => {
   AuthVerification();
@@ -11,8 +10,7 @@ const AdminChatsPage = () => {
     <div>
       <Header title="Chats com os usuários" />
       <Container style={ { height: '100vh' } }>
-        <AdminChats />
-
+        <AdminChatsList />
       </Container>
     </div>
   );
