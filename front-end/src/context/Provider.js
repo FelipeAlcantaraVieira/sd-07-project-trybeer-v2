@@ -34,6 +34,7 @@ export default function Provider(props) {
   const [totalPrice, setTotalPrice] = useState();
 
   // ****************************************************************
+  const [clientEmail, setClientEmail] = useState();
 
   const context = {
     userLogged,
@@ -51,6 +52,8 @@ export default function Provider(props) {
     setSaleDate,
     totalPrice,
     setTotalPrice,
+    clientEmail,
+    setClientEmail,
   };
 
   const { children } = provideProps;

@@ -17,14 +17,14 @@ const PORT2 = 3002;
 const { user, auth, product, sales } = require('./resources');
 // const bodyParser = require('body-parser');
 
-let messages = {};
+const messages = {};
 
 io.on('connection', (client) => {
   io.emit('allMessage', messages);
   // console.log(`Novo usuário conectado ${client.id}`);
   client.on('sendMessage', ({ messageInput, messageFrom, messageTo }) => {
     const data = moment().format();
-    const message = { messageInput, messageFrom, messageTo, data};
+    const message = { messageInput, messageFrom, messageTo, data };
     if (messages[messageFrom] === undefined) messages[messageFrom] = [message];
     else messages[messageFrom] = [...messages[messageFrom], message];
     console.log('messages', messages);
@@ -35,12 +35,17 @@ io.on('connection', (client) => {
     console.log('messageFrom', messageFrom);
     console.log('messageTo', messageTo);
     const data = moment().format();
-    const message = { messageInput, messageFrom, messageTo, data};
+    const message = { messageInput, messageFrom, messageTo, data };
     if (messages[messageTo] === undefined) messages[messageTo] = [message];
     else messages[messageTo] = [...messages[messageTo], message];
-    // console.log('messages', messages);
+    console.log('messages', messages);
     io.emit('allMessage', messages);
-  })
+  });
+
+  client.on('createClient', (email) => {
+    messages[email] = [];
+    io.emit('createdClient', messages);
+  });
 });
 
 const app = express();
