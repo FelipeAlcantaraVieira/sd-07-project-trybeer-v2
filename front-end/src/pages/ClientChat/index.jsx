@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import Header from '../../components/Header';
-import ClientChat from '../../components/ClientChat';
+import ClientChat from '../../components/Chat';
 import AuthVerification from '../../components/AuthVerification';
 
 const ClientChatPage = () => {

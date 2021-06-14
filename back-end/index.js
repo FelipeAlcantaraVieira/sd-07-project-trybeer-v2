@@ -13,8 +13,29 @@ const io = require('socket.io')(http, {
 });
 
 const chat = require('./modelsMongo/chat');
+const models = require('./models');
 
-io.on('connection', (socket) => {
+const getUserMessages = async () => {
+  const allUsers = await models.user.findAll();
+  const usersMessages = await Promise.all(allUsers.map(async (user) => {
+    const messages = await chat.getUserMessages(user.email);
+    return messages[messages.length - 1];
+  }));
+  return usersMessages.filter((e) => e !== undefined);
+};
+
+const adminListOfMessages = async (socket) => {
+  const messages = await getUserMessages();
+  socket.emit('adminListMessages', messages);
+};
+
+// const chageUserSession = async (username) => {
+//   const users = await models.user.findOne({ where: { email: username } });
+//   if (users.role === 'administrator' || users.role === null) return 'administrator';
+//   return username;
+// };
+
+const sendMessage = async (socket) => {
   let temporaryMessages = [];
   socket.on('userMessage', ({ message, userName }) => {
     const time = moment().format('HH:mm');
@@ -27,6 +48,11 @@ io.on('connection', (socket) => {
     temporaryMessages = messages;
     io.emit('serverMessage', temporaryMessages);
   });
+};
+
+io.on('connection', async (socket) => {
+  adminListOfMessages(socket);
+  sendMessage(socket);
 });
 
 const { login, user, product, sale } = require('./routes');
