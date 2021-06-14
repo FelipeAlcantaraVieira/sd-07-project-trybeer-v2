@@ -15,10 +15,12 @@ const adminRoute = '/sales/admin';
 const updateRoute = '/sales/admin/1';
 
 const validSale = [
-  {
-    productName: 'Skol Lata 250ml',
+  { productName: 'Skol Lata 250ml', 
     quantity: 5,
+    totalPrice: 1,
     deliveryAddress: 'Teste',
+    deliveryNumber: 1,
+    status: 'Pendente',
   },
 ];
 const { productName, quantity, deliveryAddress } = validSale[0];
@@ -32,9 +34,9 @@ const withoutQuantity = [{ productName }];
 const withoutAddress = [{ productName, quantity }];
 
 beforeAll(async () => {
-  await db.sequelize.sync({ force: true });
-  shell.exec('npx sequelize db:seed:undo:all');
-  shell.exec('npx sequelize db:seed:all');
+  shell.exec('npx sequelize-cli db:drop $');
+  shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
+  shell.exec('npx sequelize-cli db:seed:all $');
 });
 
 it('Para consultar as vendas dos usuários deverá ser um administrador', (done) =>
