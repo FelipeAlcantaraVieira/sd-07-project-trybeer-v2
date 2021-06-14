@@ -1,64 +1,58 @@
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-import { io } from 'socket.io-client';
-// import TrybeerContext from '../../context/TrybeerContext';
 import {
   AdminSideBar,
 } from '../../components';
+import { getAllMessage } from '../../service/trybeerApi'
 
-const client = io('http://localhost:3002');
+export default function ChatsAdmin() {
+  const [allMessage, setAllMessage] = useState([]);
+  // const [messageDetail, setMessageDetail] = useState(false);
 
-export default function ChatAdmin() {
-  // const [messageInput, setMessageInput] = useState('');
-  const [allMessages, setAllMessages] = useState('');
-  // const { clientEmail, setClientEmail } = useContext(TrybeerContext);
+  // const handleChange = (email) => {
+  //   setMessageDetail(email);
+  // };
+
   // const verifyInput = () => {
   //   if (messageInput.length > 0) return false;
   //   return true;
   // };
-  const [messageDetail, setMessageDetail] = useState(false);
-  const [messageInput, setMessageInput] = useState('');
 
-  const handleChange = (email) => {
-    setMessageDetail(email);
-  };
+  // const handleChangeMessage = ({ target: { value } }) => {
+  //   setMessageInput(value);
+  // };
 
-  const verifyInput = () => {
-    if (messageInput.length > 0) return false;
-    return true;
-  };
+  // const handleClickMessage = () => {
+  //   console.log(messageInput);
+  //   setMessageInput('');
+  //   client.emit('sendMessageAdmin', {
+  //     messageInput, messageFrom: 'tryber@trybe.com.br', messageTo: messageDetail,
+  //   });
 
-  const handleChangeMessage = ({ target: { value } }) => {
-    setMessageInput(value);
-  };
-
-  const handleClickMessage = () => {
-    console.log(messageInput);
-    setMessageInput('');
-    client.emit('sendMessageAdmin', {
-      messageInput, messageFrom: 'tryber@trybe.com.br', messageTo: messageDetail,
-    });
-
-    client.on('allMessage', async (messages) => {
-      setAllMessages(messages);
-    });
-  };
+  //   client.on('allMessage', async (messages) => {
+  //     setAllMessages(messages);
+  //   });
+  // };
 
   useEffect(() => {
-    client.on('allMessage', async (messages) => {
-      console.log('messages', messages);
-      setAllMessages(messages);
-    });
+    requestAllMessage();
   }, []);
 
-  console.log('allMessages', allMessages[messageDetail]);
-
-  const getallUsers = ['user@test.com', 'moacyrrln@gmail.com'];
-
+  const requestAllMessage = async () => {
+    const allMessage = await getAllMessage();
+    console.log(allMessage);
+    setAllMessage(allMessage);
+  }
+  if (!allMessage.length) return (<p>Nenhuma Conversa Aqui</p>)
   return (
     <div>
       <AdminSideBar />
-      { allMessages && !messageDetail
+      { allMessage.map((e, i) =>
+        <div key={i}>
+          <p data-testid="profile-name" >{e.client}</p>
+          <p data-testid="last-message" >{`Última menssagem às ${e.timeLastMessage}`}</p>
+        </div>)}
+
+      {/* { allMessages && !messageDetail
         && getallUsers.map((email, i) => (
           <p key={ i }>
             { allMessages[email][allMessages[email].length - 1].messageFrom }
@@ -121,7 +115,7 @@ export default function ChatAdmin() {
             {' '}
             { e.messageInput }
           </p>)))
-      }
+      } */}
     </div>
   );
 }

@@ -14,6 +14,7 @@ import {
   Checkout,
   ClientDetails,
   Chat,
+  ChatsAdmin,
   ChatAdmin,
 } from '../pages';
 
@@ -33,7 +34,8 @@ const Routes = () => (
     <PrivateRoute exact path="/checkout" component={ Checkout } />
     <PrivateRoute exact path="/orders/:np" component={ ClientDetails } />
     <PrivateRoute exact path="/chat" component={ Chat } />
-    <PrivateRoute exact path="/admin/chats" component={ ChatAdmin } />
+    <PrivateRoute exact path="/admin/chats" component={ ChatsAdmin } />
+    <PrivateRoute exact path="/admin/chat" component={ ChatAdmin } />
   </Switch>
 );
 

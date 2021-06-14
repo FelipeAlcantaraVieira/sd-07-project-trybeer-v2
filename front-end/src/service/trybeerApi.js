@@ -128,6 +128,15 @@ const getSaleByOrderId = async (orderId) => {
   return result;
 };
 
+const getAllMessage = async () => {
+  const result = await axios.get(`${URL}/message`, config)
+    .then((response) => response.data)
+    .catch((error) => {
+      if (error) return { error: error.message };
+    });
+  return result;
+};
+
 export {
   login,
   productList,
@@ -140,4 +149,5 @@ export {
   getAllSales,
   getSaleByUserId,
   getSaleByOrderId,
+  getAllMessage,
 };
