@@ -29,12 +29,6 @@ const adminListOfMessages = async (socket) => {
   socket.emit('adminListMessages', messages);
 };
 
-// const chageUserSession = async (username) => {
-//   const users = await models.user.findOne({ where: { email: username } });
-//   if (users.role === 'administrator' || users.role === null) return 'administrator';
-//   return username;
-// };
-
 const sendMessage = async (socket) => {
   let temporaryMessages = [];
   socket.on('userMessage', ({ message, userName }) => {
@@ -50,9 +44,30 @@ const sendMessage = async (socket) => {
   });
 };
 
+const adminMessages = async (socket) => {
+  let messages = [];
+  let to = '';
+  console.log('carregou');
+  socket.on('loadAdminMessage', async (userName) => {
+    to = userName;
+    messages = await chat.getUserMessages(userName);
+    io.emit('loadAdminMessage', messages);
+  });
+  socket.on('adminMessage', ({ message }) => {
+    const time = moment().format('HH:mm');
+    messages.push({ message, userName: 'Loja', time });
+    console.log(messages);
+    chat.add(message, time, to);
+    io.emit('loadAdminMessage', messages);
+  });
+};
+
 io.on('connection', async (socket) => {
+  socket.on('isAdmin', (admin) => { 
+    if (admin === true) return adminMessages(socket);
+    sendMessage(socket);
+  });
   adminListOfMessages(socket);
-  sendMessage(socket);
 });
 
 const { login, user, product, sale } = require('./routes');

@@ -1,8 +1,8 @@
 const connect = require('./connect');
 
-const add = async (message, userName, time) =>
+const add = async (message, userName = 'Loja', time, to = 'Loja') =>
 connect().then(async (db) => {
-    const messages = await db.collection('messages').insertOne({ message, userName, time });
+    const messages = await db.collection('messages').insertOne({ message, userName, time, to });
 
     return messages.ops[0];
   });
