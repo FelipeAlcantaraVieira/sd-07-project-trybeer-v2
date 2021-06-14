@@ -19,50 +19,18 @@ export default function Login() {
     setMessageInput(value);
   };
 
-<<<<<<< HEAD
-=======
   const handleMap = (e) => (
     `${e.data.split('T')[1].split(':')[0]}:${e.data.split('T')[1].split(':')[1]}`);
 
->>>>>>> 7ce04f11bf8bbb20639014f49af99572626e69ee
   const localStorag = JSON.parse(localStorage.getItem('user'));
 
   const handleClick = () => {
     console.log(messageInput);
     setMessageInput('');
-<<<<<<< HEAD
-    console.log(localStorag.email);
-    client.emit('sendMessage', {
-      messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br',
-    });
-
-    // client.on('allMessage', async (messages) => {
-    //   setAllMessages(messages);
-    // });
-  };
-
-  useEffect(() => {
-    if (allMessages[localStorag.email] === undefined) {
-      client.emit('createClient', localStorag.email);
-
-    }
-  }, []);
-
-  client.on('createdClient', (messages) => {
-    setAllMessages(messages);
-  });
-
-  client.on('allMessage', async (messages) => {
-    setAllMessages(messages);
-  });
-
-  console.log('allMessages', allMessages);
-
-=======
 
     console.log(localStorag.email);
-    client.emit('sendMessage', {
-      messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br' });
+    client.emit('sendMessageAdmin', {
+      messageInput, messageFrom: 'tryber@trybe.com.br', messageTo: localStorag.email });
 
     client.on('allMessage', async (messages) => {
       setAllMessages(messages);
@@ -78,7 +46,6 @@ export default function Login() {
 
   console.log('allMessages', allMessages);
   console.log('localStorag.email', localStorag.email);
->>>>>>> 7ce04f11bf8bbb20639014f49af99572626e69ee
 
   return (
     <div>
@@ -103,34 +70,12 @@ export default function Login() {
         Enviar
       </button>
 
-<<<<<<< HEAD
-      { allMessages.messages && allMessages.messages.map((e, i) => (
+      { allMessages[localStorag.email]
+      && allMessages[localStorag.email].map((e, i) => (
         <p key={ i }>
-          {e.from}
-          {' '}
-          -
-          {' '}
-          {e.date.split('T')[1].split(':')[0]}
-          :
-          {e.date.split('T')[1].split(':')[1]}
-          {' '}
-          -
-          {' '}
-          {e.text}
-        </p>))}
-=======
-      { allMessages[localStorag.messageFrom]
-      && allMessages[localStorag.messageFrom].map((e, i) => (
-        <p key={ i }>
-          {`${e.messageFrom} - ${handlemap(e)} - ${e.messageInput}`}
+          {`${e.email} - ${handleMap(e)} - ${e.messageInput}`}
         </p>))}
 
-      { allMessages['user@test.com'] && allMessages[localStorag.email].map((e, i) => (
-        <p key={ i }>
-          {`${e.messageFrom} - ${handleMap(e)} - ${e.messageInput}`}
-        </p>)) }
-
->>>>>>> 7ce04f11bf8bbb20639014f49af99572626e69ee
     </div>
   );
 }
