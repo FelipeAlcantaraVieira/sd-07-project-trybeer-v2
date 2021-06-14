@@ -62,3 +62,5 @@ app.listen(apiport, () => {
 http.listen(PORT2, () => {
   console.log(`Trybeer API ON and listen at ${PORT2}!`);
 });
+
+module.exports = app;

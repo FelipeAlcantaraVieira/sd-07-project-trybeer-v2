@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development' || 'test';
 const { secret } = require('../config/config')[env];
 
 const generateToken = ({ name, email, role, id }) => {

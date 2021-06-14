@@ -18,6 +18,8 @@ module.exports = {
     password: process.env.MYSQL_PASSWORD,
     database: process.env.SCHEMA,
     host: process.env.HOSTNAME,
+    apiport: process.env.PORT || 3001,
+    secret: process.env.SECRET || 'forabolsonaro',
     dialect: 'mysql',
     logging: false,
   },
