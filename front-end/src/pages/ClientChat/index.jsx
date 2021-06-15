@@ -10,7 +10,11 @@ const ClientChatPage = () => {
   return (
     <div>
       <Header title="Chat com a loja" />
-      <Container style={ { height: '100vh' } }>
+      <Container
+        style={ {
+          height: '100vh',
+          margin: '30px' } }
+      >
         <ClientChat />
       </Container>
     </div>
