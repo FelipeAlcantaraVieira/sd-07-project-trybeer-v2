@@ -34,7 +34,9 @@ export default function Provider(props) {
   const [totalPrice, setTotalPrice] = useState();
 
   // ****************************************************************
+  // ABOUT CHAT
   const [clientEmail, setClientEmail] = useState();
+  // ****************************************************************
 
   const context = {
     userLogged,
@@ -60,7 +62,7 @@ export default function Provider(props) {
 
   return (
     <TrybeerContext.Provider
-      value={ context }
+      value={context}
     >
       {children}
     </TrybeerContext.Provider>

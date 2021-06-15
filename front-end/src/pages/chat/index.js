@@ -28,29 +28,23 @@ export default function Login() {
     client.emit('sendMessage', {
       messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br',
     });
-
-    // client.on('allMessage', async (messages) => {
-    //   setAllMessages(messages);
-    // });
   };
 
   useEffect(() => {
-    if (allMessages[localStorag.email] === undefined) {
+    if (allMessages && allMessages[localStorag.email] === undefined) {
       client.emit('createClient', localStorag.email);
-
     }
-  }, []);
 
-  client.on('createdClient', (messages) => {
-    setAllMessages(messages);
-  });
+    client.on('createdClient', (messages) => {
+      setAllMessages(messages);
+    });
 
-  client.on('allMessage', async (messages) => {
-    setAllMessages(messages);
-  });
+    client.on('allMessage', async (messages) => {
+      setAllMessages(messages);
+    });
+  }, [allMessages, localStorag.email]);
 
   console.log('allMessages', allMessages);
-
 
   return (
     <div>
@@ -60,23 +54,23 @@ export default function Login() {
           id="message"
           name="message"
           type="text"
-          value={ messageInput }
+          value={messageInput}
           data-testid="message-input"
-          onChange={ handleChange }
+          onChange={handleChange}
         />
       </label>
 
       <button
         type="button"
         data-testid="signin-btn"
-        disabled={ verifyInput() }
-        onClick={ handleClick }
+        disabled={verifyInput()}
+        onClick={handleClick}
       >
         Enviar
       </button>
 
-      { allMessages.messages && allMessages.messages.map((e, i) => (
-        <p key={ i }>
+      {allMessages && allMessages.messages && allMessages.messages.map((e, i) => (
+        <p key={i}>
           {e.from}
           {' '}
           -
