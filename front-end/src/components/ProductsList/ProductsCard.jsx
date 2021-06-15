@@ -58,7 +58,7 @@ function ProductsCard({ item, index, addProdQtt, decProdQtt }) {
         className="align-self-center"
         style={ { width: '60%', background: 'transparent' } }
         variant="bottom"
-        src={ item.url_image }
+        src={ item.urlImage }
         alt={ item.name }
         data-testid={ `${index}-product-img` }
       />

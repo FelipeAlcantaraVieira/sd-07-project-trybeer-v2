@@ -19,14 +19,22 @@ export default function AdminChatsList() {
   }, [setusersMessagesList]);
 
   const singleUserMessages = (userName) => {
+    console.log(userName);
     socket.emit('loadAdminMessage', userName);
     socket.on('loadAdminMessage', (messages) => setUserMessages(messages));
     history.push('/admin/chats/user');
   };
 
   return (
-    <div>
-      <h1>Conversas</h1>
+    <div
+    style={{
+      margin: '20px',
+    }}>
+      <h1
+        style={{
+          margin: '20px'
+        }}
+      >Conversas</h1>
       <div
         className="d-flex flex-column align-items-center"
         style={ { marginBottom: '23vh' } }
@@ -34,14 +42,14 @@ export default function AdminChatsList() {
         {loading ? (
           <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>)
           : (
-            usersMessagesList.map((userMessage, index) => (
+            usersMessagesList.map(({ userName, time }, index) => (
               <Card
                 type="button"
                 key={ index }
                 data-testid="containerChat"
-                onClick={ () => singleUserMessages(userMessage.userName) }
+                onClick={ () => singleUserMessages(userName) }
                 role="button"
-                onKeyDown={ () => singleUserMessages(userMessage.userName) }
+                onKeyDown={ () => singleUserMessages(userName) }
                 tabIndex={ 0 }
                 className="border rounded"
                 style={ { margin: '3vh',
@@ -52,13 +60,13 @@ export default function AdminChatsList() {
               >
                 <Row>
                   <Col>
-                    <p data-testid="profile-name">{userMessage.userName}</p>
+                    <p data-testid="profile-name">{userName}</p>
                   </Col>
                   <Col>
                     <p data-testid="last-message">
                       Última mensagem às
                       {' '}
-                      {userMessage.time}
+                      {time}
                     </p>
                   </Col>
                 </Row>

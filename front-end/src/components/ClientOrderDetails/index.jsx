@@ -39,9 +39,14 @@ export default function ClientOrderDetails() {
         backgroundColor: 'rgb(0,0,0,0.2)',
         color: 'white',
         width: '50%',
-        marginLeft: '20vh' } }
+        height: 'auto',
+        marginLeft: '20vh',
+        backgroundAttachment: 'fixed',
+      } }
     >
-      <div>
+      <div
+        style={{ overflow: 'auto' }}
+      >
         <p data-testid="order-number">{`Pedido ${id}`}</p>
         <p>{sale ? sale[0].status : null}</p>
         <p data-testid="order-date">

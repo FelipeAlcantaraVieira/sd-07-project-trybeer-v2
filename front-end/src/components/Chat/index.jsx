@@ -30,7 +30,13 @@ export default function ClientChat() {
   return (
     <Form>
       <div>
-        <h1>Chat do Usuário</h1>
+        <h1
+          style={ {
+            marginTop: '20px',
+          } }
+        >
+          Chat do Usuário
+        </h1>
         <div
           style={ {
             maxHeight: '500px',
@@ -43,57 +49,107 @@ export default function ClientChat() {
             style={ {
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'flex-end',
               marginTop: '20px',
             } }
           >
             {serverMessage.map((messageContent, index) => (
-              <li
-                key={ index }
-                style={ {
-                  borderRadius: '5px',
-                  position: 'relative',
-                  padding: '5px 10px',
-                  background: '#d2d6de',
-                  border: '1px solid #d2d6de',
-                  marginRight: '30px',
-                  marginBottom: '10px',
-                  color: '#444',
-                  listStyle: 'none',
-                  maxWidth: '350px',
-                  display: 'inline-block',
-                  wordBreak: 'break-all',
-                } }
-              >
-                <div>
-                  <span
-                    data-testid="nickname"
-                    style={ {
-                      marginBottom: '2px',
-                      fontSize: '12px',
-                    } }
-                  >
-                    {messageContent.userName}
+              messageContent.userName === 'Loja'
+                ? <li
+                  key={ index }
+                  style={ {
+                    borderRadius: '5px',
+                    position: 'relative',
+                    padding: '5px 10px',
+                    background: '#f39c12',
+                    border: '1px solid #f39c12',
+                    marginRight: '30px',
+                    marginBottom: '10px',
+                    color: '#444',
+                    listStyle: 'none',
+                    maxWidth: '350px',
+                    wordBreak: 'break-all',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignSelf: 'flex-start',
+                  } }
+                >
+                  <div>
+                    <span
+                      data-testid="nickname"
+                      style={ {
+                        marginBottom: '2px',
+                        fontSize: '12px',
+                      } }
+                    >
+                      {messageContent.userName}
+                    </span>
+                    {' '}
+                    -
+                    {' '}
+                    <span
+                      data-testid="message-time"
+                      style={ {
+                        marginBottom: '2px',
+                        fontSize: '12px',
+                      } }
+                    >
+                      {messageContent.time}
+                    </span>
+                  </div>
+                  <span data-testid="text-message">
+                    {messageContent.message === ''
+                      ? <br />
+                      : messageContent.message}
                   </span>
-                  {' '}
-                  -
-                  {' '}
-                  <span
-                    data-testid="message-time"
-                    style={ {
-                      marginBottom: '2px',
-                      fontSize: '12px',
-                    } }
-                  >
-                    {messageContent.time}
+                  </li>
+                : <li
+                  key={ index }
+                  style={ {
+                    borderRadius: '5px',
+                    position: 'relative',
+                    padding: '5px 10px',
+                    background: '#d2d6de',
+                    border: '1px solid #d2d6de',
+                    marginRight: '30px',
+                    marginBottom: '10px',
+                    color: '#444',
+                    listStyle: 'none',
+                    maxWidth: '350px',
+                    wordBreak: 'break-all',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignSelf: 'flex-end',
+                  } }
+                >
+                  <div>
+                    <span
+                      data-testid="nickname"
+                      style={ {
+                        marginBottom: '2px',
+                        fontSize: '12px',
+                      } }
+                    >
+                      {messageContent.userName}
+                    </span>
+                    {' '}
+                    -
+                    {' '}
+                    <span
+                      data-testid="message-time"
+                      style={ {
+                        marginBottom: '2px',
+                        fontSize: '12px',
+                      } }
+                    >
+                      {messageContent.time}
+                    </span>
+                  </div>
+                  <span data-testid="text-message">
+                    {messageContent.message === ''
+                      ? <br />
+                      : messageContent.message}
                   </span>
-                </div>
-                <span data-testid="text-message">
-                  {messageContent.message === ''
-                    ? <br />
-                    : messageContent.message}
-                </span>
-              </li>
+                  </li>
             ))}
           </ul>
         </div>

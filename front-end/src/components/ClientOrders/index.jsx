@@ -36,7 +36,9 @@ export default function ClientOrders() {
                 style={ {
                   backgroundColor: 'rgb(0,0,0,0.5)',
                   color: 'white',
-                  padding: '15px' } }
+                  padding: '15px',
+                  margin: '20px',
+                } }
               >
                 <div
                   type="button"

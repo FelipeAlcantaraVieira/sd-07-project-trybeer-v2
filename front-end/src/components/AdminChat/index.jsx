@@ -3,6 +3,7 @@ import { Form, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import socket from '../../helper/chat';
 import ApiContext from '../../context/context';
+
 export default function AdminChat() {
   const { userMessages } = useContext(ApiContext);
   const history = useHistory();
@@ -36,7 +37,13 @@ export default function AdminChat() {
   return (
     <Form>
       <div>
-        <h1>Chat do Usuário</h1>
+        <h1
+          style={ {
+            marginTop: '20px',
+          } }
+        >
+          Chat do Admin
+        </h1>
         <div
           style={ {
             maxHeight: '500px',
@@ -49,104 +56,108 @@ export default function AdminChat() {
             style={ {
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'flex-start',
               marginTop: '20px',
             } }
           >
             {serverMessage.map((messageContent, index) => (
-              messageContent.userName === 'Loja' ?
-              <li
-                key={ index }
-                style={ {
-                  borderRadius: '5px',
-                  position: 'relative',
-                  padding: '5px 10px',
-                  background: '#f39c12',
-                  border: '1px solid #f39c12',
-                  marginRight: '30px',
-                  marginBottom: '10px',
-                  color: '#444',
-                  listStyle: 'none',
-                  maxWidth: '350px',
-                  display: 'inline-block',
-                  wordBreak: 'break-all',
-                } }
-              >
-                <div>
-                  <span
-                    data-testid="nickname"
-                    style={ {
-                      marginBottom: '2px',
-                      fontSize: '12px',
-                    } }
-                  >
-                    {messageContent.userName}
-                  </span>
-                  {' '}
-                  -
-                  {' '}
-                  <span
-                    data-testid="message-time"
-                    style={ {
-                      marginBottom: '2px',
-                      fontSize: '12px',
-                    } }
-                  >
-                    {messageContent.time}
-                  </span>
-                </div>
-                <span data-testid="text-message">
-                  {messageContent.message === ''
-                    ? <br />
-                    : messageContent.message}
-                </span>
-              </li>
-              : <li
-              key={ index }
-              style={ {
-                borderRadius: '5px',
-                position: 'relative',
-                padding: '5px 10px',
-                background: '#d2d6de',
-                border: '1px solid #d2d6de',
-                marginRight: '30px',
-                marginBottom: '10px',
-                color: '#444',
-                listStyle: 'none',
-                maxWidth: '350px',
-                display: 'inline-block',
-                wordBreak: 'break-all',
-              } }
-            >
-              <div>
-                <span
-                  data-testid="nickname"
+              messageContent.userName === 'Loja'
+                ? <li
+                  key={ index }
                   style={ {
-                    marginBottom: '2px',
-                    fontSize: '12px',
+                    borderRadius: '5px',
+                    position: 'relative',
+                    padding: '5px 10px',
+                    background: '#d2d6de',
+                    border: '1px solid #d2d6de',
+                    marginRight: '30px',
+                    marginBottom: '10px',
+                    color: '#444',
+                    listStyle: 'none',
+                    maxWidth: '350px',
+                    wordBreak: 'break-all',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignSelf: 'flex-end',
                   } }
                 >
-                  {messageContent.userName}
-                </span>
-                {' '}
-                -
-                {' '}
-                <span
-                  data-testid="message-time"
+                  <div>
+                    <span
+                      data-testid="nickname"
+                      style={ {
+                        marginBottom: '2px',
+                        fontSize: '12px',
+                      } }
+                    >
+                      {messageContent.userName}
+                    </span>
+                    {' '}
+                    -
+                    {' '}
+                    <span
+                      data-testid="message-time"
+                      style={ {
+                        marginBottom: '2px',
+                        fontSize: '12px',
+                      } }
+                    >
+                      {messageContent.time}
+                    </span>
+                    <br />
+                  </div>
+                  <span data-testid="text-message">
+                    {messageContent.message === ''
+                      ? <br />
+                      : messageContent.message}
+                  </span>
+                  </li>
+                : <li
+                  key={ index }
                   style={ {
-                    marginBottom: '2px',
-                    fontSize: '12px',
+                    borderRadius: '5px',
+                    position: 'relative',
+                    padding: '5px 10px',
+                    background: '#f39c12',
+                    border: '1px solid #f39c12',
+                    marginRight: '30px',
+                    marginBottom: '10px',
+                    color: '#444',
+                    listStyle: 'none',
+                    maxWidth: '350px',
+                    wordBreak: 'break-all',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignSelf: 'start',
                   } }
                 >
-                  {messageContent.time}
-                </span>
-              </div>
-              <span data-testid="text-message">
-                {messageContent.message === ''
-                  ? <br />
-                  : messageContent.message}
-              </span>
-            </li>
+                  <div>
+                    <span
+                      data-testid="nickname"
+                      style={ {
+                        marginBottom: '2px',
+                        fontSize: '12px',
+                      } }
+                    >
+                      {messageContent.userName}
+                    </span>
+                    {' '}
+                    -
+                    {' '}
+                    <span
+                      data-testid="message-time"
+                      style={ {
+                        marginBottom: '2px',
+                        fontSize: '12px',
+                      } }
+                    >
+                      {messageContent.time}
+                    </span>
+                  </div>
+                  <span data-testid="text-message">
+                    {messageContent.message === ''
+                      ? <br />
+                      : messageContent.message}
+                  </span>
+                  </li>
             ))}
           </ul>
         </div>
@@ -198,7 +209,7 @@ export default function AdminChat() {
           data-testid="back-button"
           onClick={ () => history.push('/admin/chats') }
           style={ {
-            marginTop: '20px'
+            marginTop: '20px',
           } }
         >
           Voltar
