@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import socket from '../../helper/chat';
 import { Form, Col, Button } from 'react-bootstrap';
+
 export default function ClientChat() {
   const [message, setMessage] = useState('');
   const [serverMessage, setServerMessage] = useState([]);
@@ -25,7 +26,7 @@ export default function ClientChat() {
   useEffect(() => {
     sendUserEmail();
   }, []);
-
+ 
   return (
     <Form>
       <div>
