@@ -11,8 +11,11 @@ export default function AdminChat() {
   const [userName, setUserName] = useState('Loja');
 
   useEffect(() => {
-    if(userMessages.length < 1) socket.emit('loadAdminMessage', (message) => setServerMessage(message))
-  }, []);
+    if (userMessages.length < 1) {
+      socket
+        .emit('loadAdminMessage', (messageContent) => setServerMessage(messageContent));
+    }
+  }, [userMessages.length]);
 
   const sendMessage = (e) => {
     e.preventDefault();
