@@ -4,10 +4,13 @@ import ApiContext from './context';
 
 function ApiProvider({ children }) {
   const [data, setData] = useState(false);
+  const [userMessages, setUserMessages] = useState([]);
 
   const userData = {
     data,
     setData,
+    userMessages,
+    setUserMessages,
   };
 
   return (

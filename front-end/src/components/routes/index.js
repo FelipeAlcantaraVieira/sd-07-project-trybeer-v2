@@ -11,7 +11,8 @@ import ClientOrderDetailsPage from '../../pages/ClientOrderDetails';
 import AdminOrderDetailsPage from '../../pages/AdminOrdersDetails';
 import Checkout from '../../pages/Checkout';
 import ClientChatPage from '../../pages/ClientChat';
-import AdminChatsPage from '../../pages/AdminChats';
+import AdminChatsListPage from '../../pages/AdminChatsList';
+import AdminChatPage from '../../pages/AdminChat';
 
 function AppRoutes() {
   return (
@@ -30,7 +31,8 @@ function AppRoutes() {
       <Route path="/checkout" component={ Checkout } />
       <Route path="/admin/orders/:id" component={ AdminOrderDetailsPage } />
       <Route path="/admin/orders" component={ AdminOrdersPage } />
-      <Route path="/admin/chats" component={ AdminChatsPage } />
+      <Route path="/admin/chats/user" component={ AdminChatPage } />
+      <Route path="/admin/chats" component={ AdminChatsListPage } />
     </Switch>
   );
 }

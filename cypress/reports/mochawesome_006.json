@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-06-15T14:57:19.790Z",
+    "end": "2021-06-15T14:57:45.415Z",
+    "duration": 25625,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "85facaff-4412-40a6-9074-d0671d7b02a3",
+      "title": "",
+      "fullFile": "cypress/integration/req4-orderDetailClient.js",
+      "file": "cypress/integration/req4-orderDetailClient.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "25c67787-7339-4f0d-a2de-6edc6849b67c",
+          "title": "4 - Desenvolver os status para o pedido da tela de Detalhe pedido Cliente",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Dado que é feito uma compra, será validado que ela está com status `Pendente` na tela de `Detalhes do pedido` do cliente",
+              "fullTitle": "4 - Desenvolver os status para o pedido da tela de Detalhe pedido Cliente Dado que é feito uma compra, será validado que ela está com status `Pendente` na tela de `Detalhes do pedido` do cliente",
+              "timedOut": null,
+              "duration": 7022,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.login)(Cypress.env('login'), Cypress.env('password'));\n(0, _actionBase.accessOrdersClient)();\n(0, _actionBase.verifyContainsText)('Pendente');\n(0, _actionBase.clickButton)('[data-testid=\"0-order-number\"]');\n(0, _actionBase.verifyContainsText)('Pendente');",
+              "err": {},
+              "uuid": "4a57db16-c82f-41e0-83fd-462676d0d952",
+              "parentUUID": "25c67787-7339-4f0d-a2de-6edc6849b67c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Dado que o admin marcou o pedido como `Preparando` é verificado que na tela de `detalhe do pedido` do cliente o status mudou para `Preparando`",
+              "fullTitle": "4 - Desenvolver os status para o pedido da tela de Detalhe pedido Cliente Dado que o admin marcou o pedido como `Preparando` é verificado que na tela de `detalhe do pedido` do cliente o status mudou para `Preparando`",
+              "timedOut": null,
+              "duration": 9332,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.login)(Cypress.env('loginAdmin'), Cypress.env('passwordAdmin'));\n(0, _actionBase.accessOrdersAdmin)();\n(0, _actionBase.clickButton)('[data-testid=\"0-order-number\"]');\n(0, _actionBase.clickButton)('[data-testid=\"mark-as-prepared-btn\"]');\n(0, _actionBase.logoutAdmin)();\n(0, _actionBase.login)(Cypress.env('login'), Cypress.env('password'));\n(0, _actionBase.accessOrdersClient)();\n(0, _actionBase.clickButton)('[data-testid=\"0-order-number\"]');\n(0, _actionBase.verifyContainsText)('Preparando');",
+              "err": {},
+              "uuid": "6b263ef6-4e12-4c9a-8b6a-0987a59a0b42",
+              "parentUUID": "25c67787-7339-4f0d-a2de-6edc6849b67c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Dado que o admin marcou o pedido como `Entregue` é verificado que na tela de `detalhe do pedido` do cliente o status mudou para `Entregue`",
+              "fullTitle": "4 - Desenvolver os status para o pedido da tela de Detalhe pedido Cliente Dado que o admin marcou o pedido como `Entregue` é verificado que na tela de `detalhe do pedido` do cliente o status mudou para `Entregue`",
+              "timedOut": null,
+              "duration": 9195,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.login)(Cypress.env('loginAdmin'), Cypress.env('passwordAdmin'));\n(0, _actionBase.accessOrdersAdmin)();\n(0, _actionBase.clickButton)('[data-testid=\"0-order-number\"]');\n(0, _actionBase.clickButton)('[data-testid=\"mark-as-delivered-btn\"]');\n(0, _actionBase.logoutAdmin)();\n(0, _actionBase.login)(Cypress.env('login'), Cypress.env('password'));\n(0, _actionBase.accessOrdersClient)();\n(0, _actionBase.clickButton)('[data-testid=\"0-order-number\"]');\n(0, _actionBase.verifyContainsText)('Entregue');",
+              "err": {},
+              "uuid": "c7ed3aac-c000-4062-ba74-0ebc89f1719e",
+              "parentUUID": "25c67787-7339-4f0d-a2de-6edc6849b67c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4a57db16-c82f-41e0-83fd-462676d0d952",
+            "6b263ef6-4e12-4c9a-8b6a-0987a59a0b42",
+            "c7ed3aac-c000-4062-ba74-0ebc89f1719e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 25549,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "4.1.0"
+    }
+  }
+}

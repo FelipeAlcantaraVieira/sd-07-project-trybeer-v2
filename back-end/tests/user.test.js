@@ -1,8 +1,8 @@
 const request = require('supertest');
 const express = require('express');
+const shell = require('shelljs');
 const { user } = require('../routes');
 const db = require('../models');
-const shell = require('shelljs');
 const message = require('./config/errorMessages');
 const { users, contentType, applicationJson, tokens } = require('./config/parameters');
 
@@ -16,8 +16,9 @@ const validPassword = '1234567';
 const validRole = 'client';
 
 beforeAll(async () => {
-  await db.sequelize.sync({ force: true });
-  shell.exec('npx sequelize db:seed:all');
+  shell.exec('npx sequelize-cli db:drop $');
+  shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
+  shell.exec('npx sequelize-cli db:seed:all $');
 });
 
 it('Não é possível cadastrar um usuário sem o campo name', (done) =>
@@ -118,8 +119,8 @@ it(' É possível cadastrar um novo usuario', (done) =>
     .expect(contentType, /json/)
     .expect(201)
     .then(({ body }) => {
-      const { token, name, email, role, id } = body;
-      expect(body).toMatchObject({ token, name, email, role, id });
+      const { token, name, email, role } = body;
+      expect(body).toMatchObject({ token, name, email, role });
       done();
     }));
 

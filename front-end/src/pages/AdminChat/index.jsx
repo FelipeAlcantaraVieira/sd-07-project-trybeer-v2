@@ -1,20 +1,19 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import Header from '../../components/Header';
-import ClientChat from '../../components/Chat';
+import AdminChat from '../../components/AdminChat';
 import AuthVerification from '../../components/AuthVerification';
 
-const ClientChatPage = () => {
+const AdminChatPage = () => {
   AuthVerification();
-
   return (
     <div>
-      <Header title="Chat com a loja" />
+      <Header title="Chats com os usuários" />
       <Container style={ { height: '100vh' } }>
-        <ClientChat />
+        <AdminChat />
       </Container>
     </div>
   );
 };
 
-export default ClientChatPage;
+export default AdminChatPage;

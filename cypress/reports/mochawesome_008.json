@@ -1,0 +1,198 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 1,
+    "pending": 0,
+    "failures": 4,
+    "start": "2021-06-15T14:57:56.272Z",
+    "end": "2021-06-15T14:58:58.670Z",
+    "duration": 62398,
+    "testsRegistered": 5,
+    "passPercent": 20,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ae27ec7c-2d3d-4e23-92c8-1160a1275fb2",
+      "title": "",
+      "fullFile": "cypress/integration/req6-chatClient.js",
+      "file": "cypress/integration/req6-chatClient.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b07b30f5-4f5f-435d-955e-6e783ac157f2",
+          "title": "6 - Desenvolver funcionalidade de chat na visão de cliente",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Será validado que existe o campo input e o botão de enviar mensagem",
+              "fullTitle": "6 - Desenvolver funcionalidade de chat na visão de cliente Será validado que existe o campo input e o botão de enviar mensagem",
+              "timedOut": null,
+              "duration": 4638,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.accessChatClient)();\n(0, _actionBase.verifyElementVisible)('[data-testid=\"message-input\"]');\n(0, _actionBase.verifyElementVisible)('[data-testid=\"send-message\"]');",
+              "err": {},
+              "uuid": "d12a82ec-4126-4e63-8f66-9b4e9ce932e7",
+              "parentUUID": "b07b30f5-4f5f-435d-955e-6e783ac157f2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Será validado que ao enviar mensagem o `nickname` do cliente é o seu email",
+              "fullTitle": "6 - Desenvolver funcionalidade de chat na visão de cliente Será validado que ao enviar mensagem o `nickname` do cliente é o seu email",
+              "timedOut": null,
+              "duration": 14287,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.accessChatClient)();\n(0, _actionBase.insertText)('[data-testid=\"message-input\"]', 'Como anda meu pedido?');\n(0, _actionBase.clickButton)('[data-testid=\"send-message\"]');\n(0, _actionBase.verifyElementVisible)('[data-testid=\"nickname\"]');\n(0, _actionBase.verifyElementContainsText)('[data-testid=\"nickname\"]', 'zebirita@gmail.com');",
+              "err": {
+                "message": "CypressError: Timed out retrying: `cy.type()` failed because the center of this element is hidden from view:\n\n`<input placeholder=\"Mensagem\" id=\"messageInput\" data-testid=\"message-input\" value=\"\">`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying: `cy.type()` failed because the center of this element is hidden from view:\n\n`<input placeholder=\"Mensagem\" id=\"messageInput\" data-testid=\"message-input\" value=\"\">`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (http://localhost:3000/__cypress/runner/cypress_runner.js:161189:24)\n    at ensureDescendents (http://localhost:3000/__cypress/runner/cypress_runner.js:149779:8)\n    at ensureDescendentsAndScroll (http://localhost:3000/__cypress/runner/cypress_runner.js:149786:14)\n    at ensureElIsNotCovered (http://localhost:3000/__cypress/runner/cypress_runner.js:149915:5)\n    at runAllChecks (http://localhost:3000/__cypress/runner/cypress_runner.js:150056:52)\n    at retryActionability (http://localhost:3000/__cypress/runner/cypress_runner.js:150071:16)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Function.Promise.attempt.Promise.try (http://localhost:3000/__cypress/runner/cypress_runner.js:7599:29)\n    at tryFn (http://localhost:3000/__cypress/runner/cypress_runner.js:165189:21)\n    at whenStable (http://localhost:3000/__cypress/runner/cypress_runner.js:165227:12)\n    at http://localhost:3000/__cypress/runner/cypress_runner.js:164742:16\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:8260:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:8317:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:8362:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:8442:18)\nFrom Your Spec Code:\n    at insertText (http://localhost:3000/__cypress/tests?p=cypress/integration/req6-chatClient.js:190:19)\n    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/req6-chatClient.js:316:32)",
+                "diff": null
+              },
+              "uuid": "2e72fab2-7ef5-4d9b-8db1-bc25e9e7d7bd",
+              "parentUUID": "b07b30f5-4f5f-435d-955e-6e783ac157f2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Será validado que ao enviar mensagem a data fica visível na tela",
+              "fullTitle": "6 - Desenvolver funcionalidade de chat na visão de cliente Será validado que ao enviar mensagem a data fica visível na tela",
+              "timedOut": null,
+              "duration": 14296,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.accessChatClient)();\n(0, _actionBase.insertText)('[data-testid=\"message-input\"]', 'Como anda meu pedido?');\n(0, _actionBase.clickButton)('[data-testid=\"send-message\"]');\n(0, _actionBase.verifyElementVisible)('[data-testid=\"message-time\"]');\n(0, _actionBase.verifyElementContainsText)('[data-testid=\"message-time\"]', (0, _actionBase.getHour)());",
+              "err": {
+                "message": "CypressError: Timed out retrying: `cy.type()` failed because the center of this element is hidden from view:\n\n`<input placeholder=\"Mensagem\" id=\"messageInput\" data-testid=\"message-input\" value=\"\">`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying: `cy.type()` failed because the center of this element is hidden from view:\n\n`<input placeholder=\"Mensagem\" id=\"messageInput\" data-testid=\"message-input\" value=\"\">`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (http://localhost:3000/__cypress/runner/cypress_runner.js:161189:24)\n    at ensureDescendents (http://localhost:3000/__cypress/runner/cypress_runner.js:149779:8)\n    at ensureDescendentsAndScroll (http://localhost:3000/__cypress/runner/cypress_runner.js:149786:14)\n    at ensureElIsNotCovered (http://localhost:3000/__cypress/runner/cypress_runner.js:149915:5)\n    at runAllChecks (http://localhost:3000/__cypress/runner/cypress_runner.js:150056:52)\n    at retryActionability (http://localhost:3000/__cypress/runner/cypress_runner.js:150071:16)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Function.Promise.attempt.Promise.try (http://localhost:3000/__cypress/runner/cypress_runner.js:7599:29)\n    at tryFn (http://localhost:3000/__cypress/runner/cypress_runner.js:165189:21)\n    at whenStable (http://localhost:3000/__cypress/runner/cypress_runner.js:165227:12)\n    at http://localhost:3000/__cypress/runner/cypress_runner.js:164742:16\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:8260:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:8317:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:8362:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:8442:18)\nFrom Your Spec Code:\n    at insertText (http://localhost:3000/__cypress/tests?p=cypress/integration/req6-chatClient.js:190:19)\n    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/req6-chatClient.js:323:32)",
+                "diff": null
+              },
+              "uuid": "e2b4cb2f-fc70-47f7-a308-929ec4a0655e",
+              "parentUUID": "b07b30f5-4f5f-435d-955e-6e783ac157f2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Será validado que ao enviar mensagem a mensagem fica visível na tela",
+              "fullTitle": "6 - Desenvolver funcionalidade de chat na visão de cliente Será validado que ao enviar mensagem a mensagem fica visível na tela",
+              "timedOut": null,
+              "duration": 14379,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.accessChatClient)();\n(0, _actionBase.insertText)('[data-testid=\"message-input\"]', 'Como anda meu pedido?');\n(0, _actionBase.clickButton)('[data-testid=\"send-message\"]');\n(0, _actionBase.verifyElementVisible)('[data-testid=\"message-time\"]');\n(0, _actionBase.verifyElementContainsText)('[data-testid=\"text-message\"]', 'Como anda meu pedido?');",
+              "err": {
+                "message": "CypressError: Timed out retrying: `cy.type()` failed because the center of this element is hidden from view:\n\n`<input placeholder=\"Mensagem\" id=\"messageInput\" data-testid=\"message-input\" value=\"\">`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying: `cy.type()` failed because the center of this element is hidden from view:\n\n`<input placeholder=\"Mensagem\" id=\"messageInput\" data-testid=\"message-input\" value=\"\">`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (http://localhost:3000/__cypress/runner/cypress_runner.js:161189:24)\n    at ensureDescendents (http://localhost:3000/__cypress/runner/cypress_runner.js:149779:8)\n    at ensureDescendentsAndScroll (http://localhost:3000/__cypress/runner/cypress_runner.js:149786:14)\n    at ensureElIsNotCovered (http://localhost:3000/__cypress/runner/cypress_runner.js:149915:5)\n    at runAllChecks (http://localhost:3000/__cypress/runner/cypress_runner.js:150056:52)\n    at retryActionability (http://localhost:3000/__cypress/runner/cypress_runner.js:150071:16)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Function.Promise.attempt.Promise.try (http://localhost:3000/__cypress/runner/cypress_runner.js:7599:29)\n    at tryFn (http://localhost:3000/__cypress/runner/cypress_runner.js:165189:21)\n    at whenStable (http://localhost:3000/__cypress/runner/cypress_runner.js:165227:12)\n    at http://localhost:3000/__cypress/runner/cypress_runner.js:164742:16\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:8260:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:8317:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:8362:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:8442:18)\nFrom Your Spec Code:\n    at insertText (http://localhost:3000/__cypress/tests?p=cypress/integration/req6-chatClient.js:190:19)\n    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/req6-chatClient.js:330:32)",
+                "diff": null
+              },
+              "uuid": "038dc851-37ee-4653-ac20-9d1640ecf0b5",
+              "parentUUID": "b07b30f5-4f5f-435d-955e-6e783ac157f2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Será validado que ê possivel enviar várias mensagens",
+              "fullTitle": "6 - Desenvolver funcionalidade de chat na visão de cliente Será validado que ê possivel enviar várias mensagens",
+              "timedOut": null,
+              "duration": 14604,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.accessChatClient)();\n(0, _actionBase.insertText)('[data-testid=\"message-input\"]', 'Como anda meu pedido?');\n(0, _actionBase.clickButton)('[data-testid=\"send-message\"]');\n(0, _actionBase.verifyElementVisible)('[data-testid=\"message-time\"]');\n(0, _actionBase.verifyElementContainsText)('[data-testid=\"text-message\"]', 'Como anda meu pedido?');\n(0, _actionBase.insertText)('[data-testid=\"message-input\"]', 'Que dia vai chegar?');\n(0, _actionBase.clickButton)('[data-testid=\"send-message\"]');\n(0, _actionBase.verifyElementVisible)('[data-testid=\"message-time\"]');\n(0, _actionBase.verifyElementContainsText)('[data-testid=\"text-message\"]', 'Que dia vai chegar?');",
+              "err": {
+                "message": "CypressError: Timed out retrying: `cy.type()` failed because the center of this element is hidden from view:\n\n`<input placeholder=\"Mensagem\" id=\"messageInput\" data-testid=\"message-input\" value=\"\">`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying: `cy.type()` failed because the center of this element is hidden from view:\n\n`<input placeholder=\"Mensagem\" id=\"messageInput\" data-testid=\"message-input\" value=\"\">`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (http://localhost:3000/__cypress/runner/cypress_runner.js:161189:24)\n    at ensureDescendents (http://localhost:3000/__cypress/runner/cypress_runner.js:149779:8)\n    at ensureDescendentsAndScroll (http://localhost:3000/__cypress/runner/cypress_runner.js:149786:14)\n    at ensureElIsNotCovered (http://localhost:3000/__cypress/runner/cypress_runner.js:149915:5)\n    at runAllChecks (http://localhost:3000/__cypress/runner/cypress_runner.js:150056:52)\n    at retryActionability (http://localhost:3000/__cypress/runner/cypress_runner.js:150071:16)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Function.Promise.attempt.Promise.try (http://localhost:3000/__cypress/runner/cypress_runner.js:7599:29)\n    at tryFn (http://localhost:3000/__cypress/runner/cypress_runner.js:165189:21)\n    at whenStable (http://localhost:3000/__cypress/runner/cypress_runner.js:165227:12)\n    at http://localhost:3000/__cypress/runner/cypress_runner.js:164742:16\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:8260:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:8317:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:8362:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:8442:18)\nFrom Your Spec Code:\n    at insertText (http://localhost:3000/__cypress/tests?p=cypress/integration/req6-chatClient.js:190:19)\n    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/req6-chatClient.js:337:32)",
+                "diff": null
+              },
+              "uuid": "c58468d6-2a94-423b-9fbb-acd31338906c",
+              "parentUUID": "b07b30f5-4f5f-435d-955e-6e783ac157f2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d12a82ec-4126-4e63-8f66-9b4e9ce932e7"
+          ],
+          "failures": [
+            "2e72fab2-7ef5-4d9b-8db1-bc25e9e7d7bd",
+            "e2b4cb2f-fc70-47f7-a308-929ec4a0655e",
+            "038dc851-37ee-4653-ac20-9d1640ecf0b5",
+            "c58468d6-2a94-423b-9fbb-acd31338906c"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 62204,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "4.1.0"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 const request = require('supertest');
 const express = require('express');
+const shell = require('shelljs');
 const db = require('../models');
 const { login } = require('../routes');
 const message = require('./config/errorMessages');
@@ -16,10 +17,16 @@ const passwordOnly = { password: '123456' };
 const emailOnly = { email: 'tste@teste.com' };
 const shortPassword = { email: 'tete@teste.com', password: '12345' };
 const invalidUser = { email: 'invaliduser@invalid.com', password: 'invalidPassword' };
-const validUser = { email: 'tryber@trybe.com.br', password: '123456' };
+const validUser = { email: 'tryber@trybe.com.br', password: '12345678' };
+
+beforeAll(async () => {
+    shell.exec('npx sequelize-cli db:drop $');
+    shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
+    shell.exec('npx sequelize-cli db:seed:all $');
+  });
 
 it('São retornados todos os usuários cadastrados', async (done) => {
-    const result = await db.User.findAll();
+    const result = await db.user.findAll({});
     const { name, email, password, role, id } = result[0];
     expect(result[0]).toMatchObject({ name, email, password, role, id });
     done();

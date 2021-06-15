@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-06-15T14:56:27.059Z",
+    "end": "2021-06-15T14:56:52.294Z",
+    "duration": 25235,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ac25c169-9129-4d21-89a0-e8d0792273d8",
+      "title": "",
+      "fullFile": "cypress/integration/req2-orderAdmin.js",
+      "file": "cypress/integration/req2-orderAdmin.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a11983be-2fc7-4a98-af7f-2cfafa8b53b4",
+          "title": "2 - Desenvolver os status para o pedido da tela `Pedidos` do Administrador",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Dado que é feito uma compra, será validado que ela está com status `Pendente` na tela de `Pedidos` do admin",
+              "fullTitle": "2 - Desenvolver os status para o pedido da tela `Pedidos` do Administrador Dado que é feito uma compra, será validado que ela está com status `Pendente` na tela de `Pedidos` do admin",
+              "timedOut": null,
+              "duration": 7803,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.login)(Cypress.env('loginAdmin'), Cypress.env('passwordAdmin'));\n(0, _actionBase.accessOrdersAdmin)();\n(0, _actionBase.verifyContainsText)('Pendente');",
+              "err": {},
+              "uuid": "a9fb687c-5d72-468d-a4a6-fee89ea8913c",
+              "parentUUID": "a11983be-2fc7-4a98-af7f-2cfafa8b53b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Dado que o pedido foi marcado como entregue será validado que na tela de `Pedidos` do admin, o status estará como `Entregue`",
+              "fullTitle": "2 - Desenvolver os status para o pedido da tela `Pedidos` do Administrador Dado que o pedido foi marcado como entregue será validado que na tela de `Pedidos` do admin, o status estará como `Entregue`",
+              "timedOut": null,
+              "duration": 8707,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.login)(Cypress.env('loginAdmin'), Cypress.env('passwordAdmin'));\n(0, _actionBase.accessOrdersAdmin)();\n(0, _actionBase.clickButton)('[data-testid=\"0-order-number\"]');\n(0, _actionBase.clickButton)('[data-testid=\"mark-as-delivered-btn\"]');\n(0, _actionBase.accessOrdersAdmin)();\n(0, _actionBase.verifyElementContainsText)('[data-testid=\"0-order-status\"]', 'Entregue');",
+              "err": {},
+              "uuid": "b5aa34ee-4f56-4e37-b597-c6d2b4717fd5",
+              "parentUUID": "a11983be-2fc7-4a98-af7f-2cfafa8b53b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Dado que o pedido foi marcado como preparando será validado que na tela de `Pedidos` do admin, o status estará como `Preparando`",
+              "fullTitle": "2 - Desenvolver os status para o pedido da tela `Pedidos` do Administrador Dado que o pedido foi marcado como preparando será validado que na tela de `Pedidos` do admin, o status estará como `Preparando`",
+              "timedOut": null,
+              "duration": 8658,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.login)(Cypress.env('loginAdmin'), Cypress.env('passwordAdmin'));\n(0, _actionBase.accessOrdersAdmin)();\n(0, _actionBase.clickButton)('[data-testid=\"0-order-number\"]');\n(0, _actionBase.clickButton)('[data-testid=\"mark-as-prepared-btn\"]');\n(0, _actionBase.accessOrdersAdmin)();\n(0, _actionBase.verifyElementContainsText)('[data-testid=\"0-order-status\"]', 'Preparando');",
+              "err": {},
+              "uuid": "098a4587-0fb5-48fb-a622-7523baa264e8",
+              "parentUUID": "a11983be-2fc7-4a98-af7f-2cfafa8b53b4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a9fb687c-5d72-468d-a4a6-fee89ea8913c",
+            "b5aa34ee-4f56-4e37-b597-c6d2b4717fd5",
+            "098a4587-0fb5-48fb-a622-7523baa264e8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 25168,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "4.1.0"
+    }
+  }
+}

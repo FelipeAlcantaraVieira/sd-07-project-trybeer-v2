@@ -8,7 +8,6 @@ export default function ClientChat() {
 
   useEffect(() => {
     socket.on('serverMessage', (incomingMessage) => setServerMessage(incomingMessage));
-    console.log('Chamou 2');
   });
 
   const sendMessage = (e) => {
@@ -25,7 +24,6 @@ export default function ClientChat() {
 
   useEffect(() => {
     sendUserEmail();
-    console.log('Chamou');
   }, []);
 
   return (
