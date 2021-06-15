@@ -16,7 +16,7 @@ const chat = require('./modelsMongo/chat');
 const models = require('./models');
 
 const formatDateHour = () => {
-  const time = moment().format('HH:mm');
+  const time = moment().format('HH:mm:ss');
   return time;
 };
 
@@ -25,8 +25,8 @@ const getUserMessages = async () => {
   const usersMessages = await Promise.all(
     allUsers.map(async (user) => {
       const messages = await chat.getUserMessages(user.email);
-      return messages[messages.length - 1];
-    })
+      if (user.role !== 'administrator') return messages[messages.length - 1];
+    }),
   );
   return usersMessages.filter((e) => e !== undefined);
 };
@@ -43,30 +43,36 @@ const sendMessage = async (socket) => {
     chat.add(message, userName, formatDateHour());
     io.emit('serverMessage', temporaryMessages);
   });
+  socket.on('adminMessage', ({ message }) => {
+    temporaryMessages.push({ message, userName: 'Loja', time: formatDateHour() });
+    io.emit('serverMessage', temporaryMessages);
+  });
   socket.on('loadMessages', async (email) => {
     const messages = await chat.getUserMessages(email);
     temporaryMessages = messages;
-    socket.emit('serverMessage', temporaryMessages);
+    const admMessage = await chat.getAdminMessages(email);
+    admMessage.forEach((item) => temporaryMessages.push(item));
+    socket.emit('serverMessage', temporaryMessages.sort((a, b) => a.time - b.time));
   });
 };
 
 const adminMessages = async (socket) => {
   let messages = [];
   let to = '';
-  socket.on('loadAdminMessage', async (userName) => {
-    to = userName;
+  socket.on('loadAdminMessage', async ({ userName }) => {
+    to = 'zebirita@trybe.com.br';
     messages = await chat.getUserMessages(userName);
     const admMessage = await chat.getAdminMessages(to);
     admMessage.forEach((item) => messages.push(item));
     io.emit('loadAdminMessage', messages);
   });
-  socket.on('serverMessage', (message) => {
-    messages.push(message);
-    socket.emit('loadAdminMessage', messages);
-  });
-  socket.on('adminMessage', ({ message, userName = 'Loja' }) => {
+  socket.on('userMessage', ({ message, userName }) => {
     messages.push({ message, userName, time: formatDateHour() });
-    chat.add(message, userName, formatDateHour(), to);
+    io.emit('loadAdminMessage', messages);
+  });
+  socket.on('adminMessage', ({ message }) => {
+    messages.push({ message, userName: 'Loja', time: formatDateHour() });
+    chat.add(message, 'Loja', formatDateHour(), to);
     socket.emit('loadAdminMessage', messages);
   });
 };
