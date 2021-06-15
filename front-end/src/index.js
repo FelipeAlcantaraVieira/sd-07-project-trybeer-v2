@@ -5,7 +5,7 @@ import Provider from './context/Provider';
 import App from './App';
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter forceRefresh>
     <Provider>
       <App />
     </Provider>

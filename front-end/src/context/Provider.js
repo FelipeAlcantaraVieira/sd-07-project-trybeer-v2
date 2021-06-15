@@ -35,7 +35,8 @@ export default function Provider(props) {
 
   // ****************************************************************
   // ABOUT CHAT
-  const [clientEmail, setClientEmail] = useState();
+  const CLIENT_KEY_LOCALSTORAGE = 'client';
+  const [clientEmail, setClientEmail] = useLocalStorage(CLIENT_KEY_LOCALSTORAGE, '');
   // ****************************************************************
 
   const context = {

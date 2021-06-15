@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import {
   AdminSideBar,
 } from '../../components';
@@ -9,7 +9,6 @@ import { getAllMessage } from '../../service/trybeerApi';
 export default function ChatsAdmin() {
   const [allMessages, setAllMessages] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
-  const history = useHistory();
   const { setClientEmail } = useContext(TrybeerContext);
 
   const requestAllMessage = async () => {

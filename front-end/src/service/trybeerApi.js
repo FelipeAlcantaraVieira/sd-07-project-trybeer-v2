@@ -3,7 +3,7 @@ import axios from 'axios';
 const URL = 'http://localhost:3001';
 const invalidToken = 'Token inválido ou lista não encontrada!';
 
-const userStorage = JSON.parse(localStorage.getItem('user'));
+const userStorage = JSON.parse(sessionStorage.getItem('user'));
 const { token } = userStorage === null ? '' : userStorage;
 
 const config = {

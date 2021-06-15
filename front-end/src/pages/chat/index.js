@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
 import {
   TopMenu,
 } from '../../components';
+import TrybeerContext from '../../context/TrybeerContext';
 
 const client = io('http://localhost:3002');
 
 export default function Login() {
   const [messageInput, setMessageInput] = useState('');
   const [allMessages, setAllMessages] = useState('');
+  const { userLogged } = useContext(TrybeerContext);
 
   const verifyInput = () => {
     if (messageInput.length > 0) return false;
@@ -19,22 +21,16 @@ export default function Login() {
     setMessageInput(value);
   };
 
-  const localStorag = JSON.parse(localStorage.getItem('user'));
-
   const handleClick = () => {
     console.log(messageInput);
     setMessageInput('');
-    console.log(localStorag.email);
     client.emit('sendMessage', {
-      messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br',
+      messageInput, messageFrom: userLogged.email, messageTo: 'tryber@trybe.com.br',
     });
   };
 
   useEffect(() => {
-    if (allMessages && allMessages[localStorag.email] === undefined) {
-      client.emit('createClient', localStorag.email);
-    }
-
+    client.emit('createClient', userLogged.email);
     client.on('createdClient', (messages) => {
       setAllMessages(messages);
     });
@@ -42,7 +38,7 @@ export default function Login() {
     client.on('allMessage', async (messages) => {
       setAllMessages(messages);
     });
-  }, [allMessages, localStorag.email]);
+  }, [userLogged.email]);
 
   console.log('allMessages', allMessages);
 
