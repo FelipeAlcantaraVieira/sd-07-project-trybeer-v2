@@ -1,0 +1,129 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2021-06-15T14:55:57.867Z",
+    "end": "2021-06-15T14:55:58.733Z",
+    "duration": 866,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "7161b3ad-0a9e-4571-95ce-ef24ee4f57d0",
+      "title": "",
+      "fullFile": "cypress/integration/req11-deployProjetct.js",
+      "file": "cypress/integration/req11-deployProjetct.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "163674af-3068-4030-9bbd-5f97268c18cc",
+          "title": "11 - Realizar o deploy do projeto back-end e front-end",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Sera validado se é possivel acessar a aplicação e verificar se estou na tela url de login",
+              "fullTitle": "11 - Realizar o deploy do projeto back-end e front-end Sera validado se é possivel acessar a aplicação e verificar se estou na tela url de login",
+              "timedOut": null,
+              "duration": 795,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.verifyContainsUrl)(\"\".concat(FRONT_URL, \"/login\"));",
+              "err": {
+                "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://-front.herokuapp.com/login\n\nThe response we received from your web server was:\n\n  > 404: Not Found\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `11 - Realizar o deploy do p...`",
+                "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://-front.herokuapp.com/login\n\nThe response we received from your web server was:\n\n  > 404: Not Found\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `11 - Realizar o deploy do p...`\n    at http://localhost:3000/__cypress/runner/cypress_runner.js:157694:25\n    at visitFailedByErr (http://localhost:3000/__cypress/runner/cypress_runner.js:157065:12)\n    at http://localhost:3000/__cypress/runner/cypress_runner.js:157674:13\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:10325:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:8260:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:8317:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:8362:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:8438:18)\n    at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:5032:12)\n    at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:5025:9)\n    at Async.../../node_modules/bluebird/js/release/async.js.Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:5041:5)\n    at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:4911:14)\nFrom Your Spec Code:\n    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/req11-deployProjetct.js:305:8)",
+                "diff": null
+              },
+              "uuid": "5db241b2-f5a6-41a1-a545-7f6b6a785251",
+              "parentUUID": "163674af-3068-4030-9bbd-5f97268c18cc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Será validado que é possível fazer cadastro de um cliente com sucesso e ser redirecionado para tela de produtos",
+              "fullTitle": "11 - Realizar o deploy do projeto back-end e front-end Será validado que é possível fazer cadastro de um cliente com sucesso e ser redirecionado para tela de produtos",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var randomEmail = _faker.internet.email();\n(0, _actionBase.clickButton)('[data-testid=\"no-account-btn\"]');\n(0, _actionBase.verifyContainsUrl)(\"\".concat(FRONT_URL, \"/register\"));\n(0, _actionBase.insertText)('[data-testid=\"signup-name\"]', 'brunobatistasilva');\n(0, _actionBase.insertText)('[data-testid=\"signup-email\"]', randomEmail);\n(0, _actionBase.insertText)('[data-testid=\"signup-password\"]', '123456');\n(0, _actionBase.clickButton)('[data-testid=\"signup-btn\"]');\n(0, _actionBase.verifyContainsUrl)(\"\".concat(FRONT_URL, \"/products\"));",
+              "err": {},
+              "uuid": "d951983a-8f39-4abc-a065-3735f1d82794",
+              "parentUUID": "163674af-3068-4030-9bbd-5f97268c18cc",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "5db241b2-f5a6-41a1-a545-7f6b6a785251"
+          ],
+          "pending": [],
+          "skipped": [
+            "d951983a-8f39-4abc-a065-3735f1d82794"
+          ],
+          "duration": 795,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "4.1.0"
+    }
+  }
+}

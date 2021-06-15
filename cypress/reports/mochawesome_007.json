@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-06-15T14:57:46.496Z",
+    "end": "2021-06-15T14:57:55.220Z",
+    "duration": 8724,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8e791743-1702-4e76-a9cc-1af3eb1dbfeb",
+      "title": "",
+      "fullFile": "cypress/integration/req5-sidebarClient.js",
+      "file": "cypress/integration/req5-sidebarClient.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cb6429a0-2d66-424e-96bd-3a8c52c59d96",
+          "title": "5 - Criar um botão no sidebar para acessar o chat do cliente",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Será validado que o botão `Conversar com a loja` existe no sidebar do cliente",
+              "fullTitle": "5 - Criar um botão no sidebar para acessar o chat do cliente Será validado que o botão `Conversar com a loja` existe no sidebar do cliente",
+              "timedOut": null,
+              "duration": 4507,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.clickButton)('[data-testid=\"top-hamburguer\"]');\n(0, _actionBase.verifyElementVisible)('[data-testid=\"side-menu-chat\"]');\n(0, _actionBase.verifyElementContainsText)('[data-testid=\"side-menu-chat\"]', 'Conversar com a loja');",
+              "err": {},
+              "uuid": "8417abd8-c16a-4f46-bcf5-4b57d25712cd",
+              "parentUUID": "cb6429a0-2d66-424e-96bd-3a8c52c59d96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Será validado que ao clicar no menu `Conversar com a loja` será redirecionado para página na url `/chat`",
+              "fullTitle": "5 - Criar um botão no sidebar para acessar o chat do cliente Será validado que ao clicar no menu `Conversar com a loja` será redirecionado para página na url `/chat`",
+              "timedOut": null,
+              "duration": 4186,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "(0, _actionBase.clickButton)('[data-testid=\"top-hamburguer\"]');\n(0, _actionBase.clickButton)('[data-testid=\"side-menu-chat\"]');\n(0, _actionBase.verifyContainsUrl)('http://localhost:3000/chat');",
+              "err": {},
+              "uuid": "65c00dca-43b1-4b23-b35c-2a1a10c6205b",
+              "parentUUID": "cb6429a0-2d66-424e-96bd-3a8c52c59d96",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8417abd8-c16a-4f46-bcf5-4b57d25712cd",
+            "65c00dca-43b1-4b23-b35c-2a1a10c6205b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 8693,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "4.1.0"
+    }
+  }
+}

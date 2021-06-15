@@ -59,7 +59,7 @@ const sendMessage = async (socket) => {
 const adminMessages = async (socket) => {
   let messages = [];
   let to = '';
-  socket.on('loadAdminMessage', async ({ userName }) => {
+  socket.on('loadAdminMessage', async (userName) => {
     to = 'zebirita@gmail.com';
     messages = await chat.getUserMessages(userName);
     const admMessage = await chat.getAdminMessages(to);
