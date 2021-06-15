@@ -60,7 +60,7 @@ const adminMessages = async (socket) => {
   let messages = [];
   let to = '';
   socket.on('loadAdminMessage', async ({ userName }) => {
-    to = 'zebirita@trybe.com.br';
+    to = 'zebirita@gmail.com';
     messages = await chat.getUserMessages(userName);
     const admMessage = await chat.getAdminMessages(to);
     admMessage.forEach((item) => messages.push(item));
