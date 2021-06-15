@@ -11,11 +11,12 @@ export default function AdminChatsList() {
   const { setUserMessages } = useContext(ApiContext);
 
   useEffect(() => {
+    socket.emit('adminListMessages');
     socket.on('adminListMessages', (list) => {
       setusersMessagesList(list);
+      setLoading(false);
     });
-    if (usersMessagesList !== null) setLoading(false);
-  }, [usersMessagesList]);
+  }, [setusersMessagesList]);
 
   const singleUserMessages = (userName) => {
     socket.emit('loadAdminMessage', userName);
