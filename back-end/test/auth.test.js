@@ -6,12 +6,12 @@ const models = require('../models');
 
 const user = {
   email: 'tryber@trybe.com.br',
-  password: '123456',
+  password: '12345678',
 };
 
 const CONTENT_TYPE = 'Content-Type';
 
-describe('Login test', () => {
+describe('User login test', () => {
   afterAll((done) => {
     models.sequelize.close()
       .then(() => done());
@@ -27,7 +27,7 @@ describe('Login test', () => {
       .expect(StatusCodes.UNAUTHORIZED)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(emailOrPasswordInvalid);
+        expect(res.body.message).toBe(emailOrPasswordInvalid);
         done();
       })
       .catch((err) => done(err));
@@ -40,7 +40,7 @@ describe('Login test', () => {
       .expect(StatusCodes.UNAUTHORIZED)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(emailOrPasswordInvalid);
+        expect(res.body.message).toBe(emailOrPasswordInvalid);
         done();
       })
       .catch((err) => done(err));
@@ -53,7 +53,7 @@ describe('Login test', () => {
       .expect(StatusCodes.UNAUTHORIZED)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(emailOrPasswordInvalid);
+        expect(res.body.message).toBe(emailOrPasswordInvalid);
         done();
       })
       .catch((err) => done(err));
@@ -69,7 +69,7 @@ describe('Login test', () => {
       .expect(StatusCodes.UNAUTHORIZED)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(emailOrPasswordInvalid);
+        expect(res.body.message).toBe(emailOrPasswordInvalid);
         done();
       })
       .catch((err) => done(err));
@@ -85,13 +85,13 @@ describe('Login test', () => {
       .expect(StatusCodes.UNAUTHORIZED)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(userNotFound);
+        expect(res.body.message).toBe(userNotFound);
         done();
       })
       .catch((err) => done(err));
   });
 
-  it('Should be able to login', async (done) => {
+  it('Será validado que é possível fazer login', async (done) => {
     request(app)
       .post('/login')
       .send(user)

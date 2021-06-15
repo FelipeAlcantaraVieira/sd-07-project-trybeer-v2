@@ -53,8 +53,8 @@ export default function CartForm() {
     const { street, houseNumber } = salesInfo;
     const sale = {
       userId: userLogged.id,
-      street,
-      houseNumber,
+      deliveryAddress: street,
+      deliveryNumber: houseNumber,
       totalPrice: getTotalShoppingCart(),
     };
     await saveSale(sale, shoppingCart);

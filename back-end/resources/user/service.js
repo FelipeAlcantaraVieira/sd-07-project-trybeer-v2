@@ -1,5 +1,6 @@
 const { User } = require('../../models');
 const { nameIsValid, passwordIsValid, emailIsValid } = require('../../helpers/validations');
+const { userNotFound } = require('../../helpers/dictonary');
 
 const getAll = async () => (User.findAll());
 
@@ -17,8 +18,8 @@ const create = async (name, email, password, role) => {
 const update = async (name, email) => {
   const bodyIsValid = nameIsValid(name) && emailIsValid(email);
   if (!bodyIsValid) return { error: true, message: 'dados inválidos' };
-  const userExists = await getByEmail(email);
-  if (!userExists) return { error: true, message: 'usuário não encontrado' };
+  const userExists = await User.findOne({ where: { email } });
+  if (!userExists) return { error: true, message: userNotFound };
   await User.update({ name }, { where: { email } });
   return { error: false, message: 'Atualização concluída com sucesso' };
 };

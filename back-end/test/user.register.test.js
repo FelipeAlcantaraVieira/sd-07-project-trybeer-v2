@@ -1,5 +1,6 @@
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
+require('iconv-lite').encodingExists('foo');
 const app = require('../index');
 const { invalidData, userExists } = require('../helpers/dictonary');
 const models = require('../models');
@@ -7,7 +8,7 @@ const models = require('../models');
 const user = {
   name: 'Roberto Carlos',
   email: 'felipetestabackregister@gmail.com',
-  password: '123456',
+  password: '12345678',
   role: 'client',
 };
 
@@ -15,8 +16,8 @@ const registeredEmail = 'tryber@trybe.com.br';
 
 const CONTENT_TYPE = 'Content-Type';
 
-describe('Register test', () => {
-  beforeEach(() => {
+describe('User register test', () => {
+  afterEach(() => {
     models.User.destroy({ where: { email: user.email } });
   });
 
@@ -36,7 +37,7 @@ describe('Register test', () => {
       .expect(StatusCodes.BAD_REQUEST)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(invalidData);
+        expect(res.body.message).toBe(invalidData);
         done();
       })
       .catch((err) => done(err));
@@ -53,7 +54,7 @@ describe('Register test', () => {
       .expect(StatusCodes.BAD_REQUEST)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(invalidData);
+        expect(res.body.message).toBe(invalidData);
         done();
       })
       .catch((err) => done(err));
@@ -70,7 +71,7 @@ describe('Register test', () => {
       .expect(StatusCodes.BAD_REQUEST)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(invalidData);
+        expect(res.body.message).toBe(invalidData);
         done();
       })
       .catch((err) => done(err));
@@ -87,7 +88,7 @@ describe('Register test', () => {
       .expect(StatusCodes.BAD_REQUEST)
       .expect(CONTENT_TYPE, /json/)
       .then((res) => {
-        expect(res.body.message).toContain(userExists);
+        expect(res.body.message).toBe(userExists);
         done();
       })
       .catch((err) => done(err));
