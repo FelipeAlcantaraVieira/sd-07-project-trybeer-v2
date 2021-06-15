@@ -7,10 +7,6 @@ export default function ClientChat() {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    socket.emit('isAdmin', false);
-  }, []);
-
-  useEffect(() => {
     socket.on('serverMessage', (incomingMessage) => setServerMessage(incomingMessage));
   });
 
@@ -28,7 +24,6 @@ export default function ClientChat() {
 
   useEffect(() => {
     sendUserEmail();
-    console.log('Chamou');
   }, []);
 
   return (

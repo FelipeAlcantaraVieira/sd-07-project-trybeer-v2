@@ -18,7 +18,7 @@ export default function AdminChatsList() {
   }, [usersMessagesList]);
 
   const singleUserMessages = (userName) => {
-    socket.emit('isAdmin', true);
+    console.log(userName);
     socket.emit('loadAdminMessage', userName);
     socket.on('loadAdminMessage', (messages) => setUserMessages(messages));
     history.push('/admin/chats/user');
@@ -36,9 +36,9 @@ export default function AdminChatsList() {
             type="button"
             key={ index }
             data-testid="containerChat"
-            onClick={ () => singleUserMessages(userMessage.userName) }
+            onClick={ () => singleUserMessages(userMessage) }
             role="button"
-            onKeyDown={ () => singleUserMessages(userMessage.userName) }
+            onKeyDown={ () => singleUserMessages(userMessage) }
             tabIndex={ 0 }
             className="border rounded"
             style={ { margin: '3vh',

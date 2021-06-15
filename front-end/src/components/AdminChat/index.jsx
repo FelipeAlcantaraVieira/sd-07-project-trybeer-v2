@@ -11,7 +11,7 @@ export default function AdminChat() {
   const [userName, setUserName] = useState('Loja');
 
   useEffect(() => {
-    socket.emit('isAdmin', true);
+    if(userMessages.length < 1) socket.emit('loadAdminMessage', (message) => setServerMessage(message))
   }, []);
 
   const sendMessage = (e) => {
@@ -65,7 +65,7 @@ export default function AdminChat() {
       <button
         type="button"
         data-testid="back-button"
-        onClick={ () => history.push('/admim/chats') }
+        onClick={ () => history.push('/admin/chats') }
       >
         Voltar
       </button>
