@@ -30,36 +30,38 @@ export default function AdminChatsList() {
         className="d-flex flex-column align-items-center"
         style={ { marginBottom: '23vh' } }
       >
-        {loading ? (<p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>) : (usersMessagesList.map((userMessage, index) => (
-          <Card
-            type="button"
-            key={ index }
-            data-testid="containerChat"
-            onClick={ () => singleUserMessages(userMessage.userName) }
-            role="button"
-            onKeyDown={ () => singleUserMessages(userMessage.userName) }
-            tabIndex={ 0 }
-            className="border rounded"
-            style={ { margin: '3vh',
-              width: '90vh',
-              backgroundColor: 'rgb(0,0,0,0.5)',
-              color: 'white',
-              padding: '3vh' } }
-          >
-            <Row>
-              <Col>
-                <p data-testid="profile-name">{userMessage.userName}</p>
-              </Col>
-              <Col>
-                <p data-testid="last-message">
-                  Última mensagem às
-                  {userMessage.time}
-                </p>
-              </Col>
-            </Row>
-          </Card>
-        )))
-        }
+        {loading ? (
+          <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>)
+          : (
+            usersMessagesList.map((userMessage, index) => (
+              <Card
+                type="button"
+                key={ index }
+                data-testid="containerChat"
+                onClick={ () => singleUserMessages(userMessage.userName) }
+                role="button"
+                onKeyDown={ () => singleUserMessages(userMessage.userName) }
+                tabIndex={ 0 }
+                className="border rounded"
+                style={ { margin: '3vh',
+                  width: '90vh',
+                  backgroundColor: 'rgb(0,0,0,0.5)',
+                  color: 'white',
+                  padding: '3vh' } }
+              >
+                <Row>
+                  <Col>
+                    <p data-testid="profile-name">{userMessage.userName}</p>
+                  </Col>
+                  <Col>
+                    <p data-testid="last-message">
+                      Última mensagem às
+                      {userMessage.time}
+                    </p>
+                  </Col>
+                </Row>
+              </Card>
+            )))}
       </div>
     </div>
   );
