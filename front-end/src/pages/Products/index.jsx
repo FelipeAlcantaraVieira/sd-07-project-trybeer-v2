@@ -11,7 +11,7 @@ const Products = () => {
   return (
     <div className="products">
       <Header title="TryBeer" />
-      <Container style={ { height: '100vh' } }>
+      <Container>
         <ProductsList />
       </Container>
     </div>

@@ -26,6 +26,7 @@ export default function ClientProfile() {
       onSubmit={ onSubmitHandler }
       style={ {
         marginRight: '20vh',
+        marginTop: '20vh',
       } }
     >
       <Form.Label htmlFor="nameInput">
@@ -51,20 +52,18 @@ export default function ClientProfile() {
       <Form.Label htmlFor="profile-email-input">
         Email
       </Form.Label>
-      <Col>
-        <Form.Control
-          style={ {
-            background: 'transparent',
-            marginBottom: '20px',
-            color: 'white',
-          } }
-          value={ currentUser.email }
-          type="email"
-          name="email"
-          data-testid="profile-email-input"
-          readOnly
-        />
-      </Col>
+      <Form.Control
+        style={ {
+          background: 'transparent',
+          marginBottom: '20px',
+          color: 'white',
+        } }
+        value={ currentUser.email }
+        type="email"
+        name="email"
+        data-testid="profile-email-input"
+        readOnly
+      />
       <Row>
         <Col>
           <Button

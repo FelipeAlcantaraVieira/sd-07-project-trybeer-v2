@@ -74,7 +74,7 @@ ProductsCard.propTypes = {
     name: PropTypes.string,
     price: PropTypes.string,
     productQtt: PropTypes.number,
-    url_image: PropTypes.string,
+    urlImage: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
   addProdQtt: PropTypes.func.isRequired,

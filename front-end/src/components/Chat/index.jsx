@@ -52,9 +52,9 @@ export default function ClientChat() {
               marginTop: '20px',
             } }
           >
-            {serverMessage.map((messageContent, index) => (
-              messageContent.userName === 'Loja'
-                ? <li
+            {serverMessage
+              .map((messageContent, index) => (messageContent.userName === 'Loja' ? (
+                <li
                   key={ index }
                   style={ {
                     borderRadius: '5px',
@@ -97,12 +97,15 @@ export default function ClientChat() {
                     </span>
                   </div>
                   <span data-testid="text-message">
-                    {messageContent.message === ''
-                      ? <br />
-                      : messageContent.message}
+                    {messageContent.message === '' ? (
+                      <br />
+                    ) : (
+                      messageContent.message
+                    )}
                   </span>
-                  </li>
-                : <li
+                </li>
+              ) : (
+                <li
                   key={ index }
                   style={ {
                     borderRadius: '5px',
@@ -145,12 +148,14 @@ export default function ClientChat() {
                     </span>
                   </div>
                   <span data-testid="text-message">
-                    {messageContent.message === ''
-                      ? <br />
-                      : messageContent.message}
+                    {messageContent.message === '' ? (
+                      <br />
+                    ) : (
+                      messageContent.message
+                    )}
                   </span>
-                  </li>
-            ))}
+                </li>
+              )))}
           </ul>
         </div>
         <Form.Row
@@ -170,7 +175,10 @@ export default function ClientChat() {
               placeholder="Digite sua mensagem"
               id="messageInput"
               value={ message }
-              onChange={ (e) => { e.preventDefault(); setMessage(e.target.value); } }
+              onChange={ (e) => {
+                e.preventDefault();
+                setMessage(e.target.value);
+              } }
               data-testid="message-input"
               style={ {
                 padding: '10px',

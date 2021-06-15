@@ -11,7 +11,10 @@ const Checkout = () => {
   return (
     <div className="checkout">
       <Header title="Finalizar Pedido" />
-      <Container style={ { height: '100vh' } }>
+      <Container
+        style={ {
+          height: 'auto' } }
+      >
         <CheckoutCart />
       </Container>
     </div>

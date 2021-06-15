@@ -27,14 +27,17 @@ export default function AdminChatsList() {
 
   return (
     <div
-    style={{
-      margin: '20px',
-    }}>
+      style={ {
+        margin: '20px',
+      } }
+    >
       <h1
-        style={{
-          margin: '20px'
-        }}
-      >Conversas</h1>
+        style={ {
+          margin: '20px',
+        } }
+      >
+        Conversas
+      </h1>
       <div
         className="d-flex flex-column align-items-center"
         style={ { marginBottom: '23vh' } }

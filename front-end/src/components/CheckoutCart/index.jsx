@@ -47,17 +47,32 @@ export default function CheckoutCart() {
   if (!currentUser) return null;
   return (
     <div
-      style={ { color: 'white' } }
+      style={ {
+        color: 'white',
+        marginBottom: '40px',
+      } }
     >
       <p>Produtos</p>
       { total === '0.00' || total === 0 ? <p>Não há produtos no carrinho</p>
         : (
-          <CardDeck>
+          <CardDeck
+            style={ {
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            } }
+          >
             {productCheckout.filter((item) => item.productQtt !== 0)
               .map((product, index) => (
                 <Card
                   key={ product.name }
-                  style={ { backgroundColor: 'rgb(0,0,0,0.41)' } }
+                  style={ {
+                    backgroundColor: 'rgb(0,0,0,0.41)',
+                    maxWidth: '400px',
+                    margin: '20px',
+                    paddingBottom: '20px',
+                    borderColor: 'white',
+                  } }
                 >
                   <Card.Body>
                     <Card.Title data-testid={ `${index}-product-name` }>
@@ -79,6 +94,10 @@ export default function CheckoutCart() {
                     type="button"
                     data-testid={ `${index}-removal-button` }
                     onClick={ () => removeProduct(product.id) }
+                    style={ {
+                      alignSelf: 'center',
+                      maxWidth: 'auto',
+                    } }
                   >
                     X
                   </Button>
@@ -92,7 +111,14 @@ export default function CheckoutCart() {
         {total > 0 ? `Total: R$ ${parseFloat(total).toFixed(2).replace('.', ',')}`
           : 'Total: R$ 0,00'}
       </p>
-      <Form>
+      <Form
+        style={ {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginBottom: '20px',
+        } }
+      >
         <p>Endereço</p>
         <Form.Row>
           <Form.Group as={ Col }>
@@ -105,7 +131,10 @@ export default function CheckoutCart() {
               value={ addressName }
               onChange={ (e) => setAddressName(e.target.value) }
               data-testid="checkout-street-input"
-              style={ { color: 'white', backgroundColor: 'rgb(0,0,0,0.4)' } }
+              style={ { color: 'white',
+                backgroundColor: 'rgb(0,0,0,0.4)',
+                maxWidth: '400px',
+              } }
             />
           </Form.Group>
           <Form.Group as={ Col }>
@@ -118,7 +147,11 @@ export default function CheckoutCart() {
               onChange={ (e) => setAddressNumber(e.target.value) }
               type="text"
               data-testid="checkout-house-number-input"
-              style={ { color: 'white', backgroundColor: 'rgb(0,0,0,0.4)' } }
+              style={ { color: 'white',
+                backgroundColor: 'rgb(0,0,0,0.4)',
+                maxWidth: '400px',
+
+              } }
             />
           </Form.Group>
         </Form.Row>

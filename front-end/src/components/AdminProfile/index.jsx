@@ -9,6 +9,7 @@ export default function AdminProfile() {
       className="d-flex flex-column"
       style={ {
         marginRight: '20vh',
+        marginTop: '22vh',
       } }
     >
       <Form.Label htmlFor="profile-name">

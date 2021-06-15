@@ -26,7 +26,11 @@ export default function ClientOrders() {
   }
 
   return (
-    <div>
+    <div
+      style={ {
+        overflow: 'auto',
+      } }
+    >
       { userSales.err ? <p>{userSales.err.message}</p>
         : (
           <CardDeck style={ { paddingTop: '15px' } }>
