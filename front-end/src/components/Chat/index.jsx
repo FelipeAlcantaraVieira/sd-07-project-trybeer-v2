@@ -2,31 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
 import socket from '../../helper/chat';
 
-    export default function ClientChat() {
-      const [message, setMessage] = useState('');
-      const [serverMessage, setServerMessage] = useState([]);
-      const [userName, setUserName] = useState('');
-    
-      useEffect(() => {
-        socket.on('serverMessage', (incomingMessage) => setServerMessage(incomingMessage));
-      });
-    
-      const sendMessage = (e) => {
-        e.preventDefault();
-        socket.emit('userMessage', { userName, message });
-        setMessage('');
-      };
-    
-      const sendUserEmail = () => {
-        const { email } = JSON.parse(localStorage.getItem('user'));
-        socket.emit('loadMessages', email);
-        setUserName(email);
-      };
-    
-      useEffect(() => {
-        sendUserEmail();
-      }, []);
-      
+export default function ClientChat() {
+  const [message, setMessage] = useState('');
+  const [serverMessage, setServerMessage] = useState([]);
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    socket.on('serverMessage', (incomingMessage) => setServerMessage(incomingMessage));
+  });
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    socket.emit('userMessage', { userName, message });
+    setMessage('');
+  };
+
+  const sendUserEmail = () => {
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    socket.emit('loadMessages', email);
+    setUserName(email);
+  };
+
+  useEffect(() => {
+    sendUserEmail();
+  }, []);
+
   return (
     <Form>
       <div>
