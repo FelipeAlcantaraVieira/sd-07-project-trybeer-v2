@@ -15,12 +15,19 @@ const io = require('socket.io')(http, {
 const chat = require('./modelsMongo/chat');
 const models = require('./models');
 
+const formatDateHour = () => {
+  const time = moment().format('HH:mm');
+  return time;
+};
+
 const getUserMessages = async () => {
   const allUsers = await models.user.findAll();
-  const usersMessages = await Promise.all(allUsers.map(async (user) => {
-    const messages = await chat.getUserMessages(user.email);
-    return messages[messages.length - 1];
-  }));
+  const usersMessages = await Promise.all(
+    allUsers.map(async (user) => {
+      const messages = await chat.getUserMessages(user.email);
+      return messages[messages.length - 1];
+    })
+  );
   return usersMessages.filter((e) => e !== undefined);
 };
 
@@ -32,41 +39,41 @@ const adminListOfMessages = async (socket) => {
 const sendMessage = async (socket) => {
   let temporaryMessages = [];
   socket.on('userMessage', ({ message, userName }) => {
-    const time = moment().format('HH:mm');
-    temporaryMessages.push({ message, userName, time });
-    chat.add(message, userName, time);
+    temporaryMessages.push({ message, userName, time: formatDateHour() });
+    chat.add(message, userName, formatDateHour());
     io.emit('serverMessage', temporaryMessages);
   });
   socket.on('loadMessages', async (email) => {
     const messages = await chat.getUserMessages(email);
     temporaryMessages = messages;
-    io.emit('serverMessage', temporaryMessages);
+    socket.emit('serverMessage', temporaryMessages);
   });
 };
 
 const adminMessages = async (socket) => {
   let messages = [];
   let to = '';
-  console.log('carregou');
   socket.on('loadAdminMessage', async (userName) => {
     to = userName;
     messages = await chat.getUserMessages(userName);
+    const admMessage = await chat.getAdminMessages(to);
+    admMessage.forEach((item) => messages.push(item));
     io.emit('loadAdminMessage', messages);
   });
-  socket.on('adminMessage', ({ message }) => {
-    const time = moment().format('HH:mm');
-    messages.push({ message, userName: 'Loja', time });
-    console.log(messages);
-    chat.add(message, time, to);
-    io.emit('loadAdminMessage', messages);
+  socket.on('serverMessage', (message) => {
+    messages.push(message);
+    socket.emit('loadAdminMessage', messages);
+  });
+  socket.on('adminMessage', ({ message, userName = 'Loja' }) => {
+    messages.push({ message, userName, time: formatDateHour() });
+    chat.add(message, userName, formatDateHour(), to);
+    socket.emit('loadAdminMessage', messages);
   });
 };
 
 io.on('connection', async (socket) => {
-  socket.on('isAdmin', (admin) => { 
-    if (admin === true) return adminMessages(socket);
-    sendMessage(socket);
-  });
+  adminMessages(socket);
+  sendMessage(socket);
   adminListOfMessages(socket);
 });
 
