@@ -14,7 +14,7 @@ export default function AdminChatsList() {
     socket.emit('adminListMessages');
     socket.on('adminListMessages', (list) => {
       setusersMessagesList(list);
-      setLoading(false);
+      if (list.length > 0) setLoading(false);
     });
   }, [setusersMessagesList]);
 
