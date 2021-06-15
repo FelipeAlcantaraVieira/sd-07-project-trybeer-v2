@@ -25,9 +25,20 @@ const update = async ({ _id, timeLastMessage, newMessage }) => {
         },
       ));
   if (modifiedCount) {
-    return true;
+    return await findById(_id);
   }
   return null;
+  
+};
+
+const findById = async (id) => {
+  const chat = await connection().then((db) =>
+    db.collection(COLLECTION_NAME)
+      .findOne({
+        _id: id,
+      }));
+    // console.log(chat)
+  return chat;
 };
 
 const findByEmail = async (email) => {
@@ -36,6 +47,13 @@ const findByEmail = async (email) => {
       .findOne({
         client: email,
       }));
+    // console.log(chat)
+  return chat;
+};
+
+const findAll = async () => {
+  const chat = await connection().then((db) => 
+    db.collection(COLLECTION_NAME).find().toArray());
   return chat;
 };
 
@@ -43,4 +61,5 @@ module.exports = {
   create,
   findByEmail,
   update,
+  findAll,
 };

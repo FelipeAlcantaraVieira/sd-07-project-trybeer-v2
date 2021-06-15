@@ -19,18 +19,11 @@ export default function Login() {
     setMessageInput(value);
   };
 
-<<<<<<< HEAD
-=======
-  const handleMap = (e) => (
-    `${e.data.split('T')[1].split(':')[0]}:${e.data.split('T')[1].split(':')[1]}`);
-
->>>>>>> 7ce04f11bf8bbb20639014f49af99572626e69ee
   const localStorag = JSON.parse(localStorage.getItem('user'));
 
   const handleClick = () => {
     console.log(messageInput);
     setMessageInput('');
-<<<<<<< HEAD
     console.log(localStorag.email);
     client.emit('sendMessage', {
       messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br',
@@ -58,27 +51,6 @@ export default function Login() {
 
   console.log('allMessages', allMessages);
 
-=======
-
-    console.log(localStorag.email);
-    client.emit('sendMessage', {
-      messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br' });
-
-    client.on('allMessage', async (messages) => {
-      setAllMessages(messages);
-    });
-  };
-
-  useEffect(() => {
-    client.on('allMessage', async (messages) => {
-      console.log('messages', messages);
-      setAllMessages(messages);
-    });
-  }, []);
-
-  console.log('allMessages', allMessages);
-  console.log('localStorag.email', localStorag.email);
->>>>>>> 7ce04f11bf8bbb20639014f49af99572626e69ee
 
   return (
     <div>
@@ -103,7 +75,6 @@ export default function Login() {
         Enviar
       </button>
 
-<<<<<<< HEAD
       { allMessages.messages && allMessages.messages.map((e, i) => (
         <p key={ i }>
           {e.from}
@@ -118,19 +89,6 @@ export default function Login() {
           {' '}
           {e.text}
         </p>))}
-=======
-      { allMessages[localStorag.messageFrom]
-      && allMessages[localStorag.messageFrom].map((e, i) => (
-        <p key={ i }>
-          {`${e.messageFrom} - ${handlemap(e)} - ${e.messageInput}`}
-        </p>))}
-
-      { allMessages['user@test.com'] && allMessages[localStorag.email].map((e, i) => (
-        <p key={ i }>
-          {`${e.messageFrom} - ${handleMap(e)} - ${e.messageInput}`}
-        </p>)) }
-
->>>>>>> 7ce04f11bf8bbb20639014f49af99572626e69ee
     </div>
   );
 }
