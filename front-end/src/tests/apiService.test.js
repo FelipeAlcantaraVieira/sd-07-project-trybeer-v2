@@ -11,10 +11,9 @@ const {
   updateSalesStatus,
 } = require('../services/apiService');
 const { users, tokens } = require('./config/parameters');
-const connect = require('../../../back-end/models/connection');
-const db = require('../../../back-end/tests/config/querySQL');
-const script = require('./config/script');
-const { insetUsers } = require('../../../back-end/tests/config/querySQL');
+const db = require('../../../back-end/models')
+const shell = require('shelljs');
+
 const sale = [
   {
     productName: 'Brahma 600ml',
@@ -33,14 +32,10 @@ const sale = [
   },
 ];
 
-beforeAll(async (done) => {
-  await connect.execute(db.dropSaleTables);
-  await connect.execute('DROP TABLE IF EXISTS users;')
-  await connect.execute(db.createUsers);
-  await connect.execute(db.insertUsers);
-  await connect.execute(db.createSales);
-  await connect.execute(db.createSaleProducts);
-  done();
+beforeAll(async () => {
+  shell.exec('npx sequelize-cli db:drop $');
+  shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
+  shell.exec('npx sequelize-cli db:seed:all $');
 });
 
 describe('Criando usuario', () => {
@@ -138,4 +133,6 @@ describe('Atualizando o status de uma venda', () => {
   });
 });
 
-afterAll(async () => connect.end());
+afterAll(async () => {
+  await db.sequelize.close();
+});

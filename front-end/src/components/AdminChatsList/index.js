@@ -57,6 +57,7 @@ export default function AdminChatsList() {
                   <Col>
                     <p data-testid="last-message">
                       Última mensagem às
+                      {' '}
                       {userMessage.time}
                     </p>
                   </Col>

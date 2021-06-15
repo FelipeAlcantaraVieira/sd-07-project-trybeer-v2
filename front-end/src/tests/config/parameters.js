@@ -4,7 +4,7 @@ const users = {
   tryberAdmin: {
     name: 'Tryber Admin',
     email: 'tryber@trybe.com.br',
-    password: '123456',
+    password: '12345678',
     role: 'administrator',
   },
   newUser: {
