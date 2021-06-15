@@ -33,7 +33,9 @@ const getUserMessages = async () => {
 
 const adminListOfMessages = async (socket) => {
   const messages = await getUserMessages();
-  socket.emit('adminListMessages', messages);
+  socket.on('adminListMessages', () => {
+    socket.emit('adminListMessages', messages);
+  });
 };
 
 const sendMessage = async (socket) => {
