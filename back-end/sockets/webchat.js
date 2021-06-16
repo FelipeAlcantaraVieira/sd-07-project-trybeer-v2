@@ -6,23 +6,23 @@ const webchat = (io) => {
   io.on('connection', (client) => {
     client.on('createClient', async (email) => {
       const allMesssagens = await findByEmail(email);
-      // client.join
-      console.log('createClient', email, allMesssagens);
+      client.join(email);
+      console.log('createClient join To: ', email);
       client.emit('createdClient', allMesssagens);
     });
     client.on('sendMessage', async ({ messageInput, messageFrom }) => {
       const data = moment().format();
       const result = await
         save({ client: messageFrom, text: messageInput, date: data, from: 'client' });
-      console.log('sendMessage', result);
-      client.emit('allMessage', result);
+      console.log('Client sendMessage to Room: ', messageFrom);
+      io.in(messageFrom).emit('allMessage', result);
     });
     client.on('sendMessageAdmin', async ({ messageInput, messageTo }) => {
       const data = moment().format();
       const result = await
         save({ client: messageTo, text: messageInput, date: data, from: 'admin' });
-      client.emit('allMessage', result);
-      console.log('sendMessageAdmin', result);
+      io.in(messageTo).emit('allMessage', result);
+      console.log('Admin sendMessageAdmin to room: ', messageTo);
     });
   });
 };
