@@ -8,12 +8,17 @@ export default function ClientChat() {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    socket.on('serverMessage', (incomingMessage) => setServerMessage(incomingMessage));
-  });
+    sendUserEmail();
+    socket.on('loadMessages', (messages) => { setServerMessage(messages) })
+  }, []);
+
+  useEffect(() => {
+    socket.on('serverMessage', (incomingMessage) => setServerMessage([...serverMessage, incomingMessage]));
+  },[serverMessage]);
 
   const sendMessage = (e) => {
     e.preventDefault();
-    socket.emit('userMessage', { userName, message });
+    socket.emit('sendMessage', { userName, message });
     setMessage('');
   };
 
@@ -23,12 +28,8 @@ export default function ClientChat() {
     setUserName(email);
   };
 
-  useEffect(() => {
-    sendUserEmail();
-  }, []);
-
   return (
-    <Form>
+    <Form onSubmit={sendMessage}>
       <div>
         <h1
           style={ {
@@ -176,7 +177,6 @@ export default function ClientChat() {
               id="messageInput"
               value={ message }
               onChange={ (e) => {
-                e.preventDefault();
                 setMessage(e.target.value);
               } }
               data-testid="message-input"

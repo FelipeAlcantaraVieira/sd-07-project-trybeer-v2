@@ -46,49 +46,30 @@ const getMessages = async (email) => {
   return sortedMessages;
 };
 
-const sendMessage = async (socket) => {
-  let messages = [];
-  socket.on('userMessage', ({ message, userName }) => {
-    messages.push({ message, userName, time: formatDateHour() });
-    chat.add(message, userName, formatDateHour());
-    io.emit('serverMessage', messages);
-  });
-  socket.on('adminMessage', ({ message }) => {
-    messages.push({ message, userName: 'Loja', time: formatDateHour() });
-    io.emit('serverMessage', messages);
-  });
-  socket.on('loadMessages', async (email) => {
-    socket.join(email);
-    console.log(socket.rooms);
-    messages = await getMessages(email);
-    socket.emit('serverMessage', messages);
-  });
-};
+const messages = (socket) => {
+  let messageList = [];
+  let to = 'zebirita@gmail.com';
 
-const adminMessages = async (socket) => {
-  let messages = [];
-  let to = '';
-  socket.on('loadAdminMessage', async (userName) => {
-    socket.join(userName);
-    console.log(socket.rooms);
-    to = 'zebirita@gmail.com';
-    messages = await getMessages(userName);
-    io.emit('loadAdminMessage', messages);
+  socket.on('loadMessages', async (userName) => {
+    messageList = await getMessages(userName);
+    socket.emit('loadMessages', messageList);
   });
-  socket.on('userMessage', ({ message, userName }) => {
-    messages.push({ message, userName, time: formatDateHour() });
-    io.emit('loadAdminMessage', messages);
+
+  socket.on('sendMessage', ({ message, userName }) => {
+    messageList.push({ message, userName, time: formatDateHour() });
+    chat.add(message, userName, formatDateHour());
+    io.emit('serverMessage', { message, userName, time: formatDateHour() });
   });
+
   socket.on('adminMessage', ({ message }) => {
-    messages.push({ message, userName: 'Loja', time: formatDateHour() });
+    messageList.push({ message, userName: 'Loja', time: formatDateHour() });
     chat.add(message, 'Loja', formatDateHour(), to);
-    socket.emit('loadAdminMessage', messages);
+    io.emit('serverMessage', { message, userName: 'Loja', time: formatDateHour() });
   });
 };
 
 io.on('connection', async (socket) => {
-  adminMessages(socket);
-  sendMessage(socket);
+  messages(socket);
   adminListOfMessages(socket);
 });
 
