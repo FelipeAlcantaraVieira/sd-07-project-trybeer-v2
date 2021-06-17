@@ -42,15 +42,14 @@ const getMessages = async (email) => {
   const userMessages = await chat.getUserMessages(email);
   const adminMessages = await chat.getAdminMessages(email);
   const messages = userMessages.concat(adminMessages);
-  const sortedMessages = messages.sort((a, b) => a.time - b.time);
-  return sortedMessages;
+  return messages;
 };
 
 const messages = (socket) => {
   let messageList = [];
-  const to = 'zebirita@gmail.com';
-
-  socket.on('loadMessages', async (userName) => {
+  let to = '';
+  socket.on('loadUser', (user) => { to = user; });
+  socket.on('loadMessages', async (userName = to) => {
     messageList = await getMessages(userName);
     socket.emit('loadMessages', messageList);
   });

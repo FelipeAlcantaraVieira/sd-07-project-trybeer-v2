@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import socket from '../../helper/chat';
-import ApiContext from '../../context/context';
 
 export default function AdminChatsList() {
   const [usersMessagesList, setusersMessagesList] = useState(null);
   const [loading, setLoading] = useState(true);
   const history = useHistory();
-  const { setUserMessages } = useContext(ApiContext);
 
   useEffect(() => {
     socket.emit('adminListMessages');
@@ -19,8 +17,7 @@ export default function AdminChatsList() {
   }, [setusersMessagesList]);
 
   const singleUserMessages = ({ userName }) => {
-    socket.emit('loadAdminMessage', userName);
-    socket.on('loadAdminMessage', (messages) => setUserMessages(messages));
+    socket.emit('loadUser', userName);
     history.push('/admin/chats/user');
   };
 

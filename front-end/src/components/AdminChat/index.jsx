@@ -24,7 +24,7 @@ export default function AdminChat() {
   useEffect(() => {
     if (userMessages.length < 1) {
       socket
-        .emit('loadMessages', (messageContent) => setServerMessage(messageContent));
+        .emit('loadMessages');
     }
     socket.on('loadMessages', (messages) => setServerMessage(messages));
     sendUserEmail();
