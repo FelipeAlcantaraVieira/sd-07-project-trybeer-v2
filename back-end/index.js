@@ -48,7 +48,7 @@ const getMessages = async (email) => {
 
 const messages = (socket) => {
   let messageList = [];
-  let to = 'zebirita@gmail.com';
+  const to = 'zebirita@gmail.com';
 
   socket.on('loadMessages', async (userName) => {
     messageList = await getMessages(userName);
