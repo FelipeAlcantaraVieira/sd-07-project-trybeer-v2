@@ -7,14 +7,21 @@ export default function ClientChat() {
   const [serverMessage, setServerMessage] = useState([]);
   const [userName, setUserName] = useState('');
 
+  const sendUserEmail = () => {
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    socket.emit('loadMessages', email);
+    setUserName(email);
+  };
+
   useEffect(() => {
     sendUserEmail();
-    socket.on('loadMessages', (messages) => { setServerMessage(messages) })
+    socket.on('loadMessages', (messages) => { setServerMessage(messages); });
   }, []);
 
   useEffect(() => {
-    socket.on('serverMessage', (incomingMessage) => setServerMessage([...serverMessage, incomingMessage]));
-  },[serverMessage]);
+    socket.on('serverMessage',
+      (incomingMessage) => setServerMessage([...serverMessage, incomingMessage]));
+  }, [serverMessage]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -22,14 +29,8 @@ export default function ClientChat() {
     setMessage('');
   };
 
-  const sendUserEmail = () => {
-    const { email } = JSON.parse(localStorage.getItem('user'));
-    socket.emit('loadMessages', email);
-    setUserName(email);
-  };
-
   return (
-    <Form onSubmit={sendMessage}>
+    <Form onSubmit={ sendMessage }>
       <div>
         <h1
           style={ {

@@ -25,17 +25,16 @@ export default function AdminChat() {
     if (userMessages.length < 1) {
       socket
         .emit('loadMessages', (messageContent) => setServerMessage(messageContent));
-    };
+    }
     socket.on('loadMessages', (messages) => setServerMessage(messages));
     sendUserEmail();
   }, [userMessages.length]);
 
-
-
   useEffect(() => {
-    socket.on('serverMessage', (incomingMessage) => setServerMessage([...serverMessage, incomingMessage]));
-    console.log(serverMessage);
-  },[serverMessage]);
+    socket
+      .on('serverMessage',
+        (incomingMessage) => setServerMessage([...serverMessage, incomingMessage]));
+  }, [serverMessage]);
 
   return (
     <Form>
