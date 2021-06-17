@@ -18,8 +18,7 @@ export default function AdminChatsList() {
     });
   }, [setusersMessagesList]);
 
-  const singleUserMessages = (userName) => {
-    console.log(userName);
+  const singleUserMessages = ({ userName }) => {
     socket.emit('loadAdminMessage', userName);
     socket.on('loadAdminMessage', (messages) => setUserMessages(messages));
     history.push('/admin/chats/user');
@@ -45,14 +44,14 @@ export default function AdminChatsList() {
         {loading ? (
           <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>)
           : (
-            usersMessagesList.map(({ userName, time }, index) => (
+            usersMessagesList.map((user, index) => (
               <Card
                 type="button"
                 key={ index }
                 data-testid="containerChat"
-                onClick={ () => singleUserMessages(userName) }
+                onClick={ () => singleUserMessages(user) }
                 role="button"
-                onKeyDown={ () => singleUserMessages(userName) }
+                onKeyDown={ () => singleUserMessages(user) }
                 tabIndex={ 0 }
                 className="border rounded"
                 style={ { margin: '3vh',
@@ -63,13 +62,13 @@ export default function AdminChatsList() {
               >
                 <Row>
                   <Col>
-                    <p data-testid="profile-name">{userName}</p>
+                    <p data-testid="profile-name">{user.userName}</p>
                   </Col>
                   <Col>
                     <p data-testid="last-message">
                       Última mensagem às
                       {' '}
-                      {time}
+                      {user.time}
                     </p>
                   </Col>
                 </Row>

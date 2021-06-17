@@ -11,13 +11,6 @@ export default function AdminChat() {
   const [serverMessage, setServerMessage] = useState(userMessages);
   const [userName, setUserName] = useState('Loja');
 
-  useEffect(() => {
-    if (userMessages.length < 1) {
-      socket
-        .emit('loadAdminMessage', (messageContent) => setServerMessage(messageContent));
-    }
-  }, [userMessages.length]);
-
   const sendMessage = (e) => {
     e.preventDefault();
     socket.emit('adminMessage', { userName, message });
@@ -25,14 +18,24 @@ export default function AdminChat() {
   };
 
   const sendUserEmail = () => {
-    const { email } = JSON.parse(localStorage.getItem('user'));
-    setUserName(email);
+    const user = JSON.parse(localStorage.getItem('user'));
+    setUserName(user);
   };
+  useEffect(() => {
+    if (userMessages.length < 1) {
+      socket
+        .emit('loadMessages', (messageContent) => setServerMessage(messageContent));
+    };
+    socket.on('loadMessages', (messages) => setServerMessage(messages));
+    sendUserEmail();
+  }, [userMessages.length]);
+
+
 
   useEffect(() => {
-    socket.on('loadAdminMessage', (incomingMessage) => setServerMessage(incomingMessage));
-    sendUserEmail();
-  }, []);
+    socket.on('serverMessage', (incomingMessage) => setServerMessage([...serverMessage, incomingMessage]));
+    console.log(serverMessage);
+  },[serverMessage]);
 
   return (
     <Form>
