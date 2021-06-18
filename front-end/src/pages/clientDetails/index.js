@@ -44,22 +44,22 @@ export default function ClientDetails() {
       <div>
         {orderDetail && orderDetail.map((product, index) => (
           <div
-            key={index}
+            key={ index }
           >
             <div>
-              <span data-testid={`${index}-product-qtd`}>
+              <span data-testid={ `${index}-product-qtd` }>
                 {product.SaleProduct.quantity}
               </span>
               {' '}
               -
               {' '}
-              <span data-testid={`${index}-product-name`}>
+              <span data-testid={ `${index}-product-name` }>
                 {product.name}
               </span>
               {' '}
               -
               {' '}
-              <span data-testid={`${index}-product-total-value`}>
+              <span data-testid={ `${index}-product-total-value` }>
                 <strong>
                   {`R$ ${product.price.replace('.', ',')}`}
                 </strong>
