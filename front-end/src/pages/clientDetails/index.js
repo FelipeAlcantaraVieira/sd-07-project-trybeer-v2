@@ -15,11 +15,10 @@ export default function ClientDetails() {
     day: '2-digit', month: '2-digit',
   };
 
-  const date = (saleDate) => new Intl.DateTimeFormat('pt-BR', options)
-    .format(Date.parse(saleDate));
-
   useEffect(() => {
     const salesProducts = async () => {
+      const date = (saleDate) => new Intl.DateTimeFormat('pt-BR', options)
+        .format(Date.parse(saleDate));
       const result = await saleById(orderNumber);
       const dateOrder = date(result.saleDate);
       if (!dateOrder) return setErrors(<h3>Pedido não encontrado</h3>);
@@ -31,36 +30,36 @@ export default function ClientDetails() {
       setOrderDetail(result.products);
     };
     salesProducts();
-  }, [date, orderNumber]);
+  }, [options, orderNumber]);
 
   return (
     <div>
       <TopMenu topTitle="Detalhes de Pedido" />
       <h2>
-        <span data-testid="order-number">{ `Pedido ${orderNumber}` }</span>
+        <span data-testid="order-number">{`Pedido ${orderNumber}`}</span>
         {' '}
-        <span data-testid="order-date">{ `${orderDate}` }</span>
+        <span data-testid="order-date">{`${orderDate}`}</span>
       </h2>
       <h2>{orderStatus}</h2>
       <div>
         {orderDetail && orderDetail.map((product, index) => (
           <div
-            key={ index }
+            key={index}
           >
             <div>
-              <span data-testid={ `${index}-product-qtd` }>
+              <span data-testid={`${index}-product-qtd`}>
                 {product.SaleProduct.quantity}
               </span>
               {' '}
               -
               {' '}
-              <span data-testid={ `${index}-product-name` }>
+              <span data-testid={`${index}-product-name`}>
                 {product.name}
               </span>
               {' '}
               -
               {' '}
-              <span data-testid={ `${index}-product-total-value` }>
+              <span data-testid={`${index}-product-total-value`}>
                 <strong>
                   {`R$ ${product.price.replace('.', ',')}`}
                 </strong>
@@ -74,7 +73,7 @@ export default function ClientDetails() {
           {`R$ ${(totalPrice).replace('.', ',')}`}
         </p>
       </div>
-      { errors }
+      {errors}
     </div>
   );
 }
