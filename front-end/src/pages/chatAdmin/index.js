@@ -51,23 +51,23 @@ export default function ChatAdmin() {
             id="message"
             name="message"
             type="text"
-            value={messageInput}
+            value={ messageInput }
             data-testid="message-input"
-            onChange={handleChangeMessage}
+            onChange={ handleChangeMessage }
           />
         </label>
 
         <button
           type="button"
           data-testid="signin-btn"
-          disabled={verifyInput()}
-          onClick={handleClickMessage}
+          disabled={ verifyInput() }
+          onClick={ handleClickMessage }
         >
           Enviar
         </button>
       </p>
       {allMessages && allMessages.messages && allMessages.messages.map((e, i) => (
-        <p key={i}>
+        <p key={ i }>
           {e.from}
           {' '}
           -

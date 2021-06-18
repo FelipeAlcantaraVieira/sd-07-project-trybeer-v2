@@ -2,14 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const app2 = require('express')();
 const http = require('http').createServer(app2);
-const { webchat } = require('./sockets/webchat')
-
 
 const env = process.env.NODE_ENV || 'development';
-const moment = require('moment');
 const io = require('socket.io')(http, {
   cors: {
-    origin: ['http://localhost:3002', 'http://localhost:3001', 'http://localhost:3000'],
+    origin: [
+      'http://localhost:3002',
+      'http://localhost:3001',
+      'http://localhost:3000',
+    ],
     methods: ['POST', 'GET'],
   },
 });
@@ -17,7 +18,7 @@ const { apiport } = require('./config/config')[env];
 
 const PORT2 = 3002;
 const { user, auth, product, sales, messages } = require('./resources');
-// const bodyParser = require('body-parser');
+const { webchat } = require('./sockets/webchat');
 
 webchat(io);
 

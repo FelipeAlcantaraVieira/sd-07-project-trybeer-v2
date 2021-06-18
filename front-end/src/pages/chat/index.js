@@ -50,23 +50,23 @@ export default function Login() {
           id="message"
           name="message"
           type="text"
-          value={messageInput}
+          value={ messageInput }
           data-testid="message-input"
-          onChange={handleChange}
+          onChange={ handleChange }
         />
       </label>
 
       <button
         type="button"
         data-testid="signin-btn"
-        disabled={verifyInput()}
-        onClick={handleClick}
+        disabled={ verifyInput() }
+        onClick={ handleClick }
       >
         Enviar
       </button>
 
       {allMessages && allMessages.messages && allMessages.messages.map((e, i) => (
-        <p key={i}>
+        <p key={ i }>
           {e.from}
           {' '}
           -

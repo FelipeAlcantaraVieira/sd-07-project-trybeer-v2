@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import {
-  AdminSideBar,
-} from '../../components';
+import { AdminSideBar } from '../../components';
 import TrybeerContext from '../../context/TrybeerContext';
 import { getAllMessage } from '../../service/trybeerApi';
 
@@ -27,24 +25,26 @@ export default function ChatsAdmin() {
     requestAllMessage();
   }, []);
 
-  if (shouldRedirect) return (<Redirect to="/admin/chats/chat" />);
+  if (shouldRedirect) return <Redirect to="/admin/chats/chat" />;
 
-  if (!allMessages.length) return (<p>Nenhuma Conversa Aqui</p>);
+  if (!allMessages.length) return <p>Nenhuma Conversa Aqui</p>;
   return (
     <div>
       <AdminSideBar />
       <h1>Conversas</h1>
       {allMessages.map((chat) => (
         <button
-          key={chat.client}
+          key={ chat.client }
           data-testid="containerChat"
           type="button"
-          onClick={(e) => handleClick(e, chat.client)}
+          onClick={ (e) => handleClick(e, chat.client) }
         >
           <p data-testid="profile-name">{chat.client}</p>
-          <p data-testid="last-message">{`Última menssagem às ${chat.timeLastMessage}`}</p>
-        </button>))}
-
+          <p data-testid="last-message">
+            {`Última menssagem às ${chat.timeLastMessage}`}
+          </p>
+        </button>
+      ))}
     </div>
   );
 }

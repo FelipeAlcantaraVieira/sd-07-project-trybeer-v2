@@ -63,7 +63,7 @@ export default function Provider(props) {
 
   return (
     <TrybeerContext.Provider
-      value={context}
+      value={ context }
     >
       {children}
     </TrybeerContext.Provider>
