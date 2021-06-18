@@ -15,11 +15,10 @@ export default function ClientDetails() {
     day: '2-digit', month: '2-digit',
   };
 
-  const date = (saleDate) => new Intl.DateTimeFormat('pt-BR', options)
-    .format(Date.parse(saleDate));
-
   useEffect(() => {
     const salesProducts = async () => {
+      const date = (saleDate) => new Intl.DateTimeFormat('pt-BR', options)
+        .format(Date.parse(saleDate));
       const result = await saleById(orderNumber);
       const dateOrder = date(result.saleDate);
       if (!dateOrder) return setErrors(<h3>Pedido não encontrado</h3>);
@@ -31,15 +30,15 @@ export default function ClientDetails() {
       setOrderDetail(result.products);
     };
     salesProducts();
-  }, [date, orderNumber]);
+  }, [options, orderNumber]);
 
   return (
     <div>
       <TopMenu topTitle="Detalhes de Pedido" />
       <h2>
-        <span data-testid="order-number">{ `Pedido ${orderNumber}` }</span>
+        <span data-testid="order-number">{`Pedido ${orderNumber}`}</span>
         {' '}
-        <span data-testid="order-date">{ `${orderDate}` }</span>
+        <span data-testid="order-date">{`${orderDate}`}</span>
       </h2>
       <h2>{orderStatus}</h2>
       <div>
@@ -74,7 +73,7 @@ export default function ClientDetails() {
           {`R$ ${(totalPrice).replace('.', ',')}`}
         </p>
       </div>
-      { errors }
+      {errors}
     </div>
   );
 }
