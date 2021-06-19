@@ -34,6 +34,10 @@ export default function Provider(props) {
   const [totalPrice, setTotalPrice] = useState();
 
   // ****************************************************************
+  // ABOUT CHAT
+  const CLIENT_KEY_LOCALSTORAGE = 'client';
+  const [clientEmail, setClientEmail] = useLocalStorage(CLIENT_KEY_LOCALSTORAGE, '');
+  // ****************************************************************
 
   const context = {
     userLogged,
@@ -51,6 +55,8 @@ export default function Provider(props) {
     setSaleDate,
     totalPrice,
     setTotalPrice,
+    clientEmail,
+    setClientEmail,
   };
 
   const { children } = provideProps;

@@ -7,7 +7,7 @@ module.exports = {
     database: process.env.SCHEMA,
     host: process.env.HOSTNAME,
     dialect: 'mysql',
-    logging: true,
+    logging: false,
     apiport: process.env.PORT || 3001,
     secret: process.env.SECRET || 'forabolsonaro',
   },

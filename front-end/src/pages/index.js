@@ -8,6 +8,9 @@ import detailsAdmin from './detailsAdmin';
 import Checkout from './checkout';
 import Login from './login';
 import ClientDetails from './clientDetails';
+import Chat from './chat';
+import ChatsAdmin from './chatsAdmin';
+import ChatAdmin from './chatAdmin';
 
 export {
   Login,
@@ -20,4 +23,7 @@ export {
   detailsAdmin,
   Checkout,
   ClientDetails,
+  Chat,
+  ChatAdmin,
+  ChatsAdmin,
 };

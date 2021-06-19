@@ -4,21 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "drop": "npx sequelize-cli db:drop $",
-    "seed": "npx sequelize-cli db:seed:all $",
-    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
     "start": "node index.js",
-    "test": "jest --watchAll",
-    "test-band": "jest --watchAll --runInBand --detectOpenHandles",
-    "test-coverage": "jest --coverage",
     "debug": "nodemon index.js",
     "start:watch": "nodemon index.js",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "test": "jest",
+    "test-coverage": "jest --coverage --watchAll=false",
+    "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "17.1.1",
+    "@types/jest": "25.1.4",
     "body-parser": "1.19.0",
     "cors": "2.8.5",
     "dotenv": "8.2.0",
@@ -32,12 +30,13 @@
     "socket.io": "3.0.4"
   },
   "devDependencies": {
-    "eslint": "7.7.0",
+    "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.2.0",
-    "eslint-plugin-import": "2.22.0",
-    "eslint-plugin-sonarjs": "0.5.0",
-    "jest": "26.4.2",
+    "eslint-plugin-import": "2.22.1",
+    "frisby": "^2.1.3",
+    "jest": "25.1.0",
     "nodemon": "2.0.4",
-    "sequelize-cli": "6.2.0"
+    "supertest": "^6.1.3",
+    "typescript": "2.8.1"
   }
 }
