@@ -16,19 +16,22 @@ export default function AdminDetails() {
     products: [],
   });
 
-  useEffect(() => {
-    const fetchSale = async () => {
-      const { status, totalPrice, products } = await orderById(orderId);
-      setOrder({ status, totalPrice, products });
-      if (status) {
-        setOrderStatus(status || 'Pendente');
-      }
-    };
-    fetchSale();
-  }, [orderId]);
+  const fetchSale = async () => {
+    const result = await orderById(orderId);
+    console.log('result', result);
+    const { status, totalPrice, products } = result;
+    setOrder({ status, totalPrice, products });
+    if (status) {
+      setOrderStatus(status);
+    }
+  };
 
-  const handleClick = (status) => {
-    updateSaleStatus(status, orderId);
+  useEffect(() => {
+    fetchSale();
+  }, []);
+
+  const handleClick = async (status) => {
+    await updateSaleStatus(status, orderId);
     setOrderStatus(status);
   };
 
