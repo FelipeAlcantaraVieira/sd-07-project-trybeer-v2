@@ -27,24 +27,27 @@ export default function ChatsAdmin() {
 
   if (shouldRedirect) return <Redirect to="/admin/chats/chat" />;
 
-  if (!allMessages.length) return <p>Nenhuma Conversa Aqui</p>;
   return (
     <div>
       <AdminSideBar />
       <h1>Conversas</h1>
-      {allMessages.map((chat) => (
-        <button
-          key={ chat.client }
-          data-testid="containerChat"
-          type="button"
-          onClick={ (e) => handleClick(e, chat.client) }
-        >
-          <p data-testid="profile-name">{chat.client}</p>
-          <p data-testid="last-message">
-            {`Última menssagem às ${chat.timeLastMessage}`}
-          </p>
-        </button>
-      ))}
+      {!allMessages.length ? (
+        <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>
+      ) : (
+        allMessages.map((chat) => (
+          <button
+            key={ chat.client }
+            data-testid="containerChat"
+            type="button"
+            onClick={ (e) => handleClick(e, chat.client) }
+          >
+            <p data-testid="profile-name">{chat.client}</p>
+            <p data-testid="last-message">
+              {`Última menssagem às ${chat.timeLastMessage}`}
+            </p>
+          </button>
+        ))
+      )}
     </div>
   );
 }

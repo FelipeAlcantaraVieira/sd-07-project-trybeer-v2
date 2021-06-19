@@ -13,12 +13,12 @@ const clientOnAllMessagesHistory = (client) => {
 
 const clientEmitMessageToAdmin = (client, io) => {
   client.on('sendMessage', async ({ messageInput, messageFrom }) => {
-    const data = moment().format();
+    const data = moment().format('HH:mm:ss');
     const result = await save({
       client: messageFrom,
       text: messageInput,
       date: data,
-      from: 'client',
+      from: messageFrom,
     });
     io.in(messageFrom).emit('allMessage', result);
     console.log('Client sendMessage to Room: ', messageFrom);
@@ -27,12 +27,12 @@ const clientEmitMessageToAdmin = (client, io) => {
 
 const adminEmitMessageToCLient = (client, io) => {
   client.on('sendMessageAdmin', async ({ messageInput, messageTo }) => {
-    const data = moment().format();
+    const data = moment().format('HH:mm:ss');
     const result = await save({
       client: messageTo,
       text: messageInput,
       date: data,
-      from: 'admin',
+      from: 'Loja',
     });
     io.in(messageTo).emit('allMessage', result);
     console.log('Admin sendMessageAdmin to room: ', messageTo);

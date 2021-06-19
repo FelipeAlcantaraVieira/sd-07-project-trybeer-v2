@@ -21,7 +21,6 @@ const findById = async (id) => {
       .findOne({
         _id: id,
       }));
-  // console.log(chat)
   return chat;
 };
 const update = async ({ _id, timeLastMessage, newMessage }) => {
@@ -46,7 +45,6 @@ const findByEmail = async (email) => {
       .findOne({
         client: email,
       }));
-  // console.log(chat)
   return chat;
 };
 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
-import {
-  TopMenu,
-} from '../../components';
+import { TopMenu } from '../../components';
 import TrybeerContext from '../../context/TrybeerContext';
 
 const client = io('http://localhost:3002');
@@ -25,7 +23,9 @@ export default function Login() {
     console.log(messageInput);
     setMessageInput('');
     client.emit('sendMessage', {
-      messageInput, messageFrom: userLogged.email, messageTo: 'tryber@trybe.com.br',
+      messageInput,
+      messageFrom: userLogged.email,
+      messageTo: 'tryber@trybe.com.br',
     });
   };
 
@@ -58,27 +58,32 @@ export default function Login() {
 
       <button
         type="button"
-        data-testid="signin-btn"
+        data-testid="send-message"
         disabled={ verifyInput() }
         onClick={ handleClick }
       >
         Enviar
       </button>
 
-      {allMessages && allMessages.messages && allMessages.messages.map((e, i) => (
-        <p key={ i }>
-          {e.from}
-          {' '}
-          -
-          {' '}
-          {e.date.split('T')[1].split(':')[0]}
-          :
-          {e.date.split('T')[1].split(':')[1]}
-          {' '}
-          -
-          {' '}
-          {e.text}
-        </p>))}
+      {!allMessages.messages ? (
+        <p>Carregando</p>
+      ) : (
+        <div>
+          {allMessages.messages.map((message, i) => (
+            <div key={ i }>
+              <p>
+                <span data-testid="nickname">
+                  {`${allMessages.client} - `}
+                </span>
+                <span data-testid="message-time">
+                  {message.date}
+                </span>
+              </p>
+              <p data-testid="text-message">{message.text}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
