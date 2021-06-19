@@ -30,7 +30,7 @@ export default function ClientDetails() {
       setOrderDetail(result.products);
     };
     salesProducts();
-  }, [options, orderNumber]);
+  }, []);
 
   return (
     <div>
