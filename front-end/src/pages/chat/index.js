@@ -29,18 +29,19 @@ export default function Login() {
     });
   };
 
+  const updateAllMessages = (event) => {
+    client.on(event, (messages) => {
+      if (messages) {
+        setAllMessages(messages);
+      }
+    });
+  };
+
   useEffect(() => {
     client.emit('createClient', userLogged.email);
-    client.on('createdClient', (messages) => {
-      setAllMessages(messages);
-    });
-
-    client.on('allMessage', async (messages) => {
-      setAllMessages(messages);
-    });
+    updateAllMessages('createdClient');
+    updateAllMessages('allMessage');
   }, [userLogged.email]);
-
-  console.log('allMessages', allMessages);
 
   return (
     <div>
@@ -66,18 +67,14 @@ export default function Login() {
       </button>
 
       {!allMessages.messages ? (
-        <p>Carregando</p>
+        <p>Não existe mensagens</p>
       ) : (
         <div>
           {allMessages.messages.map((message, i) => (
             <div key={ i }>
               <p>
-                <span data-testid="nickname">
-                  {`${allMessages.client} - `}
-                </span>
-                <span data-testid="message-time">
-                  {message.date}
-                </span>
+                <span data-testid="nickname">{`${allMessages.client} - `}</span>
+                <span data-testid="message-time">{message.date}</span>
               </p>
               <p data-testid="text-message">{message.text}</p>
             </div>

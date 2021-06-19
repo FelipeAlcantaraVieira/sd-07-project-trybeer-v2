@@ -14,7 +14,9 @@ const save = async ({ client, text, date, from }) => {
     });
   } else {
     // create a new chat
-    result = await create({ client, text, date, from });
+    const newChat = await create({ client, text, date, from });
+    const value = newChat.ops[0];
+    result = value;
   }
   return result;
 };
