@@ -54,8 +54,8 @@ export default function CartForm() {
     console.log(street, houseNumber);
     const sale = {
       userId: userLogged.id,
-      deliveryAddress: street,
-      deliveryNumber: houseNumber,
+      street,
+      houseNumber,
       totalPrice: getTotalShoppingCart(),
     };
     console.log('saleobj', sale);

@@ -3,6 +3,9 @@ const { StatusCodes } = require('http-status-codes');
 const app = require('../index');
 const { service } = require('../resources/auth');
 const models = require('../models');
+const { invalidData, statusUpdated } = require('../helpers/dictonary');
+
+const adminOrderUrl = '/admin/orders/2';
 
 const sale = {
   userId: 45,
@@ -25,7 +28,15 @@ const user = {
   password: '12345678',
 };
 
-const getToken = () => service.login(user.email, user.password).then((res) => res.payload.token);
+const admin = {
+  email: 'tryber@trybe.com.br',
+  password: '12345678',
+};
+
+const getToken = ({ email, password }) =>
+  service.login(email, password).then((res) => res.payload.token);
+
+const CONTENT_TYPE = 'Content-Type';
 
 describe('Sale Test', () => {
   afterAll((done) => {
@@ -33,31 +44,125 @@ describe('Sale Test', () => {
       .then(() => done());
   });
   it('Será validado que é possível fazer criar uma venda', (done) => {
-    getToken()
-    .then((token) => {
-      request(app)
-      .post('/sales')
-      .set({ authorization: token })
-      .send({ sale, products })
-      .expect(StatusCodes.OK)
-      .expect('Content-Type', /json/);
-      done();
-    });
+    getToken(user)
+      .then((token) => {
+        request(app)
+          .post('/sales')
+          .set({ authorization: token })
+          .send({ sale, products })
+          .expect(StatusCodes.OK)
+          .expect(CONTENT_TYPE, /json/);
+        done();
+      });
   });
 
   it('Será validado que é possível listar todas as vendas', (done) => {
-    getToken()
+    getToken(user)
       .then((token) => {
         request(app)
           .get('/sales')
           .set({ authorization: token })
           .expect(StatusCodes.OK)
-          .expect('Content-Type', /json/)
+          .expect(CONTENT_TYPE, /json/)
           .then(({ body }) => {
             expect(body[0]).toHaveProperty('totalPrice');
             expect(body[0]).toHaveProperty('userId');
             expect(body[0]).toHaveProperty('deliveryAddress');
             expect(body[0]).toHaveProperty('deliveryNumber');
+            done();
+          })
+          .catch((err) => done(err));
+      });
+  });
+
+  it('Será validado que é possível listar todas as vendas de um cliente', (done) => {
+    getToken(user)
+      .then((token) => {
+        request(app)
+          .get('/sales/user/8')
+          .set({ authorization: token })
+          .expect(StatusCodes.OK)
+          .expect(CONTENT_TYPE, /json/)
+          .then(({ body }) => {
+            expect(body[0]).toHaveProperty('totalPrice');
+            expect(body[0]).toHaveProperty('userId');
+            expect(body[0]).toHaveProperty('deliveryAddress');
+            expect(body[0]).toHaveProperty('deliveryNumber');
+            expect(body[0]).toHaveProperty('status');
+            done();
+          })
+          .catch((err) => done(err));
+      });
+  });
+
+  it('Será validado que é possível listar uma venda específica(client)', (done) => {
+    getToken(user)
+      .then((token) => {
+        request(app)
+          .get('/sales/order/2')
+          .set({ authorization: token })
+          .expect(StatusCodes.OK)
+          .expect(CONTENT_TYPE, /json/)
+          .then(({ body }) => {
+            expect(body).toHaveProperty('totalPrice');
+            expect(body).toHaveProperty('userId');
+            expect(body).toHaveProperty('deliveryAddress');
+            expect(body).toHaveProperty('deliveryNumber');
+            done();
+          })
+          .catch((err) => done(err));
+      });
+  });
+
+  it('Será validado que é possível listar uma venda específica(admin)', (done) => {
+    getToken(user)
+      .then((token) => {
+        request(app)
+          .get(adminOrderUrl)
+          .set({ authorization: token })
+          .expect(StatusCodes.OK)
+          .expect(CONTENT_TYPE, /json/)
+          .then(({ body }) => {
+            expect(body).toHaveProperty('totalPrice');
+            expect(body).toHaveProperty('userId');
+            expect(body).toHaveProperty('deliveryAddress');
+            expect(body).toHaveProperty('deliveryNumber');
+            expect(body).toHaveProperty('products');
+            done();
+          })
+          .catch((err) => done(err));
+      });
+  });
+
+  it('Será validado que não é possível atualizar uma venda com um status inválido', (done) => {
+    getToken(admin)
+      .then((token) => {
+        request(app)
+          .put(adminOrderUrl)
+          .set({ authorization: token })
+          .send({ status: 'pamonha' })
+          .expect(StatusCodes.BAD_REQUEST)
+          .expect(CONTENT_TYPE, /json/)
+          .then((res) => {
+            expect(res.body.message).toBe(invalidData);
+            models.Sale.update({ status: 'Pendente' }, { where: { id: 1 } });
+            done();
+          })
+          .catch((err) => done(err));
+      });
+  });
+  it('Será validado que o admin é capaz de atualizar o status de uma venda', (done) => {
+    getToken(admin)
+      .then((token) => {
+        request(app)
+          .put(adminOrderUrl)
+          .set({ authorization: token })
+          .send({ status: 'Entregue' })
+          .expect(StatusCodes.OK)
+          .expect(CONTENT_TYPE, /json/)
+          .then((res) => {
+            expect(res.body.message).toBe(statusUpdated);
+            models.Sale.update({ status: 'Pendente' }, { where: { id: 1 } });
             done();
           })
           .catch((err) => done(err));

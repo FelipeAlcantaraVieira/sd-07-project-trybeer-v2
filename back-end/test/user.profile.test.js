@@ -78,4 +78,19 @@ describe('User profile test', () => {
       })
       .catch((err) => done(err));
   });
+
+  it('Será validado que é possível listar todos os usuários', (done) => {
+        request(app)
+          .get('/users')
+          .expect(StatusCodes.OK)
+          .expect(CONTENT_TYPE, /json/)
+          .then(({ body }) => {
+            expect(body[0]).toHaveProperty('name');
+            expect(body[0]).toHaveProperty('email');
+            expect(body[0]).toHaveProperty('password');
+            expect(body[0]).toHaveProperty('role');
+            done();
+          })
+          .catch((err) => done(err));
+  });
 });
