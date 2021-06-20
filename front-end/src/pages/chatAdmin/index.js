@@ -1,82 +1,96 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
-
-import {
-  TopMenu,
-} from '../../components';
+import { useHistory } from 'react-router-dom';
+import TrybeerContext from '../../context/TrybeerContext';
+import { AdminSideBar } from '../../components';
 
 const client = io('http://localhost:3002');
 
-export default function Login() {
-  // const [messageInput, setMessageInput] = useState('');
-  const [allMessages, setAllMessages] = useState('');
+export default function ChatAdmin() {
+  const history = useHistory();
+  const [allMessages, setAllMessages] = useState([]);
+  const [messageInput, setMessageInput] = useState('');
+  const { clientEmail } = useContext(TrybeerContext);
 
-  /* const verifyInput = () => {
+  const verifyInput = () => {
     if (messageInput.length > 0) return false;
     return true;
   };
 
-  const handleChange = ({ target: { value } }) => {
+  const handleChangeMessage = ({ target: { value } }) => {
     setMessageInput(value);
-  }; */
+  };
 
-  // const localStorag = JSON.parse(localStorage.getItem('user'));
-
-  // const handleClick = () => {
-  //   console.log(messageInput);
-  //   setMessageInput('');
-
-  //   console.log(localStorag.email);
-  //   client.emit('sendMessageAdmin', {messageInput, messageFrom: 'tryber@trybe.com.br', messageTo: localStorag.email});
-
-  //   client.on('allMessage', async (messages) => {
-  //     setAllMessages(messages);
-  //   })
-  // };
+  const handleClickMessage = () => {
+    console.log(messageInput);
+    setMessageInput('');
+    client.emit('sendMessageAdmin', {
+      messageInput,
+      messageTo: clientEmail,
+    });
+  };
 
   useEffect(() => {
+    client.emit('createClient', clientEmail);
+    client.on('createdClient', (messages) => {
+      setAllMessages(messages);
+    });
+
     client.on('allMessage', async (messages) => {
       console.log('messages', messages);
       setAllMessages(messages);
     });
-  }, []);
-
-  console.log('allMessages', allMessages);
-
-  // const getallUsers = ['user@test.com'];
+  }, [clientEmail]);
 
   return (
     <div>
-      <TopMenu />
-      {/* <label htmlFor="message">
-        <input
-          id="message"
-          name="message"
-          type="text"
-          value={messageInput}
-          data-testid="message-input"
-          onChange={ handleChange }
-        />
-      </label>
+      <AdminSideBar />
 
-      <button
-        type="button"
-        data-testid="signin-btn"
-        disabled={ verifyInput() }
-        onClick={ handleClick }
-      >
-        Enviar
-      </button> */}
+      {!allMessages.messages ? (
+        <p>Carregando</p>
+      ) : (
+        <div>
+          <h1>{`Conversando com ${allMessages.client}`}</h1>
+          <button
+            type="button"
+            data-testid="back-button"
+            onClick={ () => history.push('/admin/chats') }
+          >
+            VOLTAR
+          </button>
+          {allMessages.messages.map((message, i) => (
+            <div key={ i }>
+              <p>
+                <span data-testid="nickname">{`${message.from} - `}</span>
+                <span data-testid="message-time">{message.date}</span>
+              </p>
+              <p data-testid="text-message">{message.text}</p>
+            </div>
+          ))}
+        </div>
+      )}
 
-      {/* { allMessages[localStorag.email]
-        && allMessages[localStorag.email].map((e,i) => (
-          <p>
-          {e.email} - {e.data.split('T')[1].split(':')[0]}:{e.data.split('T')[1].split(':')[1]} - {e.messageInput}
-          </p>))} */}
+      <p>
+        <label htmlFor="message">
+          <input
+            id="message"
+            name="message"
+            type="text"
+            value={ messageInput }
+            data-testid="message-input"
+            onChange={ handleChangeMessage }
+          />
+        </label>
 
-      { allMessages
-      && allMessages['user@test.com'][allMessages['user@test.com'].length - 1].data}
-
+        <button
+          type="button"
+          data-testid="send-message"
+          disabled={ verifyInput() }
+          onClick={ handleClickMessage }
+        >
+          Enviar
+        </button>
+      </p>
     </div>
   );
 }

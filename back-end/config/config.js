@@ -10,8 +10,6 @@ module.exports = {
     logging: false,
     apiport: process.env.PORT || 3001,
     secret: process.env.SECRET || 'forabolsonaro',
-    mongoUrl: process.env.DB_URL,
-    mongoDataBase: process.env.DB_NAME,
   },
   test: {
     username: process.env.MYSQL_USER,

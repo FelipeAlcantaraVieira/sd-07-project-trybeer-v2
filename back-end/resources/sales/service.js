@@ -28,7 +28,11 @@ const create = async (sale, products) => {
   const t = await sequelize.transaction();
   try {
     const newSale = await Sale
-      .create({ ...sale, saleDate: Date.now(), status: 'Pendente' }, { transaction: t });
+      .create({ ...sale,
+        deliveryAddress: sale.street,
+        deliveryNumber: sale.houseNumber,
+        saleDate: Date.now(),
+        status: 'Pendente' }, { transaction: t });
     await SaleProduct
       .bulkCreate(products
         .map(({ id, quantity }) => ({ saleId: newSale.id, productId: id, quantity })),

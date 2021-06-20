@@ -51,12 +51,15 @@ export default function CartForm() {
 
   const handleClick = async () => {
     const { street, houseNumber } = salesInfo;
+    console.log(street, houseNumber);
     const sale = {
       userId: userLogged.id,
       deliveryAddress: street,
       deliveryNumber: houseNumber,
       totalPrice: getTotalShoppingCart(),
     };
+    console.log('saleobj', sale);
+    console.log(shoppingCart);
     await saveSale(sale, shoppingCart);
     setShowFinishMessage(true);
   };

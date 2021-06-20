@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
-import {
-  TopMenu,
-} from '../../components';
+import { TopMenu } from '../../components';
+import TrybeerContext from '../../context/TrybeerContext';
 
 const client = io('http://localhost:3002');
 
 export default function Login() {
   const [messageInput, setMessageInput] = useState('');
   const [allMessages, setAllMessages] = useState('');
+  const { userLogged } = useContext(TrybeerContext);
 
   const verifyInput = () => {
     if (messageInput.length > 0) return false;
@@ -19,33 +19,29 @@ export default function Login() {
     setMessageInput(value);
   };
 
-  const handleMap = (e) => (
-    `${e.data.split('T')[1].split(':')[0]}:${e.data.split('T')[1].split(':')[1]}`);
-
-  const localStorag = JSON.parse(localStorage.getItem('user'));
-
   const handleClick = () => {
     console.log(messageInput);
     setMessageInput('');
-
-    console.log(localStorag.email);
     client.emit('sendMessage', {
-      messageInput, messageFrom: localStorag.email, messageTo: 'tryber@trybe.com.br' });
+      messageInput,
+      messageFrom: userLogged.email,
+      messageTo: 'tryber@trybe.com.br',
+    });
+  };
 
-    client.on('allMessage', async (messages) => {
-      setAllMessages(messages);
+  const updateAllMessages = (event) => {
+    client.on(event, (messages) => {
+      if (messages) {
+        setAllMessages(messages);
+      }
     });
   };
 
   useEffect(() => {
-    client.on('allMessage', async (messages) => {
-      console.log('messages', messages);
-      setAllMessages(messages);
-    });
-  }, []);
-
-  console.log('allMessages', allMessages);
-  console.log('localStorag.email', localStorag.email);
+    client.emit('createClient', userLogged.email);
+    updateAllMessages('createdClient');
+    updateAllMessages('allMessage');
+  }, [userLogged.email]);
 
   return (
     <div>
@@ -63,24 +59,28 @@ export default function Login() {
 
       <button
         type="button"
-        data-testid="signin-btn"
+        data-testid="send-message"
         disabled={ verifyInput() }
         onClick={ handleClick }
       >
         Enviar
       </button>
 
-      { allMessages[localStorag.messageFrom]
-      && allMessages[localStorag.messageFrom].map((e, i) => (
-        <p key={ i }>
-          {`${e.messageFrom} - ${handlemap(e)} - ${e.messageInput}`}
-        </p>))}
-
-      { allMessages['user@test.com'] && allMessages[localStorag.email].map((e, i) => (
-        <p key={ i }>
-          {`${e.messageFrom} - ${handleMap(e)} - ${e.messageInput}`}
-        </p>)) }
-
+      {!allMessages.messages ? (
+        <p>Não existe mensagens</p>
+      ) : (
+        <div>
+          {allMessages.messages.map((message, i) => (
+            <div key={ i }>
+              <p>
+                <span data-testid="nickname">{`${allMessages.client} - `}</span>
+                <span data-testid="message-time">{message.date}</span>
+              </p>
+              <p data-testid="text-message">{message.text}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

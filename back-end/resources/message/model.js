@@ -14,6 +14,15 @@ const create = async ({ client, text, date, from }) => {
 
   return newMessage;
 };
+
+const findById = async (id) => {
+  const chat = await connection().then((db) =>
+    db.collection(COLLECTION_NAME)
+      .findOne({
+        _id: id,
+      }));
+  return chat;
+};
 const update = async ({ _id, timeLastMessage, newMessage }) => {
   const { modifiedCount } = await connection().then((db) =>
     db.collection(COLLECTION_NAME)
@@ -25,7 +34,7 @@ const update = async ({ _id, timeLastMessage, newMessage }) => {
         },
       ));
   if (modifiedCount) {
-    return true;
+    return findById(_id);
   }
   return null;
 };
@@ -39,8 +48,15 @@ const findByEmail = async (email) => {
   return chat;
 };
 
+const findAll = async () => {
+  const chat = await connection().then((db) =>
+    db.collection(COLLECTION_NAME).find().toArray());
+  return chat;
+};
+
 module.exports = {
   create,
   findByEmail,
   update,
+  findAll,
 };
