@@ -83,6 +83,7 @@ function LoginForm() {
               backgroundColor: 'rgb(133,54,21)',
               borderColor: rgbBorderColor,
               marginRight: '10vh',
+              marginTop: '10px',
             } }
             type="submit"
             data-testid="signin-btn"
@@ -92,11 +93,16 @@ function LoginForm() {
             Entrar
           </Button>
         </Col>
-        <Col>
+        <Col
+          style={ { marginTop: '18px' } }
+        >
           <Link
             to="/register"
             data-testid="no-account-btn"
-            style={ { color: 'rgb(232,214,210)', marginLeft: '-50px' } }
+            style={ {
+              color: 'rgb(232,214,210)',
+              marginLeft: '-50px',
+            } }
           >
             Ainda não tenho conta
           </Link>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import {
   getAdminSalesDetails,
@@ -96,31 +96,49 @@ export default function ClientOrderDetails() {
       </div>
       <p
         data-testid="order-total-value"
-        style={ { marginTop: '5vh' } }
+        style={ {
+          marginTop: '5vh',
+          marginLeft: '135px',
+          marginBottom: '30px',
+        } }
         className="align-self-start"
       >
         Total:
         {' '}
         {sale ? `R$ ${sale[0].totalPrice.replace('.', ',')}` : 'R$ 0,00'}
       </p>
-      <Button
-        type="submit"
-        data-testid="mark-as-prepared-btn"
-        onClick={ () => preparingButton() }
-        hidden={ hiddenButton }
-        style={ { width: '30vh' } }
-      >
-        Preparar pedido
-      </Button>
-      <Button
-        type="submit"
-        data-testid="mark-as-delivered-btn"
-        onClick={ () => deliveredButton() }
-        hidden={ hiddenButton }
-        style={ { width: '30vh' } }
-      >
-        Marcar como entregue
-      </Button>
+      <Row>
+        <Col>
+          <Button
+            type="submit"
+            data-testid="mark-as-prepared-btn"
+            onClick={ () => preparingButton() }
+            hidden={ hiddenButton }
+            style={ {
+              width: '30vh',
+              marginLeft: '60px',
+              backgroundColor: 'orange',
+              borderColor: 'orange',
+            } }
+          >
+            Preparar pedido
+          </Button>
+        </Col>
+        <Col>
+          <Button
+            type="submit"
+            data-testid="mark-as-delivered-btn"
+            onClick={ () => deliveredButton() }
+            hidden={ hiddenButton }
+            style={ {
+              width: '30vh',
+              marginRight: '400px',
+            } }
+          >
+            Marcar como entregue
+          </Button>
+        </Col>
+      </Row>
     </div>
   );
 }
