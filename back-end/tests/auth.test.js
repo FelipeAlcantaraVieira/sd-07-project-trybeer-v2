@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
-const app = require('../index');
+const { app } = require('../index');
 const { userNotFound, emailOrPasswordInvalid } = require('../helpers/dictonary');
 const models = require('../models');
 
@@ -13,8 +13,7 @@ const CONTENT_TYPE = 'Content-Type';
 
 describe('User login test', () => {
   afterAll((done) => {
-    models.sequelize.close()
-      .then(() => done());
+    done();
   });
 
   it('Será validado que não é possível fazer login com um email inválido', (done) => {
@@ -59,7 +58,7 @@ describe('User login test', () => {
       .catch((err) => done(err));
   });
 
-  it('Será validado que não é possível fazer login com uma senha inválida', async (done) => {
+  it('Será validado que não é possível fazer login com uma senha inválida', (done) => {
     request(app)
       .post('/login')
       .send({
@@ -91,7 +90,7 @@ describe('User login test', () => {
       .catch((err) => done(err));
   });
 
-  it('Será validado que é possível fazer login', async (done) => {
+  it('Será validado que é possível fazer login', (done) => {
     request(app)
       .post('/login')
       .send(user)

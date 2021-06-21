@@ -1,7 +1,7 @@
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
 require('iconv-lite').encodingExists('foo');
-const app = require('../index');
+const { app } = require('../index');
 const { invalidData, userExists } = require('../helpers/dictonary');
 const models = require('../models');
 
@@ -19,11 +19,6 @@ const CONTENT_TYPE = 'Content-Type';
 describe('User register test', () => {
   afterEach(() => {
     models.User.destroy({ where: { email: user.email } });
-  });
-
-  afterAll((done) => {
-    models.sequelize.close()
-      .then(() => done());
   });
 
   it('Será validado que não é possível se registrar com um email inválido', (done) => {
@@ -77,7 +72,7 @@ describe('User register test', () => {
       .catch((err) => done(err));
   });
 
-  it('Será validado que não é possível se registrar com um email já registrado', async (done) => {
+  it('Será validado que não é possível se registrar com um email já registrado', (done) => {
     request(app)
       .post('/register')
       .send({
@@ -94,7 +89,7 @@ describe('User register test', () => {
       .catch((err) => done(err));
   });
 
-  it('Será validado que é possível se registrar', async (done) => {
+  it('Será validado que é possível se registrar', (done) => {
     request(app)
       .post('/register')
       .send(user)

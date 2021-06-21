@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
-const app = require('../index');
+const { app } = require('../index');
 const { userNotFound, invalidData } = require('../helpers/dictonary');
 const models = require('../models');
 
@@ -13,8 +13,7 @@ const CONTENT_TYPE = 'Content-Type';
 
 describe('User profile test', () => {
   afterAll((done) => {
-    models.sequelize.close()
-      .then(() => done());
+    done();
   });
 
   it('Será validado que não é possível atualizar o nome com um email inválido', (done) => {
@@ -65,7 +64,7 @@ describe('User profile test', () => {
       .catch((err) => done(err));
   });
 
-  it('Será validado que é possível atualizar o nome', async (done) => {
+  it('Será validado que é possível atualizar o nome', (done) => {
     request(app)
       .put('/profile')
       .send(user)
@@ -74,23 +73,23 @@ describe('User profile test', () => {
       .then((res) => {
         expect(res.body.message).toBe('Atualização concluída com sucesso');
         models.User.update({ name: 'Cliente Zé Birita' }, { where: { email: user.email } })
-        .then(() => done());
+          .then(() => done());
       })
       .catch((err) => done(err));
   });
 
   it('Será validado que é possível listar todos os usuários', (done) => {
-        request(app)
-          .get('/users')
-          .expect(StatusCodes.OK)
-          .expect(CONTENT_TYPE, /json/)
-          .then(({ body }) => {
-            expect(body[0]).toHaveProperty('name');
-            expect(body[0]).toHaveProperty('email');
-            expect(body[0]).toHaveProperty('password');
-            expect(body[0]).toHaveProperty('role');
-            done();
-          })
-          .catch((err) => done(err));
+    request(app)
+      .get('/users')
+      .expect(StatusCodes.OK)
+      .expect(CONTENT_TYPE, /json/)
+      .then(({ body }) => {
+        expect(body[0]).toHaveProperty('name');
+        expect(body[0]).toHaveProperty('email');
+        expect(body[0]).toHaveProperty('password');
+        expect(body[0]).toHaveProperty('role');
+        done();
+      })
+      .catch((err) => done(err));
   });
 });

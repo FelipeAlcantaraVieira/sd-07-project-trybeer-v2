@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
-const app = require('../index');
+const { app } = require('../index');
 const { service } = require('../resources/auth');
 const models = require('../models');
 
@@ -20,8 +20,7 @@ const getToken = () => service.login(user.email, user.password).then((res) => re
 
 describe('Product Test', () => {
   afterAll((done) => {
-    models.sequelize.close()
-      .then(() => done());
+    done();
   });
   it('Será validado que é possível listar todos os produtos', (done) => {
     getToken()

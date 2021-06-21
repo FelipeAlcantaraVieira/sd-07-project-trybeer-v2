@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
-const app = require('../index');
+const { app } = require('../index');
 const { service } = require('../resources/auth');
 const models = require('../models');
 const { invalidData, statusUpdated } = require('../helpers/dictonary');
@@ -40,8 +40,7 @@ const CONTENT_TYPE = 'Content-Type';
 
 describe('Sale Test', () => {
   afterAll((done) => {
-    models.sequelize.close()
-      .then(() => done());
+    done();
   });
   it('Será validado que é possível fazer criar uma venda', (done) => {
     getToken(user)
@@ -79,7 +78,7 @@ describe('Sale Test', () => {
     getToken(user)
       .then((token) => {
         request(app)
-          .get('/sales/user/8')
+          .get('/sales/user/2')
           .set({ authorization: token })
           .expect(StatusCodes.OK)
           .expect(CONTENT_TYPE, /json/)

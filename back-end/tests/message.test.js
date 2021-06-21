@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
-const app = require('../index');
+const { app } = require('../index');
 
 describe('Message Test', () => {
   it('Será validado que é possível listar todas as conversas e mensagens', (done) => {

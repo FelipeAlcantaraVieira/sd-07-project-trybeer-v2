@@ -3,7 +3,7 @@ const cors = require('cors');
 const app2 = require('express')();
 const http = require('http').createServer(app2);
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development' || 'test';
 const io = require('socket.io')(http, {
   cors: {
     origin: [
@@ -43,4 +43,4 @@ http.listen(PORT2, () => {
   console.log(`Trybeer API ON and listen at ${PORT2}!`);
 });
 
-module.exports = app;
+module.exports = { app, http };
