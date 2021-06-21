@@ -38,19 +38,12 @@ const adminListOfMessages = async (socket) => {
   });
 };
 
-const getMessages = async (email) => {
-  const userMessages = await chat.getUserMessages(email);
-  const adminMessages = await chat.getAdminMessages(email);
-  const messages = userMessages.concat(adminMessages);
-  return messages;
-};
-
 const messages = (socket) => {
   let messageList = [];
   let to = '';
   socket.on('loadUser', (user) => { to = user; });
   socket.on('loadMessages', async (userName = to) => {
-    messageList = await getMessages(userName);
+    messageList = await chat.getMessages(userName);
     socket.emit('loadMessages', messageList);
   });
 
@@ -84,7 +77,6 @@ app.use(cors());
 
 app.use(login);
 app.use(user);
-// app.use(image);
 app.use(product);
 app.use(sale);
 

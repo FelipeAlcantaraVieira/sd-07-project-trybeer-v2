@@ -10,11 +10,12 @@ connect().then(async (db) => {
 const getUserMessages = async (userName) => connect()
   .then((db) => db.collection('messages').find({ userName }).toArray());
 
-const getAdminMessages = async (to) => connect()
-  .then((db) => db.collection('messages').find({ to }).toArray());
+const getMessages = async (userName) => connect()
+  .then((db) => db.collection('messages')
+  .find({ $or: [{ userName }, { to: userName }] }).toArray());
 
 module.exports = {
   add,
   getUserMessages,
-  getAdminMessages,
+  getMessages,
 };
