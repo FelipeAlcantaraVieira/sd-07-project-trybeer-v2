@@ -1,0 +1,17 @@
+.box {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.box label {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.box input {
+  margin: 0 10px;
+  width: max-content;
+}

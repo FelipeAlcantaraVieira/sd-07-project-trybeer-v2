@@ -11,20 +11,22 @@ export default function CartList() {
   }, [getTotalShoppingCart]);
 
   return (
-    <div>
-      <h2> Produtos </h2>
-      <div>
-        {shoppingCart.length > 0 && shoppingCart.map((product, index) => (
-          <CartItem key={ product.id } product={ product } index={ index } />
-        ))}
-        {shoppingCart.length === 0 && <h2>Não há produtos no carrinho</h2>}
-        <p>
-          Total:
-          <span data-testid="order-total-value">
-            {` R$ ${totalPriceCart.toFixed(2).split('.').join(',')}`}
-          </span>
-        </p>
+    <div className="cart-list-container">
+      <div className="checkout-card-container">
+        {shoppingCart.length === 0 && (
+          <h2 className="error">Não há produtos no carrinho</h2>
+        )}
+        {shoppingCart.length > 0
+          && shoppingCart.map((product, index) => (
+            <CartItem key={ product.id } product={ product } index={ index } />
+          ))}
       </div>
+      {/* <h2 className='checkout-total-price'>
+        Total:
+        <span data-testid='order-total-value'>
+          {` R$ ${totalPriceCart.toFixed(2).split('.').join(',')}`}
+        </span>
+      </h2> */}
     </div>
   );
 }

@@ -44,43 +44,71 @@ export default function Login() {
   }, [userLogged.email]);
 
   return (
-    <div>
+    <div className="list-chats-admin-container">
       <TopMenu />
-      <label htmlFor="message">
+
+      <div className="chat-container">
+        {!allMessages.messages ? (
+          <p className="message-container">Não existe mensagens</p>
+        ) : (
+          <div className="all-messagens-container">
+            {allMessages.messages.map((message, i) => (
+              <div
+                key={ i }
+                className={
+                  message.from === allMessages.client
+                    ? 'message-container-client'
+                    : 'message-container-adm'
+                }
+              >
+                <p>
+                  <span
+                    data-testid="nickname"
+                    className={
+                      message.from === allMessages.client ? 'client' : 'admin'
+                    }
+                  >
+                    {`${message.from} - `}
+                  </span>
+                  <span
+                    data-testid="message-time"
+                    className={
+                      message.from === allMessages.client ? 'client' : 'admin'
+                    }
+                  >
+                    {message.date}
+                  </span>
+                </p>
+                <p data-testid="text-message">{message.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="send-message-container">
+        <label htmlFor="message" />
         <input
           id="message"
           name="message"
           type="text"
+          className="input-message"
+          placeholder="Digite sua mensagem aqui"
           value={ messageInput }
           data-testid="message-input"
           onChange={ handleChange }
         />
-      </label>
 
-      <button
-        type="button"
-        data-testid="send-message"
-        disabled={ verifyInput() }
-        onClick={ handleClick }
-      >
-        Enviar
-      </button>
-
-      {!allMessages.messages ? (
-        <p>Não existe mensagens</p>
-      ) : (
-        <div>
-          {allMessages.messages.map((message, i) => (
-            <div key={ i }>
-              <p>
-                <span data-testid="nickname">{`${allMessages.client} - `}</span>
-                <span data-testid="message-time">{message.date}</span>
-              </p>
-              <p data-testid="text-message">{message.text}</p>
-            </div>
-          ))}
-        </div>
-      )}
+        <button
+          type="button"
+          className="button-final"
+          data-testid="send-message"
+          disabled={ verifyInput() }
+          onClick={ handleClick }
+        >
+          Enviar
+        </button>
+      </div>
     </div>
   );
 }

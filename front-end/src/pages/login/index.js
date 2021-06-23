@@ -2,11 +2,12 @@ import React, { useState, useContext } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import TrybeerContext from '../../context/TrybeerContext';
 import { login } from '../../service/trybeerApi';
+import './style.css';
 
 export default function Login() {
   const { login: loginAction } = useContext(TrybeerContext);
   const [shouldRedirect, setShouldRedirect] = useState('');
-  const [loginException, setLoginException] = useState();
+  const [loginException, setLoginException] = useState('');
   const [loginInfo, setLoginInfo] = useState({
     email: '',
     password: '',
@@ -34,55 +35,78 @@ export default function Login() {
       loginAction({ ...result });
       return setShouldRedirect(result.role);
     }
-    setLoginException(<p>{result.error}</p>);
+    setLoginException(<p className="error">{result.error}</p>);
   };
 
   if (shouldRedirect) {
-    return (<Redirect
-      to={ `/${shouldRedirect === 'administrator' ? 'admin/orders' : 'products'}` }
-    />);
+    return (
+      <Redirect
+        to={ `/${
+          shouldRedirect === 'administrator' ? 'admin/orders' : 'products'
+        }` }
+      />
+    );
   }
 
   return (
-    <div>
-      <label htmlFor="email">
-        Email:
-        <input
-          id="email"
-          name="email"
-          type="text"
-          data-testid="email-input"
-          onChange={ handleChange }
-        />
-      </label>
+    <div className="page-body">
+      <h1 className="title">
+        <span className="try-title">Try</span>
+        Bebos
+      </h1>
 
-      <label htmlFor="password">
-        Senha:
-        <input
-          id="password"
-          name="password"
-          type="password"
-          onChange={ handleChange }
-          data-testid="password-input"
-        />
-      </label>
+      <div className="form-container">
+        <div className="inputs-container">
+          <div className="inputs-sub-container">
+            <label htmlFor="email">
+              Email:
+              <input
+                id="email"
+                name="email"
+                type="text"
+                data-testid="email-input"
+                onChange={ handleChange }
+              />
+            </label>
+          </div>
 
-      <button
-        type="button"
-        data-testid="signin-btn"
-        disabled={ !verifyInput() }
-        onClick={ handleClick }
-      >
-        Entrar
-      </button>
+          <div className="inputs-sub-container">
+            <label htmlFor="password">
+              Senha:
+              <input
+                id="password"
+                name="password"
+                type="password"
+                onChange={ handleChange }
+                data-testid="password-input"
+              />
+            </label>
+          </div>
+        </div>
 
-      <Link
-        to="/register"
-        data-testid="no-account-btn"
-      >
-        Ainda não tenho conta
-      </Link>
-      {loginException}
+        <div className="btn-container">
+          <button
+            type="button"
+            id="btn-submit"
+            data-testid="signin-btn"
+            disabled={ !verifyInput() }
+            className={ !verifyInput() ? 'form-btn' : 'form-btn-enable' }
+            onClick={ handleClick }
+          >
+            Entrar
+          </button>
+
+          <Link
+            id="btn-new-user"
+            to="/register"
+            data-testid="no-account-btn"
+            className="form-btn-link"
+          >
+            Ainda não tenho conta
+          </Link>
+          {loginException}
+        </div>
+      </div>
     </div>
   );
 }

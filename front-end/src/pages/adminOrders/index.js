@@ -18,6 +18,12 @@ export default function AdminOrders() {
     setSales(saleData);
   };
 
+  const handleClassStatus = (orderStatus) => {
+    if (orderStatus === 'Pendente') return 'status-pendente';
+    if (orderStatus === 'Preparando') return 'status-preparando';
+    return 'status-entregue';
+  };
+
   useEffect(() => {
     setIsLoading(true);
     listSales().then(() => {
@@ -26,44 +32,53 @@ export default function AdminOrders() {
   }, []);
 
   const getCards = () => sales.map((sale, index) => (
-
     <button
+      className="order-card-und-container"
       key={ sale.id }
       type="button"
       onClick={ () => history.push(`/admin/orders/${sale.id}`) }
     >
-      <div className="div-cards">
-        <h4 data-testid={ `${index}-order-number` }>
+      <div className="order-number-address-container">
+        <h2
+          className="order-text"
+          data-testid={ `${index}-order-number` }
+        >
           {`Pedido ${sale.id}`}
-        </h4>
+        </h2>
 
-        <h4 data-testid={ `${index}-order-address` }>
-          {
-            `${sale.deliveryAddress}, ${sale.deliveryNumber}`
-          }
-        </h4>
-
+        <h3 data-testid={ `${index}-order-address` }>
+          {`${sale.deliveryAddress}, ${sale.deliveryNumber}`}
+        </h3>
+      </div>
+      <div className="order-price-status-container">
         <h3 data-testid={ `${index}-order-total-value` }>
-          {
-            `R$ ${parseFloat(sale.totalPrice)
-              .toFixed(2).split('.').join(',')}`
-          }
+          {`R$ ${parseFloat(sale.totalPrice)
+            .toFixed(2)
+            .split('.')
+            .join(',')}`}
         </h3>
 
-        <h4 data-testid={ `${index}-order-status` }>
+        <h2
+          data-testid={ `${index}-order-status` }
+          className={ handleClassStatus(sale.status) }
+        >
           {sale.status}
-        </h4>
+        </h2>
       </div>
     </button>
   ));
 
   return (
-    <div>
+    <div className="admin-orders-container">
       <AdminSideBar />
-      <h2>Pedidos</h2>
-      {
-        isLoading ? <span>carregando...</span> : getCards()
-      }
+      <h1>Pedidos</h1>
+      {isLoading ? (
+        <h3 className="admin-orders-card-container">
+          <strong>Você não tem pedidos ainda :(</strong>
+        </h3>
+      ) : (
+        <div className="admin-orders-card-container">{getCards()}</div>
+      )}
     </div>
   );
 }

@@ -13,6 +13,7 @@ export default function ShowCartButton(props) {
   return (
     <button
       type="button"
+      className="total-btn"
       data-testid="checkout-bottom-btn"
       onClick={ () => history.push('/checkout') }
       disabled={ parseFloat(totalPrice) === 0 }

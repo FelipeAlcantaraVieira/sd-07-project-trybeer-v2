@@ -8,10 +8,9 @@ export default function CartForm() {
     getTotalShoppingCart,
     dispatchShoppingCart,
     userLogged,
-    shoppingCart } = useContext(TrybeerContext);
-  const [
-    totalPriceCart,
-    setTotalPriceCart] = useState(getTotalShoppingCart());
+    shoppingCart,
+  } = useContext(TrybeerContext);
+  const [totalPriceCart, setTotalPriceCart] = useState(getTotalShoppingCart());
   const [showFinishMessage, setShowFinishMessage] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const history = useHistory();
@@ -65,9 +64,14 @@ export default function CartForm() {
   };
 
   return (
-    <div>
-      <h2> Endereço </h2>
-      <div>
+    <div className="checkout-form-container">
+      <h2 className="checkout-total-price">
+        Total:
+        <span data-testid="order-total-value">
+          {` R$ ${totalPriceCart.toFixed(2).split('.').join(',')}`}
+        </span>
+      </h2>
+      <div className="form-checkout-container">
         <label htmlFor="street">
           Rua:
           <input
@@ -75,10 +79,13 @@ export default function CartForm() {
             name="street"
             type="text"
             value={ salesInfo.street }
+            placeholder="Digite aqui"
             data-testid="checkout-street-input"
             onChange={ handleChange }
           />
         </label>
+      </div>
+      <div className="form-checkout-container">
         <label htmlFor="house-number">
           Número da casa:
           <input
@@ -86,22 +93,26 @@ export default function CartForm() {
             name="houseNumber"
             type="text"
             value={ salesInfo.houseNumber }
+            placeholder="Digite aqui"
             data-testid="checkout-house-number-input"
             onChange={ handleChange }
           />
         </label>
-        <button
-          type="button"
-          data-testid="checkout-finish-btn"
-          disabled={ !totalPriceCart
-            || salesInfo.street === ''
-            || salesInfo.houseNumber === '' }
-          onClick={ handleClick }
-        >
-          Finalizar Pedido
-        </button>
-        { showFinishMessage && <p>Compra realizada com sucesso!</p>}
       </div>
+      {showFinishMessage && <p className="error">Compra realizada com sucesso!</p>}
+      <button
+        type="button"
+        className="button-final"
+        data-testid="checkout-finish-btn"
+        disabled={
+          !totalPriceCart
+          || salesInfo.street === ''
+          || salesInfo.houseNumber === ''
+        }
+        onClick={ handleClick }
+      >
+        Finalizar Pedido
+      </button>
     </div>
   );
 }

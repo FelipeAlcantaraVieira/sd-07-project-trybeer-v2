@@ -1,15 +1,94 @@
-.div-card {
+.products-container {
+  background-color: #fac62a;
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: column nowrap;
+  height: 100vh;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.grid {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, auto));
+  height: 80vh;
+  justify-content: space-evenly;
   margin: auto;
-  width: 70%;
+  overflow-y: scroll;
+  width: 100%;
 }
 
-.div-salesCar {
-  margin-top: auto;
+.total-btn {
+  background-color: #252525;
+  color: white;
+  font-size: large;
+  padding: 20px;
+  width: 100%;
 }
 
-div img {
-  height: 150px;
-  width: 150px;
+.product-card {
+  align-items: center;
+  background-color: white;
+  border: 1px solid #666;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px black;
+  display: flex;
+  flex-direction: column;
+  height: 370px;
+  margin: 20px 0;
+  position: relative;
+  width: 270px;
+}
+
+.image {
+  height: 140px;
+  margin: 20px 0;
+  width: auto;
+}
+
+.quantity-box {
+  align-content: center;
+  align-items: baseline;
+  bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: space-evenly;
+  line-height: 44px;
+  position: absolute;
+  width: 100%;
+}
+
+.quantity-btn {
+  outline: none;
+}
+
+.quantity-text {
+  font-size: 40px;
+  margin: auto 0;
+}
+
+.product-name {
+  color: black;
+  margin: 0;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.product-price {
+  bottom: 80px;
+  color: black;
+  font-size: 30px;
+  position: absolute;
+  text-align: center;
+}
+
+h3 {
+  cursor: pointer;
+  display: flex;
+  font-size: 50px;
+  font-weight: 100;
+  margin: 0;
+  padding: 0;
+  user-select: none;
 }

@@ -1,0 +1,90 @@
+.list-chats-admin-container {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.chat-container {
+  height: 600px;
+  margin: auto;
+  overflow-y: scroll;
+  padding: 30px 0;
+  width: 90%;
+}
+
+.title-chat-container {
+  border-radius: 20px;
+  margin-bottom: 30px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.title-chat-container span {
+  color: red;
+}
+
+.client {
+  color: red;
+}
+
+.admin {
+  color: green;
+}
+
+.all-messagens-container {
+  align-items: flex-start;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.message-container-client {
+  background-color: #f5f5f580;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  width: 60%;
+}
+
+.message-container-client p {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.message-container-adm {
+  align-self: flex-end;
+  background-color: #f5f5f580;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  width: 60%;
+}
+
+.message-container-adm p {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.send-message-container {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.send-message-container input {
+  background-color: black;
+  margin: 0;
+  padding: 15px 0;
+  width: 100%;
+}
+
+.button-final {
+  color: #e2b52b;
+  margin: 0;
+  padding: 10px 0;
+  width: 100%;
+}

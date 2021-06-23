@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 
 export default function Texts({ value, index }) {
   return (
-    <p
+    <h2
+      className="product-name"
       data-testid={ `${index}-product-name` }
     >
       { value }
-    </p>
+    </h2>
   );
 }
 

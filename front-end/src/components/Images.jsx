@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default function Images({ value, index }) {
   return (
     <img
+      className="image"
       data-testid={ `${index}-product-img` }
       src={ value }
       alt="Images Trybeer"

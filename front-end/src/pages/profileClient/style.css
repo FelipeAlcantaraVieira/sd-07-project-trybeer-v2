@@ -1,0 +1,37 @@
+.profile-container-client {
+  align-items: center;
+  background-color: #fac52c;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.profile-inputs {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 200px;
+  justify-content: space-around;
+  padding: 20px 0;
+  width: 80%;
+}
+
+.save-profile-button {
+  font-size: 1.2rem;
+  padding: 20px 30px;
+}
+
+label {
+  display: flex;
+  flex-flow: column nowrap;
+  font-weight: 900;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+}

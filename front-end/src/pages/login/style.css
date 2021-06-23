@@ -1,0 +1,147 @@
+.page-body {
+  align-items: center;
+  background-image: url('https://i.pinimg.com/originals/db/7f/c2/db7fc263c7ff27035979a51498577d8a.jpg');
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.title {
+  font-family: Arial , Helvetica , sans-serif;
+  font-size: 45px;
+  margin: 5vh 0 10vh;
+  text-shadow: 5px 5px 5px black;
+  top: 0;
+}
+
+.try-title {
+  color: #2fc18c;
+}
+
+.form-container {
+  border-radius: 0;
+  height: 100vh;
+  margin: 0 10px;
+  padding: 0 60px;
+  width: 85vw;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 5px 0;
+}
+
+label {
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+input {
+  background-color: #252525;
+  border: none;
+  border-bottom: 1px solid #444;
+  color: #fac62a;
+  font-size: 20px;
+  outline: none;
+  padding: 10px 0;
+  text-align: center;
+  transition: border-bottom 0.3s ease;
+  width: 100%;
+}
+
+input:focus {
+  border-bottom: 1px solid #777;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 30px #252525 inset;
+  -webkit-text-fill-color: #fac62a;
+}
+
+.inputs-container {
+  background-color: #f5f5f580;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.inputs-sub-container {
+  margin: 20px 0;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px 0 0;
+}
+
+.form-btn {
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 1rem;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.form-btn:hover {
+  background-color: #888;
+}
+
+.form-btn-enable {
+  background-color: #252525;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 8px 0 #888;
+  color: #fac62a;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 1rem;
+  padding: 15px;
+  transition: 0.3s;
+}
+
+.btn-container button {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.form-btn-link {
+  background-color: #252525;
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  color: #fac62a;
+  cursor: pointer;
+  flex-grow: 0;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 1rem;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.error {
+  background-color: #f5f5f580;
+  border-radius: 20px;
+  color: red;
+  font-weight: 900;
+  margin: auto;
+  padding: 10px 20px;
+  text-align: center;
+}

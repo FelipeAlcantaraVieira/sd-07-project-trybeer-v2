@@ -1,0 +1,99 @@
+.checkout-container {
+  background-color: #fac62a;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+  justify-content: space-between;
+  margin: 0;
+  overflow: auto;
+  width: 100%;
+}
+
+.checkout-card-container {
+  display: flex;
+  flex-flow: row wrap;
+  height: max-content;
+  margin: 10px auto;
+  width: 90%;
+}
+
+.checkout-total-price {
+  background-color: black;
+  color: white;
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+  padding: 10px 0;
+}
+
+button {
+  font-weight: 900;
+  padding: 10px 15px;
+}
+
+button:hover {
+  background-color: #fac62a;
+}
+
+.checkout-form-container {
+  background-color: whitesmoke;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.checkout-form-container button {
+  padding: 20px 0;
+  width: 100%;
+}
+
+.form-checkout-container {
+  margin: auto;
+  padding: 20px 0 0;
+  width: 90%;
+}
+
+.checkout-disable-button {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+  padding: 20px;
+}
+
+.checkout-final-button {
+  background-color: #fac62a;
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+}
+
+.checkout-card-und-container {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px black;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 150px;
+  justify-content: space-around;
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.button-final {
+  margin: 20px 0 0;
+}

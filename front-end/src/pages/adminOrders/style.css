@@ -1,6 +1,100 @@
-.div-cards {
-  border: 2px solid black;
+.admin-orders-container {
+  background-color: #fac62a;
   display: flex;
-  flex-wrap: wrap;
-  margin: auto;
+  flex-flow: column nowrap;
+  height: 100vh;
+  justify-content: space-between;
+  margin: 0;
+  overflow: auto;
+  width: 100%;
+}
+
+.admin-orders-card-container {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  margin: 10px auto;
+  width: 90%;
+}
+
+.order-card-und-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px black;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 150px;
+  justify-content: center;
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.order-price-status-container {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.order-number-address-container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.order-number-date {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.order-price {
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+h1 {
+  font-family: Arial , Helvetica , sans-serif;
+  text-align: center;
+}
+
+h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.order-text {
+  color: black;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 200;
+  margin: 5px 0;
+  padding: 0;
+  text-align: center;
+}
+
+.status-pendente {
+  color: red;
+}
+
+.status-preparando {
+  color: blue;
+}
+
+.status-entregue {
+  color: green;
+}
+
+button:hover {
+  background-color: #fac62a;
 }

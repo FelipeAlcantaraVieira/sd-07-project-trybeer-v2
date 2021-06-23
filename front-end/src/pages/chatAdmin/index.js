@@ -3,6 +3,7 @@ import { io } from 'socket.io-client';
 import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../../context/TrybeerContext';
 import { AdminSideBar } from '../../components';
+import './style.css';
 
 const client = io('http://localhost:3002');
 
@@ -43,54 +44,84 @@ export default function ChatAdmin() {
   }, [clientEmail]);
 
   return (
-    <div>
+    <div className="list-chats-admin-container">
       <AdminSideBar />
 
       {!allMessages.messages ? (
         <p>Carregando</p>
       ) : (
-        <div>
-          <h1>{`Conversando com ${allMessages.client}`}</h1>
-          <button
-            type="button"
-            data-testid="back-button"
-            onClick={ () => history.push('/admin/chats') }
-          >
-            VOLTAR
-          </button>
-          {allMessages.messages.map((message, i) => (
-            <div key={ i }>
-              <p>
-                <span data-testid="nickname">{`${message.from} - `}</span>
-                <span data-testid="message-time">{message.date}</span>
-              </p>
-              <p data-testid="text-message">{message.text}</p>
-            </div>
-          ))}
+        <div className="chat-container">
+          <div className="title-chat-container">
+            <h1>
+              {'Conversando com '}
+              <span>{allMessages.client}</span>
+            </h1>
+          </div>
+          <div className="all-messagens-container">
+            {allMessages.messages.map((message, i) => (
+              <div
+                key={ i }
+                className={
+                  message.from === allMessages.client
+                    ? 'message-container-client'
+                    : 'message-container-adm'
+                }
+              >
+                <p>
+                  <span
+                    data-testid="nickname"
+                    className={
+                      message.from === allMessages.client ? 'client' : 'admin'
+                    }
+                  >
+                    {`${message.from} - `}
+                  </span>
+                  <span
+                    data-testid="message-time"
+                    className={
+                      message.from === allMessages.client ? 'client' : 'admin'
+                    }
+                  >
+                    {message.date}
+                  </span>
+                </p>
+                <p data-testid="text-message">{message.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
-      <p>
-        <label htmlFor="message">
-          <input
-            id="message"
-            name="message"
-            type="text"
-            value={ messageInput }
-            data-testid="message-input"
-            onChange={ handleChangeMessage }
-          />
-        </label>
+      <div className="send-message-container">
+        <label htmlFor="message" />
+        <input
+          id="message"
+          name="message"
+          type="text"
+          value={ messageInput }
+          placeholder="Digite sua mensagem aqui"
+          data-testid="message-input"
+          onChange={ handleChangeMessage }
+        />
 
         <button
           type="button"
+          className="button-final"
           data-testid="send-message"
           disabled={ verifyInput() }
           onClick={ handleClickMessage }
         >
           Enviar
         </button>
-      </p>
+        <button
+          type="button"
+          className="button-final"
+          data-testid="back-button"
+          onClick={ () => history.push('/admin/chats') }
+        >
+          Voltar
+        </button>
+      </div>
     </div>
   );
 }

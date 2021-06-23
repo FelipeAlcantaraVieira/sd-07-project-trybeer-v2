@@ -3,6 +3,7 @@ import TrybeerContext from '../../context/TrybeerContext';
 import { nameIsValid } from '../../service/validateInputs';
 import { TopMenu } from '../../components';
 import { updateClient } from '../../service/trybeerApi';
+import './style.css';
 
 export default function ProfileClient() {
   const { userLogged, setUserLogged } = useContext(TrybeerContext);
@@ -46,41 +47,44 @@ export default function ProfileClient() {
   };
 
   return (
-    <div>
+    <div className="profile-container-client">
       <TopMenu topTitle="Meu perfil" />
-      <label htmlFor="name">
-        Nome:
-        <input
-          id="name"
-          name="name"
-          type="text"
-          value={ profileInfo.name }
-          onClick={ () => setProfileInfo({ ...profileInfo, name: '' }) }
-          data-testid="profile-name-input"
-          onChange={ handleChange }
-        />
-      </label>
+      <div className="profile-inputs">
+        <label htmlFor="name">
+          Nome:
+          <input
+            id="name"
+            name="name"
+            type="text"
+            value={ profileInfo.name }
+            onClick={ () => setProfileInfo({ ...profileInfo, name: '' }) }
+            data-testid="profile-name-input"
+            onChange={ handleChange }
+          />
+        </label>
 
-      <label htmlFor="email">
-        Email:
-        <input
-          id="email"
-          name="email"
-          type="text"
-          value={ profileInfo.email }
-          readOnly
-          data-testid="profile-email-input"
-        />
-      </label>
+        <label htmlFor="email">
+          Email:
+          <input
+            id="email"
+            name="email"
+            type="text"
+            value={ profileInfo.email }
+            readOnly
+            data-testid="profile-email-input"
+          />
+        </label>
+      </div>
       <button
         type="button"
+        className="save-profile-button"
         data-testid="profile-save-btn"
         disabled={ !verifyInput() }
         onClick={ handleClick }
       >
         Salvar
       </button>
-      { text }
+      {text}
     </div>
   );
 }

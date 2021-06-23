@@ -38,27 +38,25 @@ export default function Product() {
   }, [shoppingCart, getTotalShoppingCart]);
 
   return (
-    <div>
+    <div className="products-container">
       <div>
-        <h3>{ isLoading ? 'Carregando' : '' }</h3>
-        <TopMenu />
+        <TopMenu topTitle="Produtos" />
       </div>
-      <div className="div-card">
-        {products && products.map((prod, index) => (
-          <div key={ prod.id }>
-            <br />
-            ---------------------------------------------------------------------------
-            <Prices index={ index } value={ prod.price } />
-            <Images index={ index } value={ prod.urlImage } />
-            <Texts index={ index } value={ prod.name } />
-            <Counts index={ index } product={ prod } />
-          </div>
-        ))}
-        <br />
-        <div className="div-salesCar">
-          <ShowCartButton totalPrice={ totalPriceCart } />
-        </div>
+      <div className="grid">
+        {isLoading ? (
+          <h3>Carregando</h3>
+        ) : (
+          products.map((prod, index) => (
+            <div key={ prod.id } className="product-card">
+              <Images index={ index } value={ prod.urlImage } />
+              <Texts index={ index } value={ prod.name } />
+              <Prices index={ index } value={ prod.price } />
+              <Counts index={ index } product={ prod } />
+            </div>
+          ))
+        )}
       </div>
+      <ShowCartButton totalPrice={ totalPriceCart } />
     </div>
   );
 }

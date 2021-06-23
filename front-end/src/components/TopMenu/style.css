@@ -1,0 +1,43 @@
+.top-menu {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.top-menu-container {
+  align-items: center;
+  background-color: #252525;
+  color: white;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.title-and-buttons {
+  margin: auto;
+}
+
+.menu {
+  height: 80px;
+  width: 100px;
+  z-index: 2;
+}
+
+.side-menu-container {
+  align-items: stretch;
+  display: flex;
+  flex-flow: row nowrap;
+  height: max-content;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 80px;
+  width: 100%;
+  z-index: 1;
+}
+
+.side-menu-container button {
+  width: 100%;
+}

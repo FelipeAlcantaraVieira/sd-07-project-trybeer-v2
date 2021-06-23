@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import TrybeerContext from '../../context/TrybeerContext';
 import AdminSideBar from '../../components/AdminSideBar';
+import './styles.css';
 
 export default function ProfileAdmin() {
   const { userLogged } = useContext(TrybeerContext);
@@ -10,11 +11,15 @@ export default function ProfileAdmin() {
   });
 
   return (
-    <div>
+    <div className="admin-profile-container">
       <AdminSideBar />
-      <h1 data-testid="profile-title">Perfil</h1>
-      <p data-testid="profile-name">{`Nome:${profileInfo.name}`}</p>
-      <p data-testid="profile-email">{`Nome:${profileInfo.email}`}</p>
+      <div className="admin-profile-info">
+        <div className="profile-container">
+          <h1 data-testid="profile-title">Perfil</h1>
+          <h3 data-testid="profile-name">{`Usuário: ${profileInfo.name}`}</h3>
+          <h3 data-testid="profile-email">{`E-mail: ${profileInfo.email}`}</h3>
+        </div>
+      </div>
     </div>
   );
 }

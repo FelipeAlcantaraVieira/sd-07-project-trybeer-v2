@@ -7,12 +7,7 @@ import './style.css';
 
 export default function Orders() {
   const history = useHistory();
-  const {
-    userLogged,
-    setSaleId,
-    setSaleDate,
-    setTotalPrice,
-  } = useContext(TrybeerContext);
+  const { userLogged, setSaleId, setSaleDate, setTotalPrice } = useContext(TrybeerContext);
   const [ordersFromUser, setOrdersFromUser] = useState([]);
 
   useEffect(() => {
@@ -24,7 +19,8 @@ export default function Orders() {
   }, [userLogged.id]);
 
   const options = {
-    day: '2-digit', month: '2-digit',
+    day: '2-digit',
+    month: '2-digit',
   };
 
   const handleClick = (id, date, price) => {
@@ -34,40 +30,46 @@ export default function Orders() {
     history.push(`/orders/${id}`);
   };
 
+  const handleClassStatus = (orderStatus) => {
+    if (orderStatus === 'Pendente') return 'status-pendente';
+    if (orderStatus === 'Preparando') return 'status-preparando';
+    return 'status-entregue';
+  };
+
   return (
-    <div>
+    <div className="orders-container">
       <TopMenu topTitle="Meus Pedidos" />
-      <div>
+      <div className="orders-card-container">
         {ordersFromUser.map((order, index) => {
-          const priceOrder = new Intl
-            .NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
-            .format(order.totalPrice);
-          const dateOrder = new Intl.DateTimeFormat('pt-BR', options)
-            .format(Date.parse(order.saleDate));
+          const priceOrder = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(order.totalPrice);
+          const dateOrder = new Intl.DateTimeFormat('pt-BR', options).format(
+            Date.parse(order.saleDate),
+          );
           return (
             <button
               type="button"
-              className="cardOrder"
+              className="order-card-und-container"
               key={ order.id }
               data-testid={ `${index}-order-card-container` }
               onClick={ () => handleClick(order.id, dateOrder, priceOrder) }
             >
-              <span
-                data-testid={ `${index}-order-number` }
-              >
-                {`Pedido ${order.id} `}
-              </span>
-              <h2
-                data-testid={ `${index}-order-date` }
-              >
-                {dateOrder}
-              </h2>
-              <h2
+              <div className="order-number-date">
+                <h2 data-testid={ `${index}-order-number` }>
+                  {`Pedido ${order.id} `}
+                </h2>
+                <h3 data-testid={ `${index}-order-date` }>{dateOrder}</h3>
+              </div>
+
+              <h3
+                className="order-price"
                 data-testid={ `${index}-order-total-value` }
               >
                 {priceOrder}
-              </h2>
-              <h2>{order.status}</h2>
+              </h3>
+              <h2 className={ handleClassStatus(order.status) }>{order.status}</h2>
             </button>
           );
         })}
