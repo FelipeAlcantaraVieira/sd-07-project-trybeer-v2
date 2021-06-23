@@ -30,12 +30,11 @@ export default function ChatsAdmin() {
 
   return (
     <div className="list-chats-admin-container">
-      <AdminSideBar />
+      <AdminSideBar topTitle="Minhas Conversas" />
       {!allMessages.length ? (
         <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>
       ) : (
         <div className="card-container">
-          <h1>Conversas</h1>
           <div className="chats">
             {allMessages.map((chat) => (
               <button

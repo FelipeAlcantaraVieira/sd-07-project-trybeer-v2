@@ -48,7 +48,7 @@ export default function ProfileClient() {
 
   return (
     <div className="profile-container-client">
-      <TopMenu topTitle="Meu perfil" />
+      <TopMenu topTitle="Meu Perfil" />
       <div className="profile-inputs">
         <label htmlFor="name">
           Nome:

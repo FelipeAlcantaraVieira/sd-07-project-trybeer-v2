@@ -70,8 +70,7 @@ export default function AdminOrders() {
 
   return (
     <div className="admin-orders-container">
-      <AdminSideBar />
-      <h1>Pedidos</h1>
+      <AdminSideBar topTitle="Meus Pedidos" />
       {isLoading ? (
         <h3 className="admin-orders-card-container">
           <strong>Você não tem pedidos ainda :(</strong>

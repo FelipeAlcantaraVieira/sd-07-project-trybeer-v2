@@ -16,8 +16,12 @@ h1 {
 }
 
 .profile-container {
+  align-items: center;
   background-color: #f5f5f580;
   border-radius: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
   padding: 20px;
 }
 

@@ -12,10 +12,9 @@ export default function ProfileAdmin() {
 
   return (
     <div className="admin-profile-container">
-      <AdminSideBar />
+      <AdminSideBar topTitle="Meu Perfil" />
       <div className="admin-profile-info">
         <div className="profile-container">
-          <h1 data-testid="profile-title">Perfil</h1>
           <h3 data-testid="profile-name">{`Usuário: ${profileInfo.name}`}</h3>
           <h3 data-testid="profile-email">{`E-mail: ${profileInfo.email}`}</h3>
         </div>
