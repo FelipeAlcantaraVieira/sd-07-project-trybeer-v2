@@ -82,7 +82,6 @@ export default function Login() {
       >
         Ainda não tenho conta
       </Link>
-      
       {loginException}
     </div>
   );
